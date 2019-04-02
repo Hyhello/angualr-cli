@@ -1,0 +1,63 @@
+<!--
+  * 作者：yeshengqiang
+  * 时间：2018-04-28
+  * 描述：产品检测 返修人员
+-->
+<div class="check-container">
+    <!-- searchBar -->
+    <div class="search-bar" ng-enter="searchLineProduct()">
+        <div class="search-bar-item-input">
+            <div class="check__checked">
+                <v-radio ng-model="checkType" value="imei">IMEI</v-radio>
+                <v-radio ng-model="checkType" value="vin">车架号</v-radio>
+                <v-radio ng-model="checkType" value="deviceCode">SN</v-radio>
+            </div>
+        </div>
+        <label class="search-bar-item-label">{{placeholder}}</label>
+        <div class="search-bar-item-input">
+            <input type="text" v-focus="focus" id="checkId" name="title" autocomplete="off" placeholder="请输入{{placeholder}}" />
+        </div>
+        <button class="btn btn-promise" v-busy="loading" loading-text="搜索中" ng-click="searchLineProduct()">搜索</button>
+        <button class="btn btn-promise float-right" ng-click="check('vq')">重新进行VQ检测</button>
+        <button class="btn btn-promise float-right" ng-click="check('production')">重新进行总装检测</button>
+        <button class="btn btn-promise float-right" ng-click="check('change')">设备换件</button>
+    </div>
+    <!-- 表格 -->
+    <table class="tabel-panel">
+        <thead>
+            <tr>
+                <th>车架号</th>
+                <th>IMEI</th>
+                <th>检测时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-show="checkList.length" ng-repeat="item in checkList">
+                <td class="x-nowrap" ng-bind="item.vin"></td>
+                <td class="x-nowrap" ng-bind="item.imei"></td>
+                <td class="x-nowrap" ng-bind="item.detectionTime"></td>
+            </tr>
+            <tr ng-show="!checkList.length">
+                <td colspan="3">
+                    <div class="no-data"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- 返修原因 -->
+    <div class="reason-panel">
+        <h3 class="check-panel-title">
+            <img src="../../../assets/images/fail.png" alt="fail" />
+            返修原因
+        </h3>
+        <div class="check-panel-content">{{checkInto.repairResult}}</div>
+    </div>
+    <!-- 返修建议 -->
+    <div class="proposal-panel">
+        <h3 class="check-panel-title">
+            <img src="../../../assets/images/proposal.png" alt="proposal" />
+            返修建议
+        </h3>
+        <div class="check-panel-content">{{checkInto.detectionSuggest}}</div>
+    </div>
+</div>

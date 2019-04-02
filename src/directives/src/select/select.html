@@ -1,0 +1,33 @@
+<div class="hy-select__panel" ng-class="{'is-disabled': disabled}" ng-contains="handleClosed()">
+    <div class="hy-select__input-panel" ng-class="{'is-focus': showDropdown, 'is-hover': hover}" ng-click="handlerFocus($event)" ng-mouseleave="mouseleave()" ng-mouseenter="mouseenter()">
+        <input class="hy-select__input"
+            trim
+            type="text"
+            ng-disabled="!filterable || disabled"
+            ng-model="currentLabel"
+            ng-keydown="handleKeydown($event)"
+            placeholder="{{placeholder}}"
+            autocomplete="{{autocomplete}}">
+        <span class="hy-input__suffix">
+            <span class="hy-input__suffix-triangle" ng-show="!showClearBtn" ng-class="{'suffix-active': showDropdown}"></span>
+            <span class="hy-input__suffix-clearabled" ng-click="emptyLabel($event)" ng-show="showClearBtn" ng-class="{'suffix-active': showDropdown}">×</span>
+        </span>
+    </div>
+    <div class="hy-select__dropdown" ng-show="showDropdown">
+        <div class="hy-select__scroller" ng-show="!noData">
+            <ul class="hy-select__list">
+                <li class="hy-select__list-item"
+                        ng-show="item.visible"
+                        ng-mouseenter="mouseItemEnter(item.tabIndex)"
+                        ng-click="handleSelect(item.$id)"
+                        ng-class="{'selected': item.selected, 'hover': item.tabIndex === tabIndex}"
+                        ng-repeat="item in currentList track by $index">
+                    <div>{{item.label}}</div>
+                </li>
+            </ul>
+        </div>
+        <p class="hy-select__noData" ng-show="noData">
+            <span>{{noMatchText}}</span>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+.hy-switch {
+    display: inline-block;
+    font-size: 20px;
+    text-align: center;
+    width: 180px;
+    height: 90px;
+    margin: 10px;
+    cursor: pointer;
+    line-height: 90px;
+    background-color: #e4e4e4;
+    user-select: none;
+    &.actived {
+        background-color: #ff0000;
+    }
+}

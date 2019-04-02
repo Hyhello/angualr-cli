@@ -1,0 +1,153 @@
+<!--
+  * 作者：yeshengqiang
+  * 时间：2018-04-28
+  * 描述：vq检测
+-->
+<div class="checkVq-container">
+    <!-- searchBar -->
+    <div class="search-bar checkVq-search" ng-enter="search()">
+        <label class="search-bar-item-label">车架号</label>
+        <div class="search-bar-item-input">
+            <input type="text" v-focus="focus" id="checkVqId" name="title" autocomplete="off" placeholder="请输入车架号" />
+        </div>
+        <button class="btn btn-promise" v-busy="loading" loading-text="搜索中" ng-click="search()">搜索</button>
+        <button class="btn btn-fail float-right" ng-show="userType === 2" go-back>返回</button>
+        <button class="btn btn-fail float-right" ng-show="isAbleReport" ng-click="checkVq(2)">NG</button>
+        <button class="btn btn-promise float-right" ng-show="isAbleReport" ng-click="checkVq(1)">该车检测完成</button>
+    </div>
+    <!-- 主要内容 -->
+    <div class="checkVq-panel">
+        <div class="revisionSearch-state-info">
+            <div class="state-isRepeat">
+                <img ng-show="vqCheckInfo.vin" class="logo-car" src="../../../assets/images/car.png" alt="car" />
+                {{vqCheckInfo.vin}}
+                <span class="VIN_ERROR" ng-show="vqCheckInfo.VIN_ERROR">{{vqCheckInfo.VIN_ERROR}}</span>
+                <img class="logo-car-info" ng-show="vqCheckInfo.scanned === 2" src="../../../assets/images/info.png" alt="info" />
+            </div>
+            <button class="btn btn-promise float-right" ng-click="historyCheck()">历史检测</button>
+        </div>
+        <!-- <div class="lighting-box">
+            <ul class="checkVq-ul-panel">
+                <li class="checkVq-li-panel-item">
+                    <img class="lighting-icon" ng-show="vqCheckInfo.leftTurnSignalStatus === 1" src="../../../assets/images/lighting/left-arrow-on.png" alt="left-arrow-on" />
+                    <img class="lighting-icon" ng-show="vqCheckInfo.leftTurnSignalStatus !== 1" src="../../../assets/images/lighting/left-arrow-off.png" alt="left-arrow-off" />
+                </li>
+                <li class="checkVq-li-panel-item">
+                    <img class="lighting-icon" ng-show="vqCheckInfo.beanLightStatus === 1" src="../../../assets/images/lighting/near-light-on.png" alt="near-light-on" />
+                    <img class="lighting-icon" ng-show="vqCheckInfo.beanLightStatus !== 1" src="../../../assets/images/lighting/near-light-off.png" alt="near-light-off" />
+                    <p class="checkVq-text" ng-class="{true: 'check-on'}[vqCheckInfo.beanLightStatus === 1]">近光</p>
+                </li>
+                <li class="checkVq-li-panel-item">
+                    <img class="lighting-icon farLight" ng-show="vqCheckInfo.dippedHeadlightStatus === 1" src="../../../assets/images/lighting/far-light-on.png" alt="far-light-on" />
+                    <img class="lighting-icon farLight" ng-show="vqCheckInfo.dippedHeadlightStatus !== 1" src="../../../assets/images/lighting/far-light-off.png" alt="far-light-off" />
+                    <p class="checkVq-text" ng-class="{true: 'check-on'}[vqCheckInfo.dippedHeadlightStatus === 1]">远光</p>
+                </li>
+                <li class="checkVq-li-panel-item">
+                    <img class="lighting-icon" ng-show="vqCheckInfo.frontFoglightStatus === 1" src="../../../assets/images/lighting/front-fog-light-on.png" alt="front-fog-light-on" />
+                    <img class="lighting-icon" ng-show="vqCheckInfo.frontFoglightStatus !== 1" src="../../../assets/images/lighting/front-fog-light-off.png" alt="front-fog-light-off" />
+                    <p class="checkVq-text" ng-class="{true: 'check-on'}[vqCheckInfo.frontFoglightStatus === 1]">前雾灯</p>
+                </li>
+                <li class="checkVq-li-panel-item">
+                    <img class="lighting-icon" ng-show="vqCheckInfo.backFoglightStatus === 1" src="../../../assets/images/lighting/rear-fog-light-on.png" alt="rear-fog-light-on" />
+                    <img class="lighting-icon" ng-show="vqCheckInfo.backFoglightStatus !== 1" src="../../../assets/images/lighting/rear-fog-light-off.png" alt="rear-fog-light-off" />
+                    <p class="checkVq-text" ng-class="{true: 'check-on'}[vqCheckInfo.backFoglightStatus === 1]">后雾灯</p>
+                </li>
+                <li class="checkVq-li-panel-item">
+                    <img class="lighting-icon" ng-show="vqCheckInfo.rightTurnSignalStatus === 1" src="../../../assets/images/lighting/right-arrow-on.png" alt="right-arrow-on" />
+                    <img class="lighting-icon" ng-show="vqCheckInfo.rightTurnSignalStatus !== 1" src="../../../assets/images/lighting/right-arrow-off.png" alt="right-arrow-off" />
+                </li>
+            </ul>
+        </div> -->
+        <!-- gps -->
+        <!-- <div class="gps-box">
+            <ul class="checkVq-ul-panel">
+                <li class="checkVq-li-panel-item">
+                    <span class="gps-status" ng-class="{'gps-on': vqCheckInfo.lteMainStatus === 2, 'gps-off': vqCheckInfo.lteMainStatus === 1 || vqCheckInfo.lteMainStatus === 3}"></span>
+                    <p class="checkVq-text" ng-class="{'check-on': vqCheckInfo.lteMainStatus === 2, 'check-off': vqCheckInfo.lteMainStatus === 1 || vqCheckInfo.lteMainStatus === 3}">LTE天线主集状态</p>
+                </li>
+                <li class="checkVq-li-panel-item">
+                    <span class="gps-status" ng-class="{'gps-on': vqCheckInfo.lteDiversityStatus === 2, 'gps-off': vqCheckInfo.lteDiversityStatus === 1 || vqCheckInfo.lteDiversityStatus === 3}"></span>
+                    <p class="checkVq-text" ng-class="{'check-on': vqCheckInfo.lteDiversityStatus === 2, 'check-off': vqCheckInfo.lteDiversityStatus === 1 || vqCheckInfo.lteDiversityStatus === 3}">LTE天线分集状态</p>
+                </li>
+                <li class="checkVq-li-panel-item">
+                    <span class="gps-status" ng-class="{'gps-on': vqCheckInfo.gpsAntennaStatus === 3, 'gps-off': vqCheckInfo.gpsAntennaStatus === 1 || vqCheckInfo.gpsAntennaStatus === 2}"></span>
+                    <p class="checkVq-text" ng-class="{'check-on': vqCheckInfo.gpsAntennaStatus === 3, 'check-off': vqCheckInfo.gpsAntennaStatus === 1 || vqCheckInfo.gpsAntennaStatus === 2}">GPS天线状态</p>
+                </li>
+            </ul>
+        </div> -->
+        <div class="car-box">
+            <ul class="checkVq-ul-panel">
+                <!-- <li class="checkVq-li-panel-item">
+                    <echarts width="250" height="150" options="{{fuelOption}}"></echarts>
+                    <p class="checkVq-text">当前油量(L)</p>
+                </li> -->
+                <li class="checkVq-li-panel-item">
+                    <div class="gps-box">
+                        <div class="gps-box-item">
+                            <span class="gps-status" ng-class="{'gps-on': vqCheckInfo.lteMainStatus === 2, 'gps-off': vqCheckInfo.lteMainStatus === 1 || vqCheckInfo.lteMainStatus === 3}"></span>
+                            <p class="checkVq-text" ng-class="{'check-on': vqCheckInfo.lteMainStatus === 2, 'check-off': vqCheckInfo.lteMainStatus === 1 || vqCheckInfo.lteMainStatus === 3}">LTE天线主集状态</p>
+                        </div>
+                        <div class="gps-box-item">
+                            <span class="gps-status" ng-class="{'gps-on': vqCheckInfo.lteDiversityStatus === 2, 'gps-off': vqCheckInfo.lteDiversityStatus === 1 || vqCheckInfo.lteDiversityStatus === 3}"></span>
+                            <p class="checkVq-text" ng-class="{'check-on': vqCheckInfo.lteDiversityStatus === 2, 'check-off': vqCheckInfo.lteDiversityStatus === 1 || vqCheckInfo.lteDiversityStatus === 3}">LTE天线分集状态</p>
+                        </div>
+                        <div class="gps-box-item">
+                            <span class="gps-status" ng-class="{'gps-on': vqCheckInfo.gpsAntennaStatus === 3, 'gps-off': vqCheckInfo.gpsAntennaStatus === 1 || vqCheckInfo.gpsAntennaStatus === 2}"></span>
+                            <p class="checkVq-text" ng-class="{'check-on': vqCheckInfo.gpsAntennaStatus === 3, 'check-off': vqCheckInfo.gpsAntennaStatus === 1 || vqCheckInfo.gpsAntennaStatus === 2}">GPS天线状态</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="checkVq-li-panel-item">
+                    <div class="car-space-panel">
+                        <div class="car-space-item">
+                            <div class="car-door-item door-top">
+                                <img height="60" width="60" src="../../../assets/images/carDoorType/carDoorOf.png" ng-show="vqCheckInfo.leftFrontDoorStatus === 1" alt="carDoorOf" />
+                                <img height="60" width="60" src="../../../assets/images/carDoorType/carDoorOff.png" ng-show="vqCheckInfo.leftFrontDoorStatus !== 1" alt="carDoorOff" />
+                                <p class="info-color">左前门</p>
+                            </div>
+                            <div class="car-door-item">
+                                <img height="60" width="60" src="../../../assets/images/carDoorType/carDoorOf.png" ng-show="vqCheckInfo.leftBackDoorStatus === 1" alt="carDoorOf" />
+                                <img height="60" width="60" src="../../../assets/images/carDoorType/carDoorOff.png" ng-show="vqCheckInfo.leftBackDoorStatus !== 1" alt="carDoorOff" />
+                                <p class="info-color">左后门</p>
+                            </div>
+                        </div>
+                        <div class="car-space-item">
+                            <img height="350" alt="car" src="../../../assets/images/carDoorType/00000.png" />
+                            <div class="car-door-item">
+                                <img height="60" width="60" ng-show="vqCheckInfo.trunkStatus === 1" src="../../../assets/images/carDoorType/carDoorOf.png" alt="carDoorOf" />
+                                <img height="60" width="60" ng-show="vqCheckInfo.trunkStatus !== 1" src="../../../assets/images/carDoorType/carDoorOff.png" alt="carDoorOff" />
+                                <p class="info-color">后备箱</p>
+                            </div>
+                        </div>
+                        <div class="car-space-item">
+                            <div class="car-door-item door-top">
+                                <img height="60" width="60" src="../../../assets/images/carDoorType/carDoorOf.png" ng-show="vqCheckInfo.rightFrontDoorStatus === 1" alt="carDoorOf" />
+                                <img height="60" width="60" src="../../../assets/images/carDoorType/carDoorOff.png" ng-show="vqCheckInfo.rightFrontDoorStatus !== 1" alt="carDoorOff" />
+                                <br><p class="info-color">右前门</p>
+                            </div>
+                            <div class="car-door-item">
+                                <img height="60" width="60" src="../../../assets/images/carDoorType/carDoorOf.png" ng-show="vqCheckInfo.rightBackDoorStatus === 1" alt="carDoorOf" />
+                                <img height="60" width="60" src="../../../assets/images/carDoorType/carDoorOff.png" ng-show="vqCheckInfo.rightBackDoorStatus !== 1" alt="carDoorOff" />
+                                <br><p class="info-color">右后门</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="last-login-time">车辆第一次登录时间：{{vqCheckInfo.firstLoginTime}}</div>
+                </li>
+                <!-- <li class="checkVq-li-panel-item">
+                    <echarts width="250" height="150" options="{{engineOption}}"></echarts>
+                    <p class="checkVq-text">发动机冷却液(℃)</p>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+    <div class="statistics">
+        <span>今日统计 | </span>
+        <span>检测总数：</span>
+        <span class="color-47bac2">{{lineRecordCountNumberInfo.todayTotal || 0}}辆</span>
+        <span class="maglf-30">检测通过：</span>
+        <span class="color-47bac2">{{lineRecordCountNumberInfo.todayPass || 0}}辆</span>
+        <span class="maglf-30">检测不通过：</span>
+        <span class="color-47bac2">{{lineRecordCountNumberInfo.todayFail || 0}}辆</span>
+    </div>
+</div>

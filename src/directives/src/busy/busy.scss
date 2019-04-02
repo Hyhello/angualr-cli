@@ -1,0 +1,42 @@
+.hy-busy__panel {
+    .hy-busy__spiner {
+        display: inline-block;
+        height: 1em;
+        width: 1em;
+        overflow: hidden;
+        font-size: 1em;
+        margin-right: 0.3em;
+        vertical-align: -0.15em;
+        animation: identifier .8s infinite linear;
+        border: 3px solid transparent;
+        border-radius: 50%;
+        border-top-color: currentColor;
+        border-left-color: currentColor;
+        border-bottom-color: currentColor;
+    }
+    img.hy-busy__img {
+        display: inline-block;
+        height: 1em;
+        width: 1em;
+        overflow: hidden;
+        font-size: 1em;
+        vertical-align: -0.15em;
+    }
+    .hy-busy__text {
+        overflow: hidden;
+        font-size: 1em;
+        color: currentColor;
+    }
+    &.hy-busy__ie8 .hy-busy__text{
+        color: #FFFFFF;
+    }
+}
+
+@keyframes identifier {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(1turn);
+    }
+}

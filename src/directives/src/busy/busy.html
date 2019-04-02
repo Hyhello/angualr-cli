@@ -1,0 +1,5 @@
+<div class="hy-busy__panel" ng-class="{'hy-busy__ie8': isIE8}">
+    <div ng-if="!isIE8" class="hy-busy__spiner"></div>
+    <img ng-if="isIE8" class="hy-busy__img" src="./loading.gif" alt="loading" />
+    <span class="hy-busy__text">{{loadingText}}</span>
+</div>

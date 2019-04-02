@@ -1,0 +1,32 @@
+
+@import 'src/assets/style/vars.scss';
+@import 'src/assets/style/mixins.scss';
+
+.reason-panel,
+.proposal-panel {
+    width: 100%;
+    .check-panel-title {
+        padding: 5px;
+        background-color: #D6D6D6;
+        border-bottom: 1px solid #f1f1f1;
+        img {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+    }
+    .check-panel-content {
+        padding: 15px;
+    }
+}
+
+.check__checked {
+    margin-top: 6px;
+    margin-left: 20px;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+    font-size: 0;
+}

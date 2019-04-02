@@ -1,0 +1,80 @@
+<!--
+  * 作者：yeshengqiang
+  * 时间：2018-04-28
+  * 描述：产品检测 检测人员
+-->
+<div class="revisionSearch-container">
+    <!-- searchBar -->
+    <div class="search-bar" ng-enter="searchLineProduct()">
+        <label class="search-bar-item-label">车架号</label>
+        <div class="search-bar-item-input">
+            <input type="text" v-focus="focus" id="productionId" value="" name="title" autocomplete="off" placeholder="请输入车架号" />
+        </div>
+        <button class="btn btn-promise" v-busy="loading" loading-text="搜索中" ng-click="searchLineProduct()">搜索</button>
+        <button class="btn btn-fail float-right" ng-show="userType === 2"  go-back>返回</button>
+    </div>
+    <!-- content -->
+    <div class="revisionSearch-panel">
+        <div class="revisionSearch-state">
+            <div class="revisionSearch-state-info">
+                <div class="state-isRepeat">
+                    <img ng-show="lineProductResult.vin" class="logo-car" src="../../../assets/images/car.png" alt="car" />
+                    {{lineProductResult.vin}}
+                    <span class="VIN_ERROR" ng-show="lineProductResult.VIN_ERROR">{{lineProductResult.VIN_ERROR}}</span>
+                    <img class="logo-car-info" ng-show="lineProductResult.scanned === 2" src="../../../assets/images/info.png" alt="info" />
+                </div>
+                <button class="btn btn-promise float-right" ng-click="historyCheck()">历史检测</button>
+            </div>
+            <div class="revisionSearch-state-main">
+                <div class="state-main-left">
+                    <p class="okStatus" ng-show="lineProductResult.result === 1">OK</p>
+                </div>
+                <div class="state-main-center">
+                    <img ng-show="!lineProductResult.result" src="../../../assets/images/activation2.png" class="state-main-logo" alt="activation2" />
+                    <img ng-show="lineProductResult.result === 1" src="../../../assets/images/activation1.png" class="state-main-logo" alt="activation1" />
+                    <img ng-show="lineProductResult.result === 2" src="../../../assets/images/activation0.png" class="state-main-logo" alt="activation0" />
+                    <p class="procedure-main-color" ng-class="{1: 'procedure-main-success', 2: 'procedure-main-fail'}[lineProductResult.result]">通讯状态</p>
+                </div>
+                <div class="state-main-right">
+                    <p class="ngStatus" ng-show="lineProductResult.result === 2">NG</p>
+                </div>
+            </div>
+        </div>
+        <!-- 表格 -->
+        <table class="tabel-panel">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>车架号</th>
+                    <th>IMEI</th>
+                    <th>检测时间</th>
+                    <th>检测结果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-show="lineProductList.length" ng-repeat="item in lineProductList" ng-class="{true: 'background-ng', false: 'background-ok'}[item.result === 2]">
+                    <td class="x-nowrap color-fff" ng-bind="$index + 1"></td>
+                    <td class="x-nowrap color-fff" ng-bind="item.vin"></td>
+                    <td class="x-nowrap color-fff" ng-bind="item.imei"></td>
+                    <td class="x-nowrap color-fff" ng-bind="item.detectionTime"></td>
+                    <td class="x-nowrap color-fff" ng-bind="item.result | productResult"></td>
+                </tr>
+                <tr ng-show="!lineProductList.length">
+                    <td colspan="5">
+                        <div class="no-data"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- table-footer -->
+        <div class="statistics">
+            <span>今日统计 | </span>
+            <span>检测总数：</span>
+            <span class="color-47bac2">{{lineRecordCountNumberInfo.todayTotal || 0}}辆</span>
+            <span class="maglf-30">检测通过：</span>
+            <span class="color-47bac2">{{lineRecordCountNumberInfo.todayPass || 0}}辆</span>
+            <span class="maglf-30">检测不通过：</span>
+            <span class="color-47bac2">{{lineRecordCountNumberInfo.todayFail || 0}}辆</span>
+        </div>
+    </div>
+</div>

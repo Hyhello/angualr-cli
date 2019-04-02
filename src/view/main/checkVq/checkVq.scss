@@ -1,0 +1,127 @@
+
+@import 'src/assets/style/vars.scss';
+@import 'src/assets/style/mixins.scss';
+
+.checkVq-container {
+    @include wh(100%, 100%);
+    position: relative;
+    padding-top: 48px;
+    padding-bottom: 45px;
+    overflow: hidden;
+    .checkVq-search {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+    .checkVq-panel {
+        @include wh(100%, 100%);
+        overflow: auto;
+        .revisionSearch-state-info {
+            width: 100%;
+            padding: 15px 40px;
+            text-align: left;
+            @include clearfix;
+            .state-isRepeat {
+                display: inline-block;
+                .logo-car {
+                    display: inline-block;
+                    vertical-align: middle;
+                    @include wh(30px, 30px);
+                    margin-right: 5px;
+                }
+                .logo-car-info {
+                    display: inline-block;
+                    vertical-align: middle;
+                    @include wh(140px, 30px);
+                    margin-left: 5px;
+                }
+            }
+        }
+        .checkVq-ul-panel {
+            display: inline-block;
+            @include clearfix;
+            .checkVq-li-panel-item {
+                float: left;
+                .checkVq-text {
+                    font-size: 14px;
+                    margin-top: 10px;
+                    color: #c4ccd3;
+                    &.check-on {
+                        color: green;;
+                    }
+                    &.check-off {
+                        color: red;;
+                    }
+                }
+                .last-login-time {
+                    padding: 15px 0;
+                }
+            }
+        }
+        .lighting-box {
+            text-align: center;
+            .lighting-icon {
+                padding: 0 10px;
+                &.farLight {
+                    padding: 0 10px 2px 10px;
+                }
+            }
+        }
+        .gps-box {
+            text-align: center;
+            padding: 30px;
+            margin-right: 200px;
+            .gps-box-item {
+                margin-bottom: 60px;
+            }
+            .gps-status {
+                border-radius: 100%;
+                display: inline-block;
+                margin: 0 35px;
+                background-color: #c4ccd3;
+                @include wh(70px, 70px);
+                &.gps-on {
+                    background-color: green;
+                }
+                &.gps-off {
+                    background-color: red;
+                }
+            }
+        }
+        .car-box {
+            text-align: center;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            .checkVq-li-panel-item {
+                margin: 0 50px;
+            }
+            .chart-dashboard-item {
+                @include wh(250px, 150px);
+            }
+            .car-space-panel {
+                @include clearfix;
+                .car-space-item {
+                    float: left;
+                    img {
+                        width: auto;
+                        display: inline-block;
+                    }
+                    .car-door-item {
+                        padding-top: 10px;
+                        &.door-top {
+                            margin-bottom: 120px;
+                        }
+                    }
+                    .info-color {
+                        padding-top: 5px;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+}
+.VIN_ERROR {
+    color: $tips_Bg;
+}

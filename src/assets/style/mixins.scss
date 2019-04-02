@@ -1,0 +1,22 @@
+// 宽度
+@mixin wh ($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// 清除浮动
+@mixin clearfix {
+    zoom: 1;
+    &::after {
+        content: '';
+        display: block;
+        overflow: hidden;
+        clear: both;
+    }
+}

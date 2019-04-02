@@ -1,0 +1,24 @@
+<!--
+  * 作者：yeshengqiang
+  * 时间：2018-04-28
+  * 描述：主界面
+-->
+<div class="main-container">
+    <div class="header-container">
+        <div class="time-panel">
+            {{timeRange}}
+        </div>
+        <div class="header-logo">
+            <img class="logo-img" src="../../assets/images/titlelogo.png" alt="titlelogo" />
+            {{STATE.title}}
+        </div>
+        <div class="header-loginOut">
+            <!-- <span class="loginInfo-username">{{userInfo.userType | userType}}：{{userInfo.name}}</span> -->
+            <span class="loginInfo-username">当前检测人：{{userInfo.name}}</span>
+            <div class="toolTips" ng-click="loginOut()" title="退出登录">
+                <img src="../../assets/images/logout.png" class="logout" alt="logout" />
+            </div>
+        </div>
+    </div>
+    <div class="main-content" ui-view></div>
+</div>

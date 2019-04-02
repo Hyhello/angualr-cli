@@ -1,0 +1,55 @@
+<!--
+  * 作者：yeshengqiang
+  * 时间：2018-04-28
+  * 描述：生产换件
+-->
+<div class="changeParts-container">
+    <!-- searchBar -->
+    <div class="search-bar" ng-enter="search()">
+        <label class="search-bar-item-label">车架号</label>
+        <div class="search-bar-item-input">
+            <input type="text" id="changePartsId" v-focus="focus" autocomplete="off" placeholder="请输入车架号" />
+        </div>
+        <button class="btn btn-promise" v-busy="loading" loading-text="搜索中" ng-click="search()">搜索</button>
+        <div class="changeParts-state-info">
+            <img class="logo-car" ng-show="changePartInfo.vin" src="../../../assets/images/car.png" alt="car" />
+            {{changePartInfo.vin}}
+            <span class="VIN_ERROR" ng-show="changePartInfo.VIN_ERROR">{{changePartInfo.VIN_ERROR}}</span>
+            <!-- <img class="logo-car-info" src="../../../assets/images/info.png" alt="info" /> -->
+        </div>
+        <button class="btn btn-fail float-right" go-back>返回</button>
+        <button class="btn btn-promise float-right" ng-click="activation()">一键激活</button>
+    </div>
+    <!-- 表格 -->
+    <table class="tabel-panel">
+        <thead>
+            <tr>
+                <th>车架号</th>
+                <th>车系</th>
+                <th>SN</th>
+                <th>IMEI</th>
+                <th>ICCID</th>
+                <th>车辆状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-show="changePartList.length" ng-repeat="item in changePartList">
+                <td class="x-nowrap" ng-bind="item.vin"></td>
+                <td class="x-nowrap" ng-bind="item.adapted"></td>
+                <td class="x-nowrap" ng-bind="item.deviceCode"></td>
+                <td class="x-nowrap" ng-bind="item.imei"></td>
+                <td class="x-nowrap" ng-bind="item.iccid"></td>
+                <td class="x-nowrap" ng-bind="item.vehicleStatus | vehicleStatus"></td>
+                <td class="x-nowrap">
+                    <button class="btn btn-promise" ng-show="item.vehicleStatus" ng-click="untying(item)">解绑</button>
+                </td>
+            </tr>
+            <tr ng-show="!changePartList.length">
+                <td colspan="7">
+                    <div class="no-data"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

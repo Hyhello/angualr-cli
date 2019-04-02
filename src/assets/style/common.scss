@@ -1,0 +1,211 @@
+// common样式
+@import './vars';
+@import './page';
+@import './search';
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, menu, nav, output, ruby, section, summary, time, mark, audio, video, input {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-weight: normal;
+    vertical-align: baseline;
+}
+
+html, body, .app-main {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    min-width: 1200px;
+    overflow: hidden;
+}
+
+body, body * {
+    box-sizing: border-box;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.btn {
+    margin-left: 10px;
+    margin-top: 4px;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    padding: 6px 15px;
+    font-size: 12px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+}
+// 按钮
+.btn-promise {
+    background-color: $btnPromise_bg;
+    border-color: $btnPromise_bg;
+    color: $white;
+}
+
+.btn-fail {
+    background-color: $btnFail_bg;
+    border-color: $btnFail_bg;
+    color: $btnFail_color;
+}
+
+// tabel
+table {
+    border: 0;
+    position: relative;
+    border-collapse:collapse;
+    border-spacing:0;
+    width: 100%;
+    text-align: center;
+    background: $white;
+    border-radius: 4px;
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        @include wh(1px, 100%);
+        background-color: #ececec;
+    }
+    &::before {
+        left: 0;
+    }
+    &::after {
+        right: 0;
+    }
+    thead {
+        border-top: 1px solid #F1F1F1;
+        border-bottom: 1px solid #F1F1F1;
+        tr th {
+            color: #253C51;
+            font-size: 14px;
+            padding: 4px 5px;
+            line-height: 30px;
+            background-color: #D6D6D6;
+            white-space: nowrap !important;
+            a {
+                color: #5f5f5f;
+                padding: 0 5px;
+                &:hover {
+                    color: #005a9a;
+                }
+                i {
+                    margin: 12px 4px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    tbody {
+        tr {
+            background-color:#fcfcfc;
+        }
+        tr td {
+            border-bottom: 1px solid #f9f4f4;
+            color: #666;
+            font-size: 13px;
+            padding: 8px;
+            line-height: 22px;
+            a.mgr-deletebtn {
+                color: #3D94EA;
+                padding: 0 5px;
+                &:hover {
+                    color: #09498A;
+                    text-decoration: underline !important;
+                }
+            }
+            a.blockbtn {
+                display: block;
+                font-size: 12px;
+                width: 80px;
+                color: #666;
+                text-align: center;
+                background: #cbd7b3;
+                line-height: 26px;
+                margin: 0 auto;
+            }
+        }
+    }
+    .x-nowrap {
+        &.color-fff {
+            color: $white;
+        }
+        &.color-00D381 {
+            color: #00D381;
+        }
+    }
+    tr.background-ng {
+        background-color: $global_ng_color;
+    }
+    tr.background-ok {
+        background-color: $global_ok_color;
+    }
+}
+
+// 暂无数据
+.no-data {
+    width: 210px;
+    height: 190px;
+    background-image: url(../../assets/images/noQueryData.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    margin-top: 50px;
+    margin-left: 40%;
+}
+
+.mr20 {
+    margin-right: 20px;
+}
+
+// 统计
+.statistics {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    @include wh(100%, 45px);
+    font-weight: bold;
+    color: #253C51;
+    font-size: 15px;
+    padding: 4px 20px;
+    line-height: 45px;
+    background: #F1F1F1;
+    white-space: nowrap;
+    .color-47bac2 {
+        color: #47bac2;
+    }
+    .maglf-30 {
+        margin-left: 30px;
+    }
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+// 去除ie上面输入框得x及眼睛
+::-ms-clear,
+::-ms-reveal{
+    display: none;
+}

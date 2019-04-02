@@ -1,0 +1,19 @@
+<div class="hy-complete__panel" ng-contains="handleClosed()">
+    <input class="hy-complete__input"
+        trim
+        type="text"
+        v-focus="focus"
+        spellcheck="false"
+        ng-click="handleClick()"
+        ng-model="currentLabel"
+        ng-keydown="handleKeydown($event)"
+        placeholder="{{placeholder}}"
+        autocomplete="{{autocomplete}}">
+    <div class="hy-complete__dropdown" ng-show="showDropdown">
+        <div class="hy-complete__scroller">
+            <ul class="hy-complete__list">
+                <li class="hy-complete__list-item" tab-index="{{item.tabIndex}}" ng-show="item.visible" ng-class="{'hover': item.tabIndex === tabIndex}" ng-repeat="item in currentList track by $index" ng-mouseenter="mouseenter(item.tabIndex)" ng-click="handleSelect(item.$id)">{{item.label}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

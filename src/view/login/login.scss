@@ -1,0 +1,116 @@
+@import 'src/assets/style/vars.scss';
+@import 'src/assets/style/mixins.scss';
+
+.login-container {
+    @include wh(100%, 100%);
+    position: relative;
+    background-color: $white;
+    .login-logo {
+        @include wh(100%, 400px);
+        position: relative;
+        background-image: url('../../assets/images/logintop.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top;
+        .login-title {
+            position: absolute;
+            top: 172px;
+            left: 50%;
+            @include wh(600px, auto);
+            margin-left: -300px;
+            text-align: center;
+            font-weight: normal;
+            color: $white;
+            font-size: 20px;
+            letter-spacing: 3px;
+        }
+    }
+    .login-panel {
+        position: absolute;
+        top: 260px;
+        left: 50%;
+        @include wh(700px, 324px);
+        margin-left: -350px;
+        background-color: $white;
+        box-shadow: $baseShadow;
+        border-radius: 15px;
+        overflow: hidden;
+        .login-panel-left,
+        .login-panel-right {
+            height: 100%;
+        }
+        .login-panel-left {
+            position: absolute;
+            padding-left: 30px;
+        }
+        .login-panel-right {
+            margin-left: 300px;
+            .form-panel {
+                margin-top: 85px;
+                .input-dev-box {
+                    position: relative;
+                    z-index: 1;
+                    @include wh(100%, auto);
+                    .remember-list {
+                        @include wh(100%, auto);
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        z-index: 100;
+                        @include clearfix;
+                        .remember-list-item {
+                            padding: 6px 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .login-footer {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        font-size: 12px;
+        padding: 16px 0;
+        p {
+            line-height: 24px;
+            text-align: center;
+        }
+        a.beianhao {
+            color: $global_color;
+            text-decoration: none;
+        }
+    }
+    .input-label{text-align: right;font-size: 12px;color: #657180;line-height: 1;padding: 10px 12px 10px 0;width: 50px;}
+    .input-dev{margin-left: 62px;margin-right: 90px;}
+    .input-value{
+        height: 32px;
+        line-height: 1.5;
+        padding: 4px 7px;
+        font-size: 12px;
+        border-radius: 4px;
+        color: #657180;
+        position: relative;
+        cursor: text;
+    }
+    .input-value:focus, .input-value:hover{border-color: #5cadff !important;}
+    a {  color: #5cadff;  text-decoration: none; }
+    a:hover{color:#39f;}
+    .but {
+        color: #fff;
+        background-color: #47bac2;
+        margin-left: 60px;
+        width: 250px;
+        padding: 6px 15px 7px;
+        font-size: 14px;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        cursor: pointer;
+    }
+    .rememberSpan {
+        font-size: 12px;
+        color: #657180;
+        line-height: 16px;
+    }
+}

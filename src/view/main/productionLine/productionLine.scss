@@ -1,0 +1,75 @@
+@import 'src/assets/style/vars.scss';
+@import 'src/assets/style/mixins.scss';
+
+.revisionSearch-panel {
+    width: 100%;
+    background-color: $white;
+    .revisionSearch-state {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+        .revisionSearch-state-info {
+            width: 100%;
+            padding: 15px 40px;
+            text-align: left;
+            @include clearfix;
+            .state-isRepeat {
+                display: inline-block;
+                .logo-car {
+                    display: inline-block;
+                    vertical-align: middle;
+                    @include wh(30px, 30px);
+                    margin-right: 5px;
+                }
+                .logo-car-info {
+                    display: inline-block;
+                    vertical-align: middle;
+                    @include wh(140px, 30px);
+                    margin-left: 5px;
+                }
+            }
+        }
+        .revisionSearch-state-main {
+            display: inline-block;
+            text-align: center;
+            @include clearfix;
+            .state-main-logo {
+                display: inline-block;
+                @include wh(56px, 56px);
+            }
+            .state-main-left,
+            .state-main-right,
+            .state-main-center {
+                float: left;
+                font-size: 14px;
+                text-align: center;
+                p.procedure-main-color {
+                    font-size: 14px;
+                    padding: 8px 0;
+                    color: #D3D4D4;
+                    &.procedure-main-success {
+                        color: #40BAC3;
+                    }
+                    &.procedure-main-fail {
+                        color: #E60049;
+                    }
+                }
+            }
+            .state-main-left,
+            .state-main-right {
+                font-size: 50px;
+                padding: 18px 40px;
+                font-weight: bold;
+                margin: 0 80px;
+                p.okStatus {
+                    font-weight: bold;
+                    color: #40BAC3;
+                }
+                p.ngStatus {
+                    font-weight: bold;
+                    color: #E60049;
+                }
+            }
+        }
+    }
+}

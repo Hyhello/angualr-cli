@@ -1,0 +1,26 @@
+.hy-tips__panel {
+    padding: 0 15px;
+    height: 35px;
+    line-height: 35px;
+    color: #FFFFFF;
+    font-size: 14px;
+    text-align: center;
+    overflow: hidden;
+    background-color: #d65151;
+    .hy-tips__closed {
+        margin-top: 6px;
+        -webkit-appearance: none;
+        padding: 0;
+        cursor: pointer;
+        background: 0 0;
+        border: 0;
+        float: right;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1;
+        color: #FFFFFF;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=80);
+        opacity: 0.8;
+    }
+}

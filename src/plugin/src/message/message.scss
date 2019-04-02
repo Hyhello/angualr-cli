@@ -1,0 +1,37 @@
+.hy-message {
+    min-width: 280px;
+    box-sizing: border-box;
+    position: fixed;
+    left: 50%;
+    top: 0;
+    opacity: 0;
+    .hy-message-polyfill {
+        width: 100%;
+        margin-left: -50%;
+        border-radius: 4px;
+        border: 1px solid #ebeef5;
+        background-color: #edf2fc;
+        overflow: hidden;
+        padding: 15px 15px 15px 20px;
+    }
+    &.hy-message--info > .hy-message-polyfill {
+        background-color: #edf2fc;
+        border-color: #ebeef5;
+        color: #909399;
+    }
+    &.hy-message--success > .hy-message-polyfill {
+        background-color: #f0f9eb;
+        border-color: #e1f3d8;
+        color: #67c23a;
+    }
+    &.hy-message--error > .hy-message-polyfill {
+        background-color: #fef0f0;
+        border-color: #fde2e2;
+        color: #f56c6c;
+    }
+    &.hy-message--warning > .hy-message-polyfill {
+        background-color: #fdf6ec;
+        border-color: #faecd8;
+        color: #e6a23c;
+    }
+}

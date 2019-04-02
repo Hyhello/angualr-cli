@@ -1,0 +1,20 @@
+
+.layui-form-checkbox {
+    span.hy-radio__inner {
+        line-height: 1;
+        font-size: 14px;
+        padding-right: 0;
+    }
+    i {
+        top: 1px;
+        border-color: #47bac2;
+        background-color: #47bac2;
+        color: #fff;
+    }
+}
+.hy-radio__group {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+    font-size: 0;
+}

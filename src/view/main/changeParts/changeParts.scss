@@ -1,0 +1,23 @@
+@import 'src/assets/style/vars.scss';
+@import 'src/assets/style/mixins.scss';
+
+.changeParts-container {
+    @include wh(100%, 100%);
+    .changeParts-state-info {
+        display: inline-block;
+        margin-left: 15px;
+        vertical-align: bottom;
+        .logo-car {
+            display: inline-block;
+            vertical-align: middle;
+            @include wh(30px, 30px);
+            margin-right: 5px;
+        }
+        .logo-car-info {
+            display: inline-block;
+            vertical-align: middle;
+            @include wh(140px, 30px);
+            margin-left: 5px;
+        }
+    }
+}

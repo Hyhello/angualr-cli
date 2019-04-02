@@ -1,0 +1,50 @@
+<!--
+  * 作者：yeshengqiang
+  * 时间：2018-04-28
+  * 描述：登陆界面
+-->
+<div class="login-container">
+    <v-tips ng-if="isShowTips">{{STATE.ie8Tips}}</v-tips>
+    <!-- logo-title -->
+    <div class="login-logo">
+        <h3 class="login-title">{{STATE.title}}</h3>
+    </div>
+    <!-- login-panel -->
+    <div class="login-panel" ng-enter="clickLogin()">
+        <div class="login-panel-left">
+            <img src="../../assets/images/login-panel-logo.png" alt="login-panel-logo" />
+        </div>
+        <div class="login-panel-right">
+            <div class="form-panel layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label input-label">帐号 :</label>
+                    <div class="layui-input-block input-dev">
+                        <div class="input-dev-box">
+                            <auto-complete ng-model="loginInfo.userName" focus="userFocus" prop="userName" select="autoSelect(value, item)" list="rememberList" placeholder="请输入帐号"></auto-complete>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label input-label">密码 :</label>
+                    <div class="layui-input-block input-dev">
+                        <input type="password" trim v-focus="pwdFocus" ng-model="loginInfo.password" autocomplete="new-password" placeholder="请输入密码" class="layui-input input-value">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label input-label"></label>
+                    <div class="layui-input-block input-dev text-right">
+                        <v-radio ng-model="isRemember">记住密码</v-radio>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <button class="but" v-busy="loading" loading-text="登录中" ng-click="clickLogin()">登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <div class="login-footer">
+        <p>广汽三菱 Welcome to TSP  © Beta {{STATE.version}}</p>
+        <p>Copyright ©2018,   <a class="beianhao" href="http://www.miitbeian.gov.cn" target="_blank">湘ICP备13002936号</a></p>
+    </div>
+</div>

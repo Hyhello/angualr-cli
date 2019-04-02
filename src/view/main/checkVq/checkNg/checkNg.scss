@@ -1,0 +1,108 @@
+
+@import 'src/assets/style/vars.scss';
+@import 'src/assets/style/mixins.scss';
+
+.checkNg-container {
+    @include wh(100%, 100%);
+    position: relative;
+    overflow: hidden;
+    padding-top: 65px;
+    &::after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 50%;
+        z-index: 9;
+        @include wh(1px, 100%);
+        background-color: #dddddd;
+    }
+    .revisionSearch-state-info {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #FFFFFF;
+        width: 100%;
+        padding: 15px 40px;
+        text-align: left;
+        z-index: 10;
+        border-bottom: 1px solid #dddddd;
+        @include clearfix;
+        .state-isRepeat {
+            display: inline-block;
+            .logo-car {
+                display: inline-block;
+                vertical-align: middle;
+                @include wh(30px, 30px);
+                margin-right: 5px;
+            }
+            .logo-car-info {
+                display: inline-block;
+                vertical-align: middle;
+                @include wh(140px, 30px);
+                margin-left: 5px;
+            }
+        }
+    }
+    .checkNg-content {
+        @include clearfix;
+        @include wh(100%, 100%);
+        overflow: hidden;
+        .checkNg-content__left,
+        .checkNg-content__right {
+            width: 50%;
+            height: 100%;
+            overflow: auto;
+            padding: 15px;
+        }
+        .checkNg-content__left {
+            position: relative;
+            float: left;
+            text-align: center;
+            .checkNg-content__title {
+                text-align: left;
+                padding: 15px;
+                font-size: 18px;
+                font-weight: bold;
+                background-color: #EEEEEE;
+                margin: 0 -15px;
+            }
+        }
+        .checkNg-content__right {
+            float: right;
+            text-align: center;
+            .car-box {
+                margin-top: 80px;
+                display: inline-block;
+                text-align: center;
+                padding-top: 30px;
+                padding-bottom: 30px;
+                .checkVq-li-panel-item {
+                    margin: 0 50px;
+                }
+                .chart-dashboard-item {
+                    @include wh(250px, 150px);
+                }
+                .car-space-panel {
+                    @include clearfix;
+                    .car-space-item {
+                        float: left;
+                        img {
+                            width: auto;
+                            display: inline-block;
+                        }
+                        .car-door-item {
+                            padding-top: 10px;
+                            &.door-top {
+                                margin-bottom: 120px;
+                            }
+                        }
+                        .info-color {
+                            padding-top: 5px;
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
