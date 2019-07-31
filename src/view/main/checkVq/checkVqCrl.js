@@ -7,7 +7,7 @@ import './checkVq.scss';
 import { trim } from '@/libs/utils';
 import { fuelOption, engineOption } from './echarts-config';
 import { reReportVqResultApi } from '@/view/main/check/checkService';
-import { findProductionLineVQRecordApi, reportVqResultApi, queryTodayDetectionNumberApi } from './checkVqService.js';
+import { findProductionLineVQRecordApi, queryTodayDetectionNumberApi } from './checkVqService.js';
 
 export default ['$scope', '$resource', '$state', '$timeout', '$Message', function ($scope, $resource, $state, $timeout, $Message) {
     // 获取用户登陆信息
@@ -23,6 +23,13 @@ export default ['$scope', '$resource', '$state', '$timeout', '$Message', functio
     $scope.isAbleReport = false;            // 是否允许上报
     $scope.lineRecordCountNumberInfo = {};
     $scope.vqCheckInfo = {};
+    // 初始化图片
+    $scope._src = _require('00000');
+
+    // 获取图片
+    function _require (name) {
+        return require(`../../../assets/images/carDoorType/${name}.png`);
+    };
 
     // 获取今日检测数量
     const _getlineRecordCountNumer = () => {
@@ -56,24 +63,15 @@ export default ['$scope', '$resource', '$state', '$timeout', '$Message', functio
                 $scope.vqCheckInfo.vin = vin;
                 $scope.vqCheckInfo.VIN_ERROR = data.message;
             } else {
-                $scope.vqCheckInfo.firstLoginTime = data.firstLoginTime;
                 $scope.isAbleReport = data.vin && !data.isDetection;         // 有值，则不允许上报
                 $scope.vqCheckInfo = data.runDriveVo || {};
                 $scope.vqCheckInfo.scanned = data.scanned;
-
-                if (data.fuelQuantity) {
-                    $scope.fuelOption.series[0].data[0].value = data.runDriveVo.fuelQuantity || 0;
-                    $scope.fuelOption.series[0].axisLine.lineStyle.color[0][1] = '#47bac2';
-                    $scope.fuelOption.series[0].splitLine.lineStyle.color = '#47bac2';
-                    $scope.fuelOption.series[0].title.color = '#47bac2';
-                }
-                if (data.coolingFluidTemperature) {
-                    $scope.engineOption.series[0].data[0].value = data.runDriveVo.coolingFluidTemperature || 0;
-                    $scope.engineOption.series[0].axisLine.lineStyle.color[0][1] = '#47bac2';
-                    $scope.engineOption.series[0].axisLine.lineStyle.color[1][1] = '#ff4500';
-                    $scope.engineOption.series[0].splitLine.lineStyle.color = '#47bac2';
-                    $scope.engineOption.series[0].title.color = '#47bac2';
-                }
+                $scope.vqCheckInfo.firstLoginTime = data.firstLoginTime;
+                let nameStr = '';
+                ['leftFrontDoorStatus', 'leftBackDoorStatus', 'trunkStatus', 'rightFrontDoorStatus', 'rightBackDoorStatus'].forEach(item => {
+                    nameStr += $scope.vqCheckInfo[item] === 1 ? 1 : 0;
+                });
+                $scope._src = _require(nameStr);
             }
             checkVqId.value = '';
             $scope.focus = true;
@@ -87,11 +85,20 @@ export default ['$scope', '$resource', '$state', '$timeout', '$Message', functio
     // 上报ok
     const _reportVq = (val) => {
         _clearTimeout();
-        const api = $scope.userType === 2 ? reReportVqResultApi : reportVqResultApi;
-        $resource(api).save({vin: $scope.vqCheckInfo.vin, status: val}, {}, (data) => {
+        $resource(reReportVqResultApi).save({vin: $scope.vqCheckInfo.vin, status: val}, {}, (data) => {
             $Message.success('上报成功!');
             _getlineRecordCountNumer();         // 统计当前用户今日检测数量
+            if (userInfo.userType === 2) {
+                $state.go('main.check');
+            } else {
+                $state.reload();
+            }
         });
+    };
+
+    // 返回到返修页面
+    $scope.go = () => {
+        $state.go('main.check');
     };
 
     // 判断
@@ -115,9 +122,9 @@ export default ['$scope', '$resource', '$state', '$timeout', '$Message', functio
         _getlineRecordCountNumer();         // 统计当前用户今日检测数量
     };
 
-    // 历史检测
+    // 检测历史
     $scope.historyCheck = () => {
-        $state.go('main.historyCheck');
+        $state.go('main.vqhistory');
     };
 
     $scope.$on('$destroy', () => {

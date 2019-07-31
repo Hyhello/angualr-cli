@@ -1,73 +1,70 @@
 @import 'src/assets/style/vars.scss';
 @import 'src/assets/style/mixins.scss';
 
-.revisionSearch-panel {
-    width: 100%;
+.production-container {
+    @include wh(100%, 100%);
+    position: relative;
+    padding-top: 315px;
+    padding-bottom: 60px;
     background-color: $white;
-    .revisionSearch-state {
+    .production-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include wh(100%, auto);
+    }
+    .revisionSearch-content {
+        position: relative;
+        @include wh(100%, 100%);
+    }
+    .production-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        @include wh(100%, auto);
+    }
+    .revisionSearch-box {
         text-align: center;
-        width: 100%;
-        margin-bottom: 10px;
-        .revisionSearch-state-info {
-            width: 100%;
-            padding: 15px 40px;
-            text-align: left;
-            @include clearfix;
-            .state-isRepeat {
-                display: inline-block;
-                .logo-car {
-                    display: inline-block;
-                    vertical-align: middle;
-                    @include wh(30px, 30px);
-                    margin-right: 5px;
-                }
-                .logo-car-info {
-                    display: inline-block;
-                    vertical-align: middle;
-                    @include wh(140px, 30px);
-                    margin-left: 5px;
-                }
-            }
-        }
-        .revisionSearch-state-main {
+        padding-bottom: 15px;
+        .revisionSearch-panel {
             display: inline-block;
             text-align: center;
-            @include clearfix;
             .state-main-logo {
                 display: inline-block;
-                @include wh(56px, 56px);
+                @include wh(96px, 96px);
             }
             .state-main-left,
             .state-main-right,
             .state-main-center {
-                float: left;
+                display: inline-block;
+                vertical-align: middle;
                 font-size: 14px;
                 text-align: center;
                 p.procedure-main-color {
-                    font-size: 14px;
+                    font-size: 18px;
                     padding: 8px 0;
-                    color: #D3D4D4;
-                    &.procedure-main-success {
-                        color: #40BAC3;
-                    }
-                    &.procedure-main-fail {
-                        color: #E60049;
-                    }
+                    color: #666666;
                 }
             }
             .state-main-left,
             .state-main-right {
-                font-size: 50px;
-                padding: 18px 40px;
-                font-weight: bold;
-                margin: 0 80px;
+                width: 300px;
+                text-align: center;
+                font-size: 80px;
+                font-weight: normal;
+                font-stretch: normal;
+                color: #ffffff;
                 p.okStatus {
-                    font-weight: bold;
-                    color: #40BAC3;
+                    display: inline-block;
+                    padding: 10px 20px;
+                    border-radius: 20px;
+                    background-color: $global_color;
                 }
                 p.ngStatus {
-                    font-weight: bold;
-                    color: #E60049;
+                    display: inline-block;
+                    padding: 10px 20px;
+                    border-radius: 20px;
+                    background-color: $global_ng_color;
                 }
             }
         }

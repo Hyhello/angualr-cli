@@ -12,6 +12,75 @@ export default ['$scope', '$rootScope', '$resource', '$state', function ($scope,
     // 获取用户登陆信息
     const userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'));
     const productionId = document.getElementById('productionId');
+
+    $scope.list = [
+        {
+            value: 1,
+            date: new Date(),
+            name: 'name'
+        },
+        {
+            value: 1,
+            date: new Date(),
+            name: 'name'
+        },
+        {
+            value: 1,
+            date: new Date(),
+            name: 'name'
+        },
+        {
+            value: 1,
+            date: new Date(),
+            name: 'name'
+        },
+        {
+            value: 1,
+            date: new Date(),
+            name: 'name'
+        },
+        {
+            value: 1,
+            date: new Date(),
+            name: 'name'
+        },
+        {
+            value: 1,
+            date: new Date(),
+            name: 'name'
+        },
+        {
+            value: 1,
+            date: new Date(),
+            name: 'name'
+        },
+        {
+            value: 1,
+            date: new Date(),
+            name: 'name'
+        },
+        {
+            value: 1,
+            date: new Date(),
+            name: 'name'
+        },
+        {
+            value: 1,
+            date: new Date(),
+            name: 'name'
+        },
+        {
+            value: 1,
+            date: new Date(),
+            name: 'name'
+        },
+        {
+            value: 1,
+            date: new Date(),
+            name: 'name'
+        }
+    ];
+
     /** **********初始化数据********* */
     $scope.searchData = {
         vin: ''         // vin码
@@ -49,6 +118,11 @@ export default ['$scope', '$rootScope', '$resource', '$state', function ($scope,
         });
     };
 
+    // 跳转
+    $scope.go = (str) => {
+        $state.go(str);
+    };
+
     // 搜索
     $scope.searchLineProduct = () => {
         if (!productionId.value) {
@@ -80,7 +154,7 @@ export default ['$scope', '$rootScope', '$resource', '$state', function ($scope,
         });
     };
 
-    // 历史检测
+    // 检测历史
     $scope.historyCheck = () => {
         $state.go('main.historyCheck');
     };

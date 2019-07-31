@@ -1,4 +1,4 @@
-<div class="layui-unselect layui-form-checkbox" ng-click="handlerClick()" ng-class="{true: 'layui-form-checked'}[checked]" lay-skin="primary">
+<div class="layui-unselect layui-form-checkbox" ng-click="handlerClick()" ng-class="{'layui-form-checked': checked, 'is-disabled': disabled }" lay-skin="primary">
     <span class="hy-radio__inner" ng-transclude></span>
     <i class="layui-icon layui-icon-ok"></i>
 </div>

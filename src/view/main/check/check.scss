@@ -2,6 +2,71 @@
 @import 'src/assets/style/vars.scss';
 @import 'src/assets/style/mixins.scss';
 
+.check-container {
+    @include wh(100%, 100%);
+    position: relative;
+    padding-top: 283px;
+    background-color: #f3f4f5;
+    .check-header {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+        .check_box {
+            padding: 10px 0;
+        }
+        .check__checked {
+            margin-right: 20px;
+            margin-bottom: 20px;
+            display: block;
+            line-height: 1;
+            font-size: 0;
+        }
+        .checkNg-info {
+            display: inline-block;
+            padding: 10px 0;
+            font-size: 22px;
+            color: #333333;
+            font-weight: normal;
+            font-stretch: normal;
+            vertical-align: middle;
+            .describe {
+                font-size: 22px;
+                font-weight: normal;
+                font-stretch: normal;
+                color: #16b793;
+            }
+            .info-label {
+                color: #707070;
+            }
+            .error-info {
+                color: #f04833;
+            }
+        }
+        .check-btn {
+            @include wh(120px, 120px);
+            padding: 6px;
+            line-height: 40px;
+            white-space: normal;
+            font-size: 24px;
+            font-weight: normal;
+            font-stretch: normal;
+            span {
+                color: #efff6e;
+            }
+        }
+        .mark-btn {
+            @include wh(100px, 60px);
+        }
+    }
+    .check-main {
+        @include wh(100%, 100%);
+    }
+}
+
+
+
+
 .reason-panel,
 .proposal-panel {
     width: 100%;
@@ -22,11 +87,20 @@
     }
 }
 
-.check__checked {
-    margin-top: 6px;
-    margin-left: 20px;
+.changeParts-state-info {
     display: inline-block;
-    line-height: 1;
-    vertical-align: middle;
-    font-size: 0;
+    margin-left: 15px;
+    vertical-align: bottom;
+    .logo-car {
+        display: inline-block;
+        vertical-align: middle;
+        @include wh(30px, 30px);
+        margin-right: 5px;
+    }
+    .logo-car-info {
+        display: inline-block;
+        vertical-align: middle;
+        @include wh(140px, 30px);
+        margin-left: 5px;
+    }
 }

@@ -3,14 +3,26 @@
  * 时间：2019-03-07
  * 描述：变量
  */
-$global_color:                     #52C2C9 !default;
+
+// global
+$global_color:                     #16b793 !default;
 $white:                            #FFFFFF !default;
 $baseShadow:                       0 1px 3px rgba(0,0,0,.18) !default;
-$header_bg:                        #022540 !default;
 $searchBar_bg:                     #EEEEEE !default;
-$btnPromise_bg:                    #47bac2 !default;
-$btnFail_bg:                       #D6D6D6 !default;
-$btnFail_color:                    #5f5f5f !default;
 $tips_Bg:                          #f71919 !default;
-$global_ok_color:                  rgb(102, 204, 153) !default;
-$global_ng_color:                  rgb(255, 102, 102) !default;
+$global_ng_color:                  #f6630a !default;
+$global_line_height:                20 / 14  !default;
+
+
+// header
+$header_bg:                        #04263f !default;
+$header_font_color:                #48bac2 !default;
+
+// button
+$button_border_color:              #16b793 !default;
+$button_default_bg:                #FFFFFF !default;
+$button_default_color:             #16b793 !default;
+$button_default_active_bg:         #eeeeee !default;
+$button_primary_bg:                #16b793 !default;
+$button_primary_color:             #FFFFFF !default;
+$button_primary_active_bg:         #12886d !default;

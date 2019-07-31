@@ -21,8 +21,19 @@ export default {
                     const duration = attrs.duration || 600;
                     const defer = attrs.defer || 3000;
                     const EButton = element.find('button');
-                    const height = element.css('height');
-                    const count = new Count(parseFloat(height), 0, duration, (val) => {
+
+                    const getRect = function (el) {
+                        let rect = el.getBoundingClientRect();
+                        rect.width = rect.width || (rect.right - rect.left);
+                        rect.height = rect.height || (rect.bottom - rect.top);
+                        rect.x = rect.x || rect.left;
+                        rect.y = rect.y || rect.top;
+                        return rect;
+                    };
+
+                    const height = getRect(element[0]).height;
+
+                    const count = new Count(height, 0, duration, (val) => {
                         element.css('height', `${val}px`);
                     });
                     const timeout = (defer) => {

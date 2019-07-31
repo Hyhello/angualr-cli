@@ -6,7 +6,7 @@
 import 'babel-polyfill';
 import 'normalize.css';
 import angular from 'angular';
-import '@/assets/style/common.scss';
+import '@/assets/style/index.scss';
 import './directives/';
 import './filters/';
 import './factory/';

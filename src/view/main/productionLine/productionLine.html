@@ -3,49 +3,61 @@
   * 时间：2018-04-28
   * 描述：产品检测 检测人员
 -->
-<div class="revisionSearch-container">
-    <!-- searchBar -->
-    <div class="search-bar" ng-enter="searchLineProduct()">
-        <label class="search-bar-item-label">车架号</label>
-        <div class="search-bar-item-input">
-            <input type="text" v-focus="focus" id="productionId" value="" name="title" autocomplete="off" placeholder="请输入车架号" />
-        </div>
-        <button class="btn btn-promise" v-busy="loading" loading-text="搜索中" ng-click="searchLineProduct()">搜索</button>
-        <button class="btn btn-fail float-right" ng-show="userType === 2"  go-back>返回</button>
-    </div>
-    <!-- content -->
-    <div class="revisionSearch-panel">
-        <div class="revisionSearch-state">
-            <div class="revisionSearch-state-info">
-                <div class="state-isRepeat">
-                    <img ng-show="lineProductResult.vin" class="logo-car" src="../../../assets/images/car.png" alt="car" />
-                    {{lineProductResult.vin}}
-                    <span class="VIN_ERROR" ng-show="lineProductResult.VIN_ERROR">{{lineProductResult.VIN_ERROR}}</span>
-                    <img class="logo-car-info" ng-show="lineProductResult.scanned === 2" src="../../../assets/images/info.png" alt="info" />
-                </div>
-                <button class="btn btn-promise float-right" ng-click="historyCheck()">历史检测</button>
+<div class="production-container">
+    <div class="production-header">
+        <!-- searchBar -->
+        <div class="search-bar" ng-enter="searchLineProduct()">
+            <div class="form-group">
+                <label>VIN编码</label>
+                <input type="text" class="form-control" v-focus="focus" id="productionId" value="" name="title" autocomplete="off" placeholder="请输入VIN编码" />
             </div>
-            <div class="revisionSearch-state-main">
+            <button class="btn btn-primary" v-busy="loading" loading-text="搜索中" ng-click="searchLineProduct()">搜索</button>
+            <button class="btn btn-primary float-right" ng-show="userType === 2" ng-click="go('main.checkVq')">返回至<span class="btn_active_color">vq</span>界面</button>
+            <button class="btn btn-primary float-right mr14" ng-show="userType === 2" ng-click="go('main.check')">返回至<span class="btn_active_color">返修</span>界面</button>
+            <button class="btn btn-default float-right mr14" ng-click="historyCheck()">检测历史</button>
+        </div>
+        <!-- vin_error_tips -->
+        <div class="error-state-info">
+            <span class="info-label" ng-show="lineProductResult.vin">当前车辆：</span>
+            {{lineProductResult.vin}}
+            <span class="error-info">{{lineProductResult.VIN_ERROR}}</span>
+            <img class="scanned-info" ng-show="lineProductResult.scanned === 2" src="../../../assets/images/info.png" alt="info" />
+        </div>
+        <!-- content -->
+        <div class="revisionSearch-box">
+            <div class="revisionSearch-panel">
                 <div class="state-main-left">
                     <p class="okStatus" ng-show="lineProductResult.result === 1">OK</p>
                 </div>
                 <div class="state-main-center">
-                    <img ng-show="!lineProductResult.result" src="../../../assets/images/activation2.png" class="state-main-logo" alt="activation2" />
-                    <img ng-show="lineProductResult.result === 1" src="../../../assets/images/activation1.png" class="state-main-logo" alt="activation1" />
-                    <img ng-show="lineProductResult.result === 2" src="../../../assets/images/activation0.png" class="state-main-logo" alt="activation0" />
-                    <p class="procedure-main-color" ng-class="{1: 'procedure-main-success', 2: 'procedure-main-fail'}[lineProductResult.result]">通讯状态</p>
+                    <img src="../../../assets/images/status.png" class="state-main-logo" alt="status" />
+                    <p class="procedure-main-color">通讯状态</p>
                 </div>
                 <div class="state-main-right">
                     <p class="ngStatus" ng-show="lineProductResult.result === 2">NG</p>
                 </div>
             </div>
         </div>
-        <!-- 表格 -->
+    </div>
+    <!-- 表格 -->
+    <div class="production-content">
+        <!-- <v-table data="list">
+            <table-cell
+                prop="date"
+                label="序号"
+                width="180"
+            ></table-cell>
+            <table-cell
+                prop="date"
+                label="序号1"
+                width="180"
+            ></table-cell>
+        </v-table> -->
         <table class="tabel-panel">
             <thead>
                 <tr>
                     <th>序号</th>
-                    <th>车架号</th>
+                    <th>VIN编码</th>
                     <th>IMEI</th>
                     <th>检测时间</th>
                     <th>检测结果</th>
@@ -53,11 +65,11 @@
             </thead>
             <tbody>
                 <tr ng-show="lineProductList.length" ng-repeat="item in lineProductList" ng-class="{true: 'background-ng', false: 'background-ok'}[item.result === 2]">
-                    <td class="x-nowrap color-fff" ng-bind="$index + 1"></td>
-                    <td class="x-nowrap color-fff" ng-bind="item.vin"></td>
-                    <td class="x-nowrap color-fff" ng-bind="item.imei"></td>
-                    <td class="x-nowrap color-fff" ng-bind="item.detectionTime"></td>
-                    <td class="x-nowrap color-fff" ng-bind="item.result | productResult"></td>
+                    <td ng-bind="$index + 1"></td>
+                    <td ng-bind="item.vin"></td>
+                    <td ng-bind="item.imei"></td>
+                    <td ng-bind="item.detectionTime"></td>
+                    <td ng-bind="item.result | productResult"></td>
                 </tr>
                 <tr ng-show="!lineProductList.length">
                     <td colspan="5">
@@ -66,7 +78,9 @@
                 </tr>
             </tbody>
         </table>
-        <!-- table-footer -->
+    </div>
+    <!-- table-footer -->
+    <div class="production-footer">
         <div class="statistics">
             <span>今日统计 | </span>
             <span>检测总数：</span>

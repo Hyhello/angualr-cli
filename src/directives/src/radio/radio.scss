@@ -1,8 +1,12 @@
 
 .layui-form-checkbox {
+    &.is-disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
     span.hy-radio__inner {
         line-height: 1;
-        font-size: 14px;
+        font-size: 24px;
         padding-right: 0;
     }
     i {
@@ -11,6 +15,22 @@
         background-color: #47bac2;
         color: #fff;
     }
+}
+.layui-form-checkbox[lay-skin=primary] {
+    min-width: 24px;
+    min-height: 24px;
+}
+.layui-form-checkbox[lay-skin=primary] span {
+    font-size: 24px;
+    line-height: 24px;
+    vertical-align: -2px;
+    margin-left: 3px;
+}
+.layui-form-checkbox[lay-skin=primary] i {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 16px;
 }
 .hy-radio__group {
     display: inline-block;

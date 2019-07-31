@@ -1,15 +1,22 @@
 .hy-switch {
     display: inline-block;
-    font-size: 20px;
+    font-size: 24px;
     text-align: center;
-    width: 180px;
+    width: 200px;
     height: 90px;
     margin: 10px;
     cursor: pointer;
     line-height: 90px;
-    background-color: #e4e4e4;
+    background-color: #dadada;
+	box-shadow: 0px 4px 20px 0px
+		rgba(172, 172, 172, 0.4);
+	border: solid 1px #a1a1a1;
     user-select: none;
     &.actived {
-        background-color: #ff0000;
+        color: #FFFFFF;
+        background-color: #f6630a;
+        box-shadow: 0px 4px 20px 0px
+            rgba(246, 99, 10, 0.4);
+        border: solid 1px #cd340b
     }
 }

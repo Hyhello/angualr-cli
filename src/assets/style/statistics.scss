@@ -1,0 +1,22 @@
+// 统计
+.statistics {
+    @include wh(100%, 50px);
+    font-size: 16px;
+	font-weight: normal;
+	font-stretch: normal;
+	color: #000000;
+    font-size: 16px;
+    padding: 0 40px;
+    line-height: 50px;
+    background: #efefef;
+    white-space: nowrap;
+    span {
+        vertical-align: middle;
+    }
+    .color-47bac2 {
+        color: $global_ng_color;
+    }
+    .maglf-30 {
+        margin-left: 30px;
+    }
+}

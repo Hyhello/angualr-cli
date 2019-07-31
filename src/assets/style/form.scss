@@ -1,0 +1,41 @@
+// from 包含input 样式
+.form-control {
+    display: inline-block;
+    width: 230px;
+    vertical-align: middle;
+    height: 50px;
+    padding: 8px 15px;
+    font-size: 16px;
+    line-height: $global_line_height;
+    line-height: 34px\9;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #acacac;
+    border-radius: 4px;
+    transition: border-color ease-in-out .15s;
+    &:focus {
+        border-color: $global_color;
+        outline: 0;
+    }
+}
+
+// form
+.form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+    margin-right: 14px;
+    label {
+        display: inline-block;
+        vertical-align: middle;
+        max-width: 100%;
+        font-weight: 700;
+        font-size: 22px;
+        margin-right: 14px;
+        margin-bottom: 3px;
+        font-weight: normal;
+        font-stretch: normal;
+        color: $global_color;
+    }
+}

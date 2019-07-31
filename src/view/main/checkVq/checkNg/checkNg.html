@@ -1,66 +1,50 @@
 <div class="checkNg-container">
-    <div class="revisionSearch-state-info">
-        <div class="state-isRepeat">
-            <img ng-show="vqCheckInfo.vin" class="logo-car" src="../../../../assets/images/car.png" alt="car" />
-            {{vqCheckInfo.vin}}
-            <span class="VIN_ERROR" ng-show="vqCheckInfo.VIN_ERROR">{{vqCheckInfo.VIN_ERROR}}</span>
-            <img class="logo-car-info" ng-show="vqCheckInfo.scanned === 2" src="../../../../assets/images/info.png" alt="info" />
+    <div class="checkNg-header">
+        <!-- searchBar -->
+        <div class="search-bar">
+            <div class="checkNg-info">
+                <span class="info-label" ng-show="vqCheckInfo.vin">当前车辆：</span>
+                {{vqCheckInfo.vin}}
+                <span class="error-info">{{vqCheckInfo.VIN_ERROR}}</span>
+                <img class="scanned-info" ng-show="vqCheckInfo.scanned === 2" src="../../../../assets/images/info.png" alt="info" />
+            </div>
+            <button class="btn btn-primary float-right" ng-click="checkOk()">该车检测<span class="btn_active_color">完成</span></button>
+            <button class="btn btn-default mr14 float-right" go-back>返回</button>
         </div>
-        <button class="btn btn-fail float-right" go-back>返回</button>
-        <button class="btn btn-promise float-right" ng-click="checkOk()">该车检测完成</button>
     </div>
     <!-- 内容部分 -->
-    <div class="checkNg-content">
-        <div class="checkNg-content__left">
-            <h3 class="checkNg-content__title">天线类NG项</h3>
-            <v-switch ng-model="vqCheckInfo.lteMainStatus" active="2" inactive="1" label="'LTE天线主集状态'"></v-switch>
-            <v-switch ng-model="vqCheckInfo.lteDiversityStatus" active="2" inactive="1" label="'LTE天线分集状态'"></v-switch>
-            <v-switch ng-model="vqCheckInfo.gpsAntennaStatus" active="3" inactive="1" label="'GPS天线状态'"></v-switch>
-            <h3 class="checkNg-content__title">车门类NG项</h3>
-            <v-switch ng-model="vqCheckInfo.leftFrontDoorStatus" active="1" inactive="0" label="'左前门'"></v-switch>
-            <v-switch ng-model="vqCheckInfo.leftBackDoorStatus" active="1" inactive="0" label="'左后门'"></v-switch>
-            <v-switch ng-model="vqCheckInfo.trunkStatus" active="1" inactive="0" label="'后备箱'"></v-switch>
-            <v-switch ng-model="vqCheckInfo.rightFrontDoorStatus" active="1" inactive="0" label="'右前门'"></v-switch>
-            <v-switch ng-model="vqCheckInfo.rightBackDoorStatus" active="1" inactive="0" label="'右后门'"></v-switch>
-        </div>
-        <div class="checkNg-content__right">
-            <div class="car-box">
-                <div class="car-space-panel">
-                    <div class="car-space-item">
-                        <div class="car-door-item door-top">
-                            <img height="60" width="60" src="../../../../assets/images/carDoorType/carDoorOf.png" ng-show="vqCheckInfo.leftFrontDoorStatus === 1" alt="carDoorOf" />
-                            <img height="60" width="60" src="../../../../assets/images/carDoorType/carDoorOff.png" ng-show="vqCheckInfo.leftFrontDoorStatus !== 1" alt="carDoorOff" />
-                            <p class="info-color">左前门</p>
-                        </div>
-                        <div class="car-door-item">
-                            <img height="60" width="60" src="../../../../assets/images/carDoorType/carDoorOf.png" ng-show="vqCheckInfo.leftBackDoorStatus === 1" alt="carDoorOf" />
-                            <img height="60" width="60" src="../../../../assets/images/carDoorType/carDoorOff.png" ng-show="vqCheckInfo.leftBackDoorStatus !== 1" alt="carDoorOff" />
-                            <p class="info-color">左后门</p>
-                        </div>
-                    </div>
-                    <div class="car-space-item">
-                        <img height="350" alt="car" src="../../../../assets/images/carDoorType/00000.png" />
-                        <div class="car-door-item">
-                            <img height="60" width="60" ng-show="vqCheckInfo.trunkStatus === 1" src="../../../../assets/images/carDoorType/carDoorOf.png" alt="carDoorOf" />
-                            <img height="60" width="60" ng-show="vqCheckInfo.trunkStatus !== 1" src="../../../../assets/images/carDoorType/carDoorOff.png" alt="carDoorOff" />
-                            <p class="info-color">后备箱</p>
-                        </div>
-                    </div>
-                    <div class="car-space-item">
-                        <div class="car-door-item door-top">
-                            <img height="60" width="60" src="../../../../assets/images/carDoorType/carDoorOf.png" ng-show="vqCheckInfo.rightFrontDoorStatus === 1" alt="carDoorOf" />
-                            <img height="60" width="60" src="../../../../assets/images/carDoorType/carDoorOff.png" ng-show="vqCheckInfo.rightFrontDoorStatus !== 1" alt="carDoorOff" />
-                            <br><p class="info-color">右前门</p>
-                        </div>
-                        <div class="car-door-item">
-                            <img height="60" width="60" src="../../../../assets/images/carDoorType/carDoorOf.png" ng-show="vqCheckInfo.rightBackDoorStatus === 1" alt="carDoorOf" />
-                            <img height="60" width="60" src="../../../../assets/images/carDoorType/carDoorOff.png" ng-show="vqCheckInfo.rightBackDoorStatus !== 1" alt="carDoorOff" />
-                            <br><p class="info-color">右后门</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="last-login-time">车辆第一次登录时间：{{vqCheckInfo.firstLoginTime}}</div>
+    <div class="checkNg-body">
+        <div class="checkNg-body__left">
+            <h3 class="checkNg-body__title"><span>天线类</span>NG项</h3>
+            <div class="checkNg-body__main mb70">
+                <v-switch ng-model="vqCheckInfo.lteMainStatus" active="2" inactive="1" label="'LTE天线主集状态'"></v-switch>
+                <v-switch ng-model="vqCheckInfo.lteDiversityStatus" active="2" inactive="1" label="'LTE天线分集状态'"></v-switch>
+                <v-switch ng-model="vqCheckInfo.gpsAntennaStatus" active="2" inactive="1" label="'GPS天线状态'"></v-switch>
             </div>
+            <h3 class="checkNg-body__title"><span>车门类</span>NG项</h3>
+            <div class="checkNg-body__main wh">
+                <v-switch ng-model="vqCheckInfo.leftFrontDoorStatus" active="2" inactive="1" label="'左前门'"></v-switch>
+                <v-switch ng-model="vqCheckInfo.leftBackDoorStatus" active="2" inactive="1" label="'左后门'"></v-switch>
+                <v-switch ng-model="vqCheckInfo.trunkStatus" active="2" inactive="1" label="'后备箱'"></v-switch>
+                <v-switch ng-model="vqCheckInfo.rightFrontDoorStatus" active="2" inactive="1" label="'右前门'"></v-switch>
+                <v-switch ng-model="vqCheckInfo.rightBackDoorStatus" active="2" inactive="1" label="'右后门'"></v-switch>
+            </div>
+        </div>
+        <div class="checkNg-body__right">
+            <div class="car-space-panel">
+                <img height="400" alt="car" src="{{_src}}" />
+            </div>
+        </div>
+    </div>
+    <div class="checkNg-footer">
+        <div class="statistics">
+            <span>今日统计 | </span>
+            <span>检测总数：</span>
+            <span class="color-47bac2">{{lineRecordCountNumberInfo.todayTotal || 0}}辆</span>
+            <span class="maglf-30">检测通过：</span>
+            <span class="color-47bac2">{{lineRecordCountNumberInfo.todayPass || 0}}辆</span>
+            <span class="maglf-30">检测不通过：</span>
+            <span class="color-47bac2">{{lineRecordCountNumberInfo.todayFail || 0}}辆</span>
         </div>
     </div>
 </div>

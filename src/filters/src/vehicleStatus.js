@@ -9,12 +9,12 @@ export default {
     callback () {
         return (val) => {
             let str = '';
-            switch (+val) {
+            switch (val) {
                 case 1:
-                    str = '整装下线';
+                    str = '总装下线NG';
                     break;
-                default:
-                    str = 'VQ下线';
+                case 2:
+                    str = 'VQ检测NG';
                     break;
             }
             return str;

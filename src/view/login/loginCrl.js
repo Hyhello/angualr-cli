@@ -7,8 +7,8 @@
 import './login.scss';
 import angular from 'angular';
 import md5 from 'blueimp-md5';
+import jsSha from 'js-sha256';
 import Cache from '@/libs/cache';
-import { checkIe8 } from '@/libs/utils';
 import { loginApi } from './loginService.js';
 
 export default ['$scope', '$resource', '$state', '$rootScope', function ($scope, $resource, $state, $rootScope) {
@@ -25,18 +25,18 @@ export default ['$scope', '$resource', '$state', '$rootScope', function ($scope,
 
     $scope.loading = false;      // 加载
 
-    $scope.isShowTips = checkIe8();
-
     $scope.rememberList = [];
     $scope.isRemember = true;
     $scope.readCookie = false;
     $scope.selectedItem = {};
+    $scope.selectedItem2 = {};
     /** **********业务逻辑********* */
 
     // 查看是否有密码记录
     const loginList = cache.getList();
     if (loginList && loginList.length) {
         $scope.loginInfo = {...loginList[0]};
+        $scope.selectedItem2 = {...loginList[0]};
         $scope.rememberList = loginList;
         $scope.isRemember = true;
         $scope.readCookie = true;
@@ -45,6 +45,7 @@ export default ['$scope', '$resource', '$state', '$rootScope', function ($scope,
     // autoComplete
     $scope.autoSelect = (val, item) => {
         $scope.selectedItem = $scope.loginInfo = {...item};
+        $scope.selectedItem2 = {...item};
     };
 
     // 用户名改变
@@ -67,10 +68,18 @@ export default ['$scope', '$resource', '$state', '$rootScope', function ($scope,
         }
         $scope.loading = true;
         const loginInfo = angular.copy($scope.loginInfo);
-        loginInfo.password = $scope.readCookie
+        console.log($scope.selectedItem2);
+        loginInfo.password = $scope.readCookie && ($scope.loginInfo.password === $scope.selectedItem2.password)
                                 ? $scope.loginInfo.password
                                 : md5($scope.loginInfo.password).toUpperCase();
-        $resource(loginApi).get(loginInfo, (data) => {
+        let ts = new Date().getTime();
+        let payload = {
+            u: loginInfo.userName,
+            p: loginInfo.password,
+            ts: ts,
+            v: jsSha.sha256(loginInfo.userName + ts + loginInfo.password)
+        };
+        $resource(loginApi).save({}, payload, (data) => {
             const result = data;
             let router = '';
             // 记住密码
@@ -96,5 +105,31 @@ export default ['$scope', '$resource', '$state', '$rootScope', function ($scope,
         }, (e) => {
             $scope.loading = false;
         });
+        // $resource(loginApi).get(loginInfo, (data) => {
+        //     const result = data;
+        //     let router = '';
+        //     // 记住密码
+        //     if ($scope.isRemember) {
+        //         // 保存密码
+        //         cache.setItem(loginInfo);
+        //     }
+        //     // 保存登陆信息
+        //     window.sessionStorage.setItem('userInfo', JSON.stringify(result));
+        //     switch (result.userType) {
+        //         case 1:
+        //             router = 'main.productionLine';
+        //             break;
+        //         case 2:
+        //             router = 'main.check';
+        //             break;
+        //         case 3:
+        //             router = 'main.checkVq';
+        //             break;
+        //     }
+        //     $scope.loading = false;
+        //     $state.go(router);
+        // }, (e) => {
+        //     $scope.loading = false;
+        // });
     };
 }];

@@ -1,19 +1,18 @@
 // 分页样式
-@import './vars';
-@import './mixins';
 
 .page-panel {
     @include clearfix;
-    padding: 10px;
+    padding: 15px 40px;
+    font-size: 20px;
     ul.pagination {
         float: right;
         li {
             float: left;
             a {
-                min-width: 32px;
-                height: 32px;
-                line-height: 30px;
-                margin: 0 4px;
+                min-width: 60px;
+                height: 60px;
+                line-height: 58px;
+                margin: 0 8px;
                 text-align: center;
                 list-style: none;
                 background-color: $white;
@@ -27,7 +26,7 @@
                 &:hover,
                 &:active {
                     color: $white;
-                    background-color: $btnPromise_bg;
+                    background-color: $button_primary_bg;
                 }
                 &.page-click {
                     padding: 0 8px;
@@ -36,8 +35,8 @@
             span {
                 display: inline-block;
                 margin-left: 4px;
-                height: 32px;
-                line-height: 32px;
+                height: 60px;
+                line-height: 60px;
             }
         }
     }

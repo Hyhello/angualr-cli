@@ -5,9 +5,9 @@
  */
 import './check.scss';
 import { trim } from '@/libs/utils';
-import { findProductionLineRecordApi } from './checkService.js';
+import { findProductionLineRecordApi, changeTboxApi, faultPartApi, repairSuccessApi } from './checkService.js';
 
-export default ['$scope', '$resource', '$state', function ($scope, $resource, $state) {
+export default ['$scope', '$resource', '$state', '$Message', function ($scope, $resource, $state, $Message) {
     const checkId = document.getElementById('checkId');
     /** **********初始化数据********* */
 
@@ -15,12 +15,13 @@ export default ['$scope', '$resource', '$state', function ($scope, $resource, $s
 
     $scope.focus = true;
 
-    $scope.checkType = 'imei';
+    $scope.describe = 'VIN';
+    $scope.checkType = 'vin';
     $scope.checkInto = {};
     $scope.checkList = [];
 
     const selectOptions = {
-        vin: '车架号',
+        vin: 'VIN编码',
         imei: 'IMEI',
         deviceCode: 'SN'
     };
@@ -32,9 +33,19 @@ export default ['$scope', '$resource', '$state', function ($scope, $resource, $s
         $scope.focus = true;
     });
 
+    // 清空
+    $scope.clear = () => {
+        $scope.checkInto = {};
+        $scope.checkList = [];
+        checkId.value = '';
+        $scope.focus = true;
+        $scope.loading = false;
+    };
+
     // 检测
     $scope.check = (val) => {
         let router = '';
+        let param = {};
         switch (val) {
             case 'vq':
                 router = 'main.checkVq';
@@ -42,11 +53,46 @@ export default ['$scope', '$resource', '$state', function ($scope, $resource, $s
             case 'production':
                 router = 'main.productionLine';
                 break;
-            case 'change':
-                router = 'main.changeParts';
-                break;
         }
-        $state.go(router);
+        $state.go(router, param);
+    };
+
+    // 解绑
+    $scope.untying = (item) => {
+        $resource(changeTboxApi).save({vin: item.vin}, {}, (data) => {
+            $Message.success('解绑成功!');
+            $scope.clear();
+        });
+    };
+
+    // 标记
+    $scope.mark = (item) => {
+        let params = {};
+        params[$scope.checkType] = item[$scope.checkType];
+        if (!params[$scope.checkType]) {
+            $Message.warning('无SN/imei');
+            return;
+        }
+        $resource(faultPartApi).save(params, {}, (data) => {
+            $Message.success('标记故障件成功!');
+            $scope.reset();
+        });
+    };
+
+    // 返修完成
+    $scope.repair = (item) => {
+        $resource(repairSuccessApi).save({vin: item.vin}, {}, (data) => {
+            $Message.success('返修完成!');
+            $scope.clear();
+        });
+    };
+
+    // 重来
+    $scope.reset = () => {
+        $scope.checkInto = {};
+        $scope.checkList = [];
+        $scope.checkType = 'vin';
+        $scope.loading = false;
     };
 
     // 搜索
@@ -55,17 +101,30 @@ export default ['$scope', '$resource', '$state', function ($scope, $resource, $s
             $scope.focus = true;
             return;
         }
-        const param = {};
+        let param = {};
         $scope.loading = true;
         param[$scope.checkType] = trim(checkId.value);
         $resource(findProductionLineRecordApi).get(param, (data) => {
-            $scope.checkInto = data || {};
-            $scope.checkList = [$scope.checkInto];
+            $scope.checkInto = {};
+            $scope.checkList = [];
+            if (data.code === 'PAGE_TIPS' || data.code === 'VEHICLE_NO_BIND_DEVICE') {
+                if (data.code === 'VEHICLE_NO_BIND_DEVICE') {
+                    $scope.checkInto._code = data.code;
+                    $scope.checkType = 'deviceCode';
+                }
+                $scope.checkInto._ERROR = data.message;
+                $scope.checkInto.vehicleStatus = data.vehicleStatus;
+            } else {
+                $scope.checkInto = data || {};
+                $scope.checkList = [$scope.checkInto];
+            }
+            $scope.describe = ($scope.checkType === 'deviceCode' ? 'SN' : $scope.checkType).toUpperCase();
+            $scope.checkInto.prevValue = checkId.value;
             checkId.value = '';
             $scope.focus = true;
             $scope.loading = false;
         }, (e) => {
-            $scope.loading = false;
+            $scope.clear();
         });
     };
 }];

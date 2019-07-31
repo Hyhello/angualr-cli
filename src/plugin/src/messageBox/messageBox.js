@@ -41,6 +41,7 @@ export default {
 
         // 隐藏
         const hide = () => {
+            if (_count.isStart) return;
             oInstance.removeClass('show');
             _count.callback = (val, _, status) => {
                 // 兼容ie8
@@ -73,6 +74,7 @@ export default {
 
         // 展示
         const show = () => {
+            if (_count.isStart) return;
             oInstance.removeClass('hide');
             _count.callback = (val, _, status) => {
                 // 兼容ie8

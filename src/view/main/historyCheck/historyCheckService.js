@@ -5,5 +5,3 @@
  */
 
 export const lineRecordHistoryApi = '/api/produce/product/findHistoryPageList/:pageNum/:pageSize';        // 分页查询产线检测记录
-
-export const retryDetectApi = '/api/produce/product/vq/line/retryDetect';                                 // 重新检测

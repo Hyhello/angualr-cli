@@ -5,14 +5,20 @@
 .checkVq-container {
     @include wh(100%, 100%);
     position: relative;
-    padding-top: 48px;
-    padding-bottom: 45px;
+    padding-top: 97px;
+    padding-bottom: 60px;
     overflow: hidden;
-    .checkVq-search {
+    .checkVq-header {
         position: absolute;
-        width: 100%;
         top: 0;
         left: 0;
+        width: 100%;
+    }
+    .checkVq-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
     }
     .checkVq-panel {
         @include wh(100%, 100%);
@@ -44,18 +50,53 @@
             .checkVq-li-panel-item {
                 float: left;
                 .checkVq-text {
-                    font-size: 14px;
-                    margin-top: 10px;
-                    color: #c4ccd3;
-                    &.check-on {
-                        color: green;;
-                    }
-                    &.check-off {
-                        color: red;;
+                    display: inline-block;
+                    width: 210px;
+                    text-align: left;
+                    margin-bottom: 5px;
+                    font-size: 22px;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    color: #333333;
+                    vertical-align: middle;
+                    span {
+                        color: #16b793;
                     }
                 }
                 .last-login-time {
+                    font-size: 24px;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    color: #666666;
                     padding: 15px 0;
+                }
+                .prev-btn {
+                    padding-top: 100px;
+                    margin-bottom: 89px;
+                }
+                .btn {
+                    width: 200px;
+                    height: 80px;
+                    font-size: 20px;
+                    color: $white;
+                    .btn_active_color {
+                        display: inline-block;
+                        font-size: 24px;
+                        color: #e9fd6e;
+                        vertical-align: 0px;
+                    }
+                    &.btn-ok {
+                        background-color: #16b793 !important;
+                        box-shadow: 0px 4px 20px 0px
+                            rgba(44, 157, 126, 0.4) !important;
+                        border: solid 1px #0e7860 !important;
+                    }
+                    &.btn-ng {
+                        background-color: #f6630a !important;
+                        box-shadow: 0px 4px 20px 0px
+                            rgba(246, 99, 10, 0.4) !important;
+                        border: solid 1px #cd340b !important;
+                    }
                 }
             }
         }
@@ -71,21 +112,37 @@
         .gps-box {
             text-align: center;
             padding: 30px;
-            margin-right: 200px;
             .gps-box-item {
                 margin-bottom: 60px;
             }
             .gps-status {
+                display: inline-block;
+                vertical-align: middle;
+                position: relative;
                 border-radius: 100%;
                 display: inline-block;
                 margin: 0 35px;
                 background-color: #c4ccd3;
-                @include wh(70px, 70px);
+                @include wh(90px, 90px);
+                &::after {
+                    content: '';
+                    position: absolute;
+                    border-radius: 100%;
+                    left: -5px;
+                    top: -5px;
+                    z-index: -1;
+                    display: inline-block;
+                    background-color: #f3f3f3;
+                    @include wh(100px, 100px);
+                }
                 &.gps-on {
-                    background-color: green;
+                    background-color: #17bf9d;
+                    &::after {
+                        background-color: #c1ece2;
+                    }
                 }
                 &.gps-off {
-                    background-color: red;
+                    background-color: #fcd6bd;
                 }
             }
         }
@@ -96,27 +153,12 @@
             .checkVq-li-panel-item {
                 margin: 0 50px;
             }
-            .chart-dashboard-item {
-                @include wh(250px, 150px);
-            }
             .car-space-panel {
-                @include clearfix;
-                .car-space-item {
-                    float: left;
-                    img {
-                        width: auto;
-                        display: inline-block;
-                    }
-                    .car-door-item {
-                        padding-top: 10px;
-                        &.door-top {
-                            margin-bottom: 120px;
-                        }
-                    }
-                    .info-color {
-                        padding-top: 5px;
-                        font-size: 16px;
-                    }
+                position: relative;
+                margin-top: 30px;
+                img {
+                    width: auto;
+                    display: inline-block;
                 }
             }
         }

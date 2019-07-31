@@ -1,0 +1,25 @@
+<div class="v-table">
+    <div class="v-table__header-wrapper">
+        <table cellspacing="0" cellpadding="0" class="v-table__header">
+            <thead class="has-gutter">
+                <tr class="v-table__row"></tr>
+            </thead>
+        </table>
+    </div>
+    <div class="v-table__body-wrapper">
+        <table cellspacing="0" cellpadding="0" class="v-table__body">
+            <tbody>
+                <tr v-show="data.length" class="v-table__row" ng-repeat="item in data track by $index">
+                    <td rowspan="1" colspan="1" width="{{value.width}}" ng-repeat="(key, value) in childMap">
+                        <div class="cell">{{item[value.prop]}}</div>
+                    </td>
+                </tr>
+                <!-- <tr v-show="!data.length">
+                    <td rowspan="1" colspan="1" width="{{value.width}}" ng-repeat="(key, value) in childMap">
+                        <div class="cell">{{item[value.prop]}}</div>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+
+.btn {
+    display: inline-block;
+    padding: 8px 25px;
+    height: 50px;
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: $global_line_height;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid $button_border_color;
+    border-radius: 4px;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+// 按钮
+.btn-primary {
+    background-color: $button_primary_bg;
+    border-color: $button_border_color;
+    color: $button_primary_color;
+    &:hover,
+    &:focus,
+    &:active,
+    &:visited {
+        background-color: $button_primary_active_bg;
+        color: $button_primary_color;
+    }
+}
+
+.btn-default {
+    background-color: $button_default_bg;
+    border-color: $button_border_color;
+    color: $button_default_color;
+    &:hover,
+    &:focus,
+    &:active,
+    &:visited {
+        background-color: $button_default_active_bg;
+        color: $button_default_color;
+    }
+}

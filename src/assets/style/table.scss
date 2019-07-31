@@ -1,0 +1,70 @@
+table.tabel-panel {
+    border: 0;
+    position: relative;
+    border-collapse:collapse;
+    border-spacing:0;
+    width: 100%;
+    text-align: center;
+    background: $white;
+    border-radius: 4px;
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        @include wh(1px, 100%);
+        background-color: #ececec;
+    }
+    &::before {
+        left: 0;
+    }
+    &::after {
+        right: 0;
+    }
+    thead {
+        border-top: 1px solid #F1F1F1;
+        border-bottom: 1px solid #F1F1F1;
+        tr th {
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            color: #062238;
+            padding: 4px 5px;
+            height: 50px;
+            line-height: 50px;
+            background-color: #efefef;
+            white-space: nowrap !important;
+            a {
+                color: #5f5f5f;
+                padding: 0 5px;
+                &:hover {
+                    color: #005a9a;
+                }
+                i {
+                    margin: 12px 4px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    tbody {
+        tr {
+            background-color: $white;
+        }
+        tr td {
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            color: #062238;
+            padding: 8px;
+            height: 60px;
+            line-height: 60px;
+        }
+    }
+    tr.background-ng {
+        background-color: $global_ng_color;
+        td {
+            color: $white;
+        }
+    }
+}

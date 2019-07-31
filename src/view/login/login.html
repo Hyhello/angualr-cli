@@ -4,7 +4,9 @@
   * 描述：登陆界面
 -->
 <div class="login-container">
-    <v-tips ng-if="isShowTips">{{STATE.ie8Tips}}</v-tips>
+    <!-- [if lt IE 9]>
+        <v-tips>{{STATE.ie8Tips}}</v-tips>
+    <![endif] -->
     <!-- logo-title -->
     <div class="login-logo">
         <h3 class="login-title">{{STATE.title}}</h3>
@@ -27,7 +29,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label input-label">密码 :</label>
                     <div class="layui-input-block input-dev">
-                        <input type="password" trim v-focus="pwdFocus" ng-model="loginInfo.password" autocomplete="new-password" placeholder="请输入密码" class="layui-input input-value">
+                        <input type="password" maxlength="18" trim v-focus="pwdFocus" ng-model="loginInfo.password" autocomplete="new-password" placeholder="请输入密码" class="layui-input input-value">
                     </div>
                 </div>
                 <div class="layui-form-item">

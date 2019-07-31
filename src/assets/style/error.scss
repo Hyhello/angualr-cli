@@ -1,0 +1,25 @@
+.error-state-info {
+    padding: 19px 40px;
+    min-height: 67px;
+    font-size: 22px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #333333;
+    // margin-bottom: 15px;
+    background-color: $white;
+    .info-label {
+        color: #707070;
+    }
+    .error-info {
+        margin-left: 5px;
+        padding-left: 20px;
+        font-size: 20px;
+        font-weight: normal;
+        font-stretch: normal;
+        color: #f04833;
+    }
+    .scanned-info {
+        display: inline-block;
+        width: 150px;
+    }
+}

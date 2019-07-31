@@ -17,12 +17,14 @@ export default {
             transclude: true,
             require: '?^vRadioGroup',
             scope: {
+                disabled: '=',
                 value: '@',
                 currentValue: '=ngModel'
             },
             link ($scope, element, attrs, app) {
                 // 点击
                 $scope.handlerClick = () => {
+                    if ($scope.disabled) return;
                     if (app) {
                         app.setValue(attrs.value);
                     } else {

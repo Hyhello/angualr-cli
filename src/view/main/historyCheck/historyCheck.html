@@ -4,78 +4,78 @@
   * 描述：检测记录 检测人员
 -->
 <div class="historyCheck-container">
-    <div class="search-bar">
-        <div class="float-left">
-            <label class="search-bar-item-label">车架号</label>
-            <div class="search-bar-item-input">
-                <input trim type="text" name="title" ng-model="searchData.vin" lay-verify="title" autocomplete="off" placeholder="请输入车架号">
+    <div class="historyCheck-header">
+        <!-- searchBar -->
+        <div class="search-bar" ng-enter="searchLineProduct()">
+            <div class="form-group">
+                <label>VIN编码</label>
+                <input trim type="text" class="form-control" name="title" ng-model="searchData.vin" lay-verify="title" autocomplete="off" placeholder="请输入VIN编码">
             </div>
-            <label class="search-bar-item-label">日期</label>
-            <div class="search-bar-item-input">
-                <input type="text" style="width: 300px;" name="title" lay-verify="title" id="dateId" autocomplete="off" placeholder="请输入日期">
+            <div class="form-group">
+                <label>日期</label>
+                <input type="text" class="form-control" name="title" lay-verify="title" id="dateId" autocomplete="off" placeholder="请输入日期">
             </div>
-            <label class="search-bar-item-label">状态</label>
-            <div class="search-bar-item-input">
-                <v-select ng-model="searchData.detectionStatus" filterable="false" list="optionList"></v-select>
+            <div class="form-group">
+                <label class="float-left mr14" style="padding-top: 10px;">状态</label>
+                <div class="float-left">
+                    <v-select ng-model="searchData.detectionStatus" filterable="false" list="optionList"></v-select>
+                </div>
             </div>
-        </div>
-        <div class="float-right mr20">
-            <button class="btn btn-promise" v-busy="loading" loading-text="搜索中" ng-click="searchRecord();">搜索</button>
-            <button class="btn btn-fail" go-back>返回</button>
+            <button class="btn btn-primary" v-busy="loading" loading-text="搜索中" ng-click="searchRecord();">搜索</button>
+            <button class="btn btn-default float-right" go-back>返回</button>
         </div>
     </div>
-    <!-- 表格 -->
-    <table class="tabel-panel">
-        <thead>
-            <tr>
-                <th>序号</th>
-                <th>车架号</th>
-                <th>IMEI</th>
-                <th>检测时间</th>
-                <th>检测结果</th>
-                <th>重新检测</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-show="recordList.length" ng-repeat="item in recordList" ng-class="{true: 'background-ng'}[item.result === 2]">
-                <td class="x-nowrap" ng-class="{true: 'color-fff'}[item.result === 2]" ng-bind="$index + 1"></td>
-                <td class="x-nowrap" ng-class="{true: 'color-fff'}[item.result === 2]" ng-bind="item.vin"></td>
-                <td class="x-nowrap" ng-class="{true: 'color-fff'}[item.result === 2]" ng-bind="item.imei"></td>
-                <td class="x-nowrap" ng-class="{true: 'color-fff'}[item.result === 2]" ng-bind="item.detectionTime"></td>
-                <td class="x-nowrap" ng-class="{true: 'color-fff', false: 'color-00D381'}[item.result === 2]" ng-bind="item.result | productResult"></td>
-                <td class="x-nowrap">
-                    <button class="btn btn-promise" ng-show="item.result === 2" ng-click="retryCheck(item.vin)">重新检测</button>
-                </td>
-            </tr>
-            <tr ng-show="!recordList.length">
-                <td colspan="6">
-                    <div class="no-data"></div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <!--分页-->
-    <div class="page-panel" ng-show="searchPaginator.page.totalResult">
-        <ul class="pagination">
-            <li>
-                <a class="page-click" ng-click="searchPaginator.previous()"
-                    ng-class="{true:'disabled'}[searchPaginator.page.currentPage === 1]"
-                    ng-show="searchPaginator.hasPrevious()">上一页
-                </a>
-            </li>
-            <li>
-                <a ng-class="{true:'active'}[searchPaginator.page.currentPage === i]"
-                    ng-repeat="i in searchPaginator.pages"
-                    ng-click="searchPaginator.go(i)">{{i}}</a>
-            </li>
-            <li>
-                <a class="page-click" ng-class="{true:'disabled'}[searchPaginator.page.currentPage === searchPaginator.page.totalPage]"
-                    ng-click="searchPaginator.next()"
-                    ng-show="searchPaginator.hasNext()">下一页</a>
-            </li>
-            <li>
-                <span>共{{searchPaginator.page.totalResult}}条数据</span>
-            </li>
-        </ul>
+    <div class="historyCheck-body">
+        <table class="tabel-panel">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>VIN编码</th>
+                    <th>IMEI</th>
+                    <th>检测时间</th>
+                    <th>检测结果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-show="recordList.length" ng-repeat="item in recordList" ng-class="{true: 'background-ng'}[item.result === 2]">
+                    <td class="x-nowrap" ng-class="{true: 'color-fff'}[item.result === 2]" ng-bind="$index + 1"></td>
+                    <td class="x-nowrap" ng-class="{true: 'color-fff'}[item.result === 2]" ng-bind="item.vin"></td>
+                    <td class="x-nowrap" ng-class="{true: 'color-fff'}[item.result === 2]" ng-bind="item.imei"></td>
+                    <td class="x-nowrap" ng-class="{true: 'color-fff'}[item.result === 2]" ng-bind="item.detectionTime"></td>
+                    <td class="x-nowrap" ng-class="{true: 'color-fff', false: 'color-00D381'}[item.result === 2]" ng-bind="item.result | productResult"></td>
+                </tr>
+                <tr ng-show="!recordList.length">
+                    <td colspan="6">
+                        <div class="no-data"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="historyCheck-footer">
+        <!--分页-->
+        <div class="page-panel" ng-show="searchPaginator.page.totalResult">
+            <ul class="pagination">
+                <li>
+                    <a class="page-click" ng-click="searchPaginator.previous()"
+                        ng-class="{true:'disabled'}[searchPaginator.page.currentPage === 1]"
+                        ng-show="searchPaginator.hasPrevious()">上一页
+                    </a>
+                </li>
+                <li>
+                    <a ng-class="{true:'active'}[searchPaginator.page.currentPage === i]"
+                        ng-repeat="i in searchPaginator.pages"
+                        ng-click="searchPaginator.go(i)">{{i}}</a>
+                </li>
+                <li>
+                    <a class="page-click" ng-class="{true:'disabled'}[searchPaginator.page.currentPage === searchPaginator.page.totalPage]"
+                        ng-click="searchPaginator.next()"
+                        ng-show="searchPaginator.hasNext()">下一页</a>
+                </li>
+                <li>
+                    <span>共{{searchPaginator.page.totalResult}}条数据</span>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

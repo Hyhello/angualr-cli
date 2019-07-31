@@ -6,12 +6,9 @@
 
 import layui from 'layui';
 import './historyCheck.scss';
-import { findVqHistoryApi } from '@/view/main/checkVq/checkVqService';
-import { lineRecordHistoryApi, retryDetectApi } from './historyCheckService.js';
+import { lineRecordHistoryApi } from './historyCheckService.js';
 
-export default ['$scope', '$rootScope', '$resource', 'Paginator', function ($scope, $rootScope, $resource, Paginator) {
-    // 获取用户登陆信息
-    const userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'));
+export default ['$scope', '$rootScope', '$resource', 'Paginator', '$MessageBox', '$Message', function ($scope, $rootScope, $resource, Paginator, $MessageBox, $Message) {
     /** **********初始化数据********* */
     $scope.recordList = [];
 
@@ -61,8 +58,7 @@ export default ['$scope', '$rootScope', '$resource', 'Paginator', function ($sco
     $scope.searchPaginator = Paginator.list((page, callback) => {
         $scope.searchData.pageNum = page.currentPage;
         $scope.searchData.pageSize = page.pageSize;
-        const api = userInfo.userType === 3 ? findVqHistoryApi : lineRecordHistoryApi;
-        $resource(api).get($scope.searchData, (data) => {
+        $resource(lineRecordHistoryApi).get($scope.searchData, (data) => {
             $scope.recordList = data.list || [];
             $scope.loading = false;
             callback(data);
@@ -84,12 +80,5 @@ export default ['$scope', '$rootScope', '$resource', 'Paginator', function ($sco
         }
         $scope.loading = true;
         $scope.searchPaginator._load(1);
-    };
-
-    // 重新检测
-    $scope.retryCheck = (vin) => {
-        $resource(retryDetectApi).save({vin}, {}, (response) => {
-            $scope.searchPaginator._load(1);
-        });
     };
 }];
