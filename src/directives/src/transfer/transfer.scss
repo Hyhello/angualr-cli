@@ -1,0 +1,48 @@
+.transfer_wraper {
+    font-size: 14px;
+    .transfer_panel {
+        border: 1px solid #ebeef5;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #fff;
+        display: inline-block;
+        vertical-align: middle;
+        width: 200px;
+        max-height: 100%;
+        box-sizing: border-box;
+        position: relative;
+        .transfer__header {
+            height: 40px;
+            line-height: 40px;
+            background: #f5f7fa;
+            margin: 0;
+            padding-left: 15px;
+            border-bottom: 1px solid #ebeef5;
+            box-sizing: border-box;
+            color: #000;
+        }
+        .transfer__content {
+            height: 246px;
+            .transfer__content__list {
+                margin: 0;
+                padding: 6px 0;
+                list-style: none;
+                height: 246px;
+                overflow: auto;
+                box-sizing: border-box;
+                .transfer__content__item {
+                    height: 30px;
+                    line-height: 30px;
+                    padding-left: 15px;
+                    margin-right: 30px;
+                    display: block;
+                }
+            }
+        }
+    }
+    .transfer_buttons {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 0 30px;
+    }
+}

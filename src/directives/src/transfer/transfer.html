@@ -1,0 +1,28 @@
+<div role="transfer" class="transfer_wraper">
+    <div class="transfer_panel">
+        <div class="transfer__header">
+            <checkbox v-model="currentValue" label="你好" indeterminate="true" custom="true">
+                {{ currentTitles[0] }}
+                <span>1 / {{ data.length }}</span>
+            </checkbox>
+        </div>
+        <div class="transfer__content">
+            <div class="transfer__content__list">
+                <checkbox v-model="currentValue" class="transfer__content__item" ng-repeat="item in data" label="你好"> label="你好"</checkbox>
+            </div>
+        </div>
+    </div>
+    <div class="transfer_buttons">
+        <button>&lt;</button>
+        <button>&gt;</button>
+    </div>
+    <div class="transfer_panel">
+        <div class="transfer__header">
+            <checkbox v-model="currentValue" label="你好" indeterminate="true" custom="true">
+                {{ currentTitles[1] }}
+                <span>1 / {{ data.length }}</span>
+            </checkbox>
+        </div>
+        <div class="transfer__content">123132</div>
+    </div>
+</div>

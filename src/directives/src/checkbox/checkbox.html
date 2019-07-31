@@ -1,0 +1,8 @@
+<label role="checkbox" class="checkbox__wraper" ng-class="{'is-checked': isChecked}" aria-checked="{{ indeterminate ? 'mixed': isChecked" }}">
+    <span aria-checked="{{ indeterminate ? 'mixed': isChecked" }}" class="checkbox__input" ng-class="{'is-checked': isChecked, 'is-indeterminate': indeterminate, 'is-disabled': disabled}">
+        <span class="checkbox__inner"></span>
+        <input type="checkbox" aria-hidden="true" ng-model="isChecked" class="checkbox__original" />
+    </span>
+    <span class="checkbox__label" ng-if="!custom" >{{ label }}</span>
+    <span class="checkbox_label" ng-if="custom" ng-transclude></span>
+</label>
