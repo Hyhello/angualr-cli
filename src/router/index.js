@@ -23,6 +23,14 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 title: '登陆'
             }
         })
+        .state('text', {
+            url: '/text',
+            template: _importHtml('text/text'),
+            controller: _importJs('text/textCrl'),
+            data: {
+                title: '测试'
+            }
+        })
         .state('main', {
             url: '/main',
             abstract: true,
@@ -88,7 +96,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 // 拦截
 app.run(['$rootScope', '$state', function ($rootScope, $state) {
     $rootScope.$on('$stateChangeStart', function (event, toState) {
-        if (toState.name === 'login') return;
+        if (toState.name === 'login' || toState.name === 'text') return;
         // 检测是否登陆
         if (!window.sessionStorage.getItem('userInfo')) {
             event.preventDefault();

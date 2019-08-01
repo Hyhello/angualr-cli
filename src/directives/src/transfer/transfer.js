@@ -29,11 +29,13 @@ export default {
             template: tpl,
             replace: true,
             scope: {
-                currentValue: '=vModel',
-                titles: '=',                            // 标题
-                data: '=',                              // 数据
-                props: '=',                             // 设置别名
-                renderContent: '&'                      // 渲染函数
+                currentValue: '=vModel',                // 绑定值 , array
+                titles: '=',                            // 标题    array
+                data: '=',                              // 数据    array
+                props: '=',                             // 设置别名 object
+                leftDefaultChecked: '=',                // 初始状态下左侧列表的已勾选项的 key 数组  array
+                rightDefaultChecked: '=',               // 初始状态下右侧列表的已勾选项的 key 数组  array
+                renderContent: '&'                      // 渲染函数 function
             },
             link ($scope, element, attrs) {
                 /** ************************* 配置项 *********************** */

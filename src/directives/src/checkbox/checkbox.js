@@ -17,8 +17,8 @@ export default {
             scope: {
                 currentValue: '=vModel',
                 disabled: '=',                  // boolean
-                indeterminate: '=',             // boolean
-                custom: '=',                    // boolean
+                indeterminate: '=',             // boolean  设置 indeterminate 状态，只负责样式控制
+                custom: '=',                    // boolean  自定义展示
                 label: '@'
             },
             transclude: true,
