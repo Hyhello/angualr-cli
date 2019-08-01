@@ -15,23 +15,13 @@ export default {
             template: tpl,
             replace: true,
             scope: {
-                currentValue: '=vModel',
+                isChecked: '=vModel',           // boolean
                 disabled: '=',                  // boolean
-                indeterminate: '=',             // boolean  设置 indeterminate 状态，只负责样式控制
-                custom: '=',                    // boolean  自定义展示
-                label: '@'
+                handlerChange: '&change',       // 勾选
+                indeterminate: '='              // boolean  设置 indeterminate 状态，只负责样式控制
             },
             transclude: true,
             link ($scope, element, attrs) {
-                // 监听
-                $scope.$watch('currentValue', function (val) {
-                    if ($scope.indeterminate !== undefined) {
-                        $scope.isChecked = val;
-                        return;
-                    }
-                    $scope.isChecked = val === $scope.label;
-                });
-
                 /** ************************* 销毁 *********************** */
                 element.on('$destroy', function () {
                     $scope.$destroy();

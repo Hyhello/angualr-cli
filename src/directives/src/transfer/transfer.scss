@@ -12,6 +12,7 @@
         box-sizing: border-box;
         position: relative;
         .transfer__header {
+            position: relative;
             height: 40px;
             line-height: 40px;
             background: #f5f7fa;
@@ -20,9 +21,77 @@
             border-bottom: 1px solid #ebeef5;
             box-sizing: border-box;
             color: #000;
+            .transfer__header__label {
+                position: absolute;
+                right: 15px;
+                color: #909399;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 1;
+                top: 50%;
+                transform: translateY(-50%);
+            }
         }
         .transfer__content {
             height: 246px;
+            .transfer__content__filter {
+                text-align: center;
+                margin: 15px;
+                box-sizing: border-box;
+                display: block;
+                width: auto;
+                font-size: 0.9em;
+                position: relative;
+                .transfer__input__inner {
+                    height: 32px;
+                    width: 100%;
+                    margin: 0;
+                    line-height: 1.412;
+                    font-size: 12px;
+                    -webkit-appearance: none;
+                    background-color: #fff;
+                    background-image: none;
+                    border: 1px solid #dcdfe6;
+                    outline: none;
+                    cursor: pointer;
+                    padding: 0 15px;
+                    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+                    display: inline-block;
+                    box-sizing: border-box;
+                    border-radius: 16px;
+                    padding-left: 15px;
+                    padding-right: 30px;
+                    &:focus {
+                        outline: none;
+                        border-color: #409eff;
+                    }
+                }
+                .transfer__clear__btn {
+                    position: absolute;
+                    font-size: 21px;
+                    font-weight: 700;
+                    line-height: 1;
+                    color: #000;
+                    text-shadow: 0 1px 0 #fff;
+                    filter: alpha(opacity=20);
+                    opacity: .2;
+                    -webkit-appearance: none;
+                    padding: 0;
+                    cursor: pointer;
+                    background: 0 0;
+                    border: 0;
+                    top: 50%;
+                    outline: none;
+                    right: 3px;
+                    transform: translate(-50%, -50%);
+                    margin-top: -2px;
+                    transition: all .3s;
+                    &:hover {
+                        filter: alpha(opacity=50);
+                        opacity: .5;
+                    }
+                }
+            }
             .transfer__content__list {
                 margin: 0;
                 padding: 6px 0;
@@ -37,6 +106,18 @@
                     margin-right: 30px;
                     display: block;
                 }
+                &.is-filterable {
+                    height: 194px;
+                    padding-top: 0;
+                }
+            }
+            .transfer__content__empty {
+                margin: 0;
+                height: 30px;
+                line-height: 30px;
+                padding: 6px 15px 0;
+                color: #909399;
+                text-align: center;
             }
         }
     }
@@ -44,5 +125,44 @@
         display: inline-block;
         vertical-align: middle;
         padding: 0 30px;
+        .transfer__btn {
+            &:first-child {
+                margin-bottom: 10px;
+            }
+            &.is-disabled,
+            &.is-disabled:hover,
+            &.is-disabled:focus {
+                cursor: not-allowed;
+                background-image: none;
+                border: 1px solid #dcdfe6;
+                background-color: #f5f7fa;
+                color: #c0c4cc;
+            }
+            display: block;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            background: #409eff;
+            border: 1px solid #409eff;
+            color: #FFFFFF;
+            -webkit-appearance: none;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            margin: 0;
+            transition: .1s;
+            font-weight: 500;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            border-radius: 4px;
+            .transfer__btn_icon {
+                font-family: cursive;
+                display: inline-block;
+                vertical-align: 0px;
+            }
+        }
     }
 }

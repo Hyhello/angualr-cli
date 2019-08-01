@@ -1,28 +1,44 @@
 <div role="transfer" class="transfer_wraper">
     <div class="transfer_panel">
         <div class="transfer__header">
-            <checkbox v-model="currentValue" label="你好" indeterminate="true" custom="true">
-                {{ currentTitles[0] }}
-                <span>1 / {{ data.length }}</span>
-            </checkbox>
+            <checkbox v-model="leftAllChecked" indeterminate="leftIndeterminate" change="handleAllChange(val, 'left')" >{{ titles[0] }}</checkbox>
+            <span class="transfer__header__label">{{ leftCheckList.length }} / {{ leftList.length }}</span>
         </div>
         <div class="transfer__content">
-            <div class="transfer__content__list">
-                <checkbox v-model="currentValue" class="transfer__content__item" ng-repeat="item in data" label="你好"> label="你好"</checkbox>
+            <div class="transfer__content__filter" ng-show="filterable">
+                <input type="text" autocomplete="off" ng-disabled="!leftList.length" ng-model="leftModel" placeholder="{{ placeholder }}" class="transfer__input__inner" />
+                <span class="transfer__clear__btn" ng-show="leftModel" ng-click="handleClear('leftModel')">×</span>
+            </div>
+            <div class="transfer__content__list" ng-class="{'is-filterable': filterable}">
+                <checkbox v-model="item.isChecked" change="handleChange(val, item, 'left')" disabled="item[props.disabled]" class="transfer__content__item" ng-repeat="item in leftList | filter:leftModel | orderBy:sortIndex">{{ item[props.label] }}</checkbox>
+                <p class="transfer__content__empty" ng-if="!leftList.length">{{ noDataText }}</p>
             </div>
         </div>
     </div>
     <div class="transfer_buttons">
-        <button>&lt;</button>
-        <button>&gt;</button>
+        <button class="transfer__btn" ng-disabled="!rightCheckList.length" ng-class="{'is-disabled': !rightCheckList.length}" ng-click="handleBtn('right')">
+            <span class="transfer__btn_icon">&lt;</span>
+            {{ buttonTexts[0] }}
+        </button>
+        <button class="transfer__btn" ng-disabled="!leftCheckList.length" ng-class="{'is-disabled': !leftCheckList.length}" ng-click="handleBtn('left')">
+            {{ buttonTexts[1] }}
+            <span class="transfer__btn_icon">&gt;</span>
+        </button>
     </div>
     <div class="transfer_panel">
         <div class="transfer__header">
-            <checkbox v-model="currentValue" label="你好" indeterminate="true" custom="true">
-                {{ currentTitles[1] }}
-                <span>1 / {{ data.length }}</span>
-            </checkbox>
+            <checkbox v-model="rightAllChecked" indeterminate="rightIndeterminate" change="handleAllChange(val, 'right')">{{ titles[1] }}</checkbox>
+            <span class="transfer__header__label">{{ rightCheckList.length }} / {{ rightList.length }}</span>
         </div>
-        <div class="transfer__content">123132</div>
+        <div class="transfer__content">
+            <div class="transfer__content__filter" ng-show="filterable">
+                <input type="text" autocomplete="off" ng-disabled="!rightList.length" ng-model="rightModel" placeholder="{{ placeholder }}" class="transfer__input__inner" />
+                <span class="transfer__clear__btn" ng-show="rightModel" ng-click="handleClear('rightModel')">×</span>
+            </div>
+            <div class="transfer__content__list" ng-class="{'is-filterable': filterable}">
+                <checkbox v-model="item.isChecked" change="handleChange(val, item, 'right')" disabled="item[props.disabled]" class="transfer__content__item" ng-repeat="item in rightList | filter:rightModel | orderBy:sortIndex">{{ item[props.label] }}</checkbox>
+                <p class="transfer__content__empty" ng-if="!rightList.length">{{ noDataText }}</p>
+            </div>
+        </div>
     </div>
 </div>

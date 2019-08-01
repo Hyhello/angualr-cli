@@ -91,4 +91,17 @@
             cursor: not-allowed;
         }
     }
+    .checkbox_label {
+        display: inline-block;
+        padding-left: 10px;
+        line-height: 19px;
+        font-size: 14px;
+    }
+    &.is-checked .checkbox_label {
+        color: #409eff;
+    }
+    &.is-disabled .checkbox_label {
+        color: #c0c4cc;
+        cursor: not-allowed;
+    }
 }
