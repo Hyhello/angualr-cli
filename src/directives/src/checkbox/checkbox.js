@@ -25,6 +25,10 @@ export default {
             link ($scope, element, attrs) {
                 // 监听
                 $scope.$watch('currentValue', function (val) {
+                    if ($scope.indeterminate !== undefined) {
+                        $scope.isChecked = val;
+                        return;
+                    }
                     $scope.isChecked = val === $scope.label;
                 });
 
