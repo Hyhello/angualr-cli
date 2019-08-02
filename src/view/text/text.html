@@ -1,5 +1,3 @@
 <div>
-    <checkbox v-model="vModel" indeterminate="indeterminate" label="vModel"></checkbox>
-
-    <transfer v-model="vModel" data="data"></transfer>
+    <transfer v-model="vModel" titles="['左边', '右边']" render-content="renderContent(options)" button-texts="['向左', '向右']" filterable="true" filter-placeholder="请搜索" data="data"></transfer>
 </div>

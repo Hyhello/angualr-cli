@@ -10,7 +10,7 @@ import { oneOf } from '@/libs/utils';
 
 export default {
     name: 'transfer',
-    callback: ['$timeout', ($timeout) => {
+    callback: ['$timeout', '$sce', ($timeout, $sce) => {
         // 配置
         const defaults = {
             titles: ['列表1', '列表2'],
@@ -107,6 +107,12 @@ export default {
                     });
                 };
                 /** ************************* 事件 *********************** */
+
+                // render
+                $scope.render = function (item) {
+                    return $sce.trustAsHtml($scope.renderContent({options: item}));
+                };
+
                 // checkbox change
                 $scope.handleChange = function (val, item, placment) {
                     const props = `${placment}CheckList`;

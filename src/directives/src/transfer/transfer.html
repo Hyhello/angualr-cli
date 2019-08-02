@@ -10,7 +10,10 @@
                 <span class="transfer__clear__btn" ng-show="leftModel" ng-click="handleClear('leftModel')">×</span>
             </div>
             <div class="transfer__content__list" ng-class="{'is-filterable': filterable}">
-                <checkbox v-model="item.isChecked" change="handleChange(val, item, 'left')" disabled="item[props.disabled]" class="transfer__content__item" ng-repeat="item in leftList | filter:leftModel | orderBy:sortIndex">{{ item[props.label] }}</checkbox>
+                <checkbox v-model="item.isChecked" change="handleChange(val, item, 'left')" disabled="item[props.disabled]" class="transfer__content__item" ng-repeat="item in leftList | filter:leftModel | orderBy:sortIndex">
+                    <span ng-if="render(item)" ng-bind-html="render(item)"></span>
+                    <span ng-if="!render(item)" ng-bind="item[props.label]"></span>
+                </checkbox>
                 <p class="transfer__content__empty" ng-if="!leftList.length">{{ noDataText }}</p>
             </div>
         </div>
@@ -36,7 +39,10 @@
                 <span class="transfer__clear__btn" ng-show="rightModel" ng-click="handleClear('rightModel')">×</span>
             </div>
             <div class="transfer__content__list" ng-class="{'is-filterable': filterable}">
-                <checkbox v-model="item.isChecked" change="handleChange(val, item, 'right')" disabled="item[props.disabled]" class="transfer__content__item" ng-repeat="item in rightList | filter:rightModel | orderBy:sortIndex">{{ item[props.label] }}</checkbox>
+                <checkbox v-model="item.isChecked" change="handleChange(val, item, 'right')" disabled="item[props.disabled]" class="transfer__content__item" ng-repeat="item in rightList | filter:rightModel | orderBy:sortIndex">
+                    <span ng-if="render(item)" ng-bind-html="render(item)"></span>
+                    <span ng-if="!render(item)" ng-bind="item[props.label]"></span>
+                </checkbox>
                 <p class="transfer__content__empty" ng-if="!rightList.length">{{ noDataText }}</p>
             </div>
         </div>

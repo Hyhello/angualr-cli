@@ -17,9 +17,11 @@ export default ['$scope', '$resource', '$state', '$rootScope', function ($scope,
         return data;
     };
 
-    $scope.indeterminate = false;
-
     $scope.data = generateData();
 
-    $scope.vModel = '你好';
+    $scope.renderContent = function (item) {
+        return `<div>${item.key} - ${item.label}</div>`;
+    };
+
+    $scope.vModel = [1, 3, 4, 5, 7];
 }];
