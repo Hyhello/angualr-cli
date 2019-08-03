@@ -118,7 +118,9 @@ export default {
                     const props = `${placment}CheckList`;
                     const key = $scope.props.key;
                     if (val) {
-                        $scope[props].push(item[key]);
+                        if (!oneOf(item[key], $scope[props])) {
+                            $scope[props].push(item[key]);
+                        }
                     } else {
                         $scope[props] = $scope[props].filter(im => im !== item[key]);
                     }
