@@ -145,7 +145,7 @@ export default {
                     const unProps = `${unPlacment}List`;
                     const key = $scope.props.key;
                     if (!$scope[checkProps].length) return;
-                    const list = $scope[props].slice(0);
+                    const list = $scope[props];
                     $scope[props] = [];
                     list.forEach(item => {
                         if (oneOf(item[key], $scope[checkProps])) {
