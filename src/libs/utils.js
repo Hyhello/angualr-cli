@@ -4,9 +4,13 @@
  * 描述：utils
  */
 
+import angular from 'angular';
+
 const _toString = Object.prototype.toString;
 
 const _slice = Array.prototype.slice;
+
+export const copy = angular.copy;
 
 // _typeof
 export const _typeof = (type) => {

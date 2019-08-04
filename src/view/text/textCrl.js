@@ -4,10 +4,11 @@
  * 描述：text
  */
 
-export default ['$scope', '$resource', '$state', '$rootScope', function ($scope, $resource, $state, $rootScope) {
+export default ['$scope', '$resource', '$state', '$rootScope', '$timeout', function ($scope, $resource, $state, $rootScope, $timeout) {
+    /** **************** transfer ************* */
     const generateData = _ => {
         const data = [];
-        for (let i = 1; i <= 15; i++) {
+        for (let i = 1; i <= 30; i++) {
             data.push({
                 key: i,
                 label: `备选项 ${i}`,
@@ -17,11 +18,19 @@ export default ['$scope', '$resource', '$state', '$rootScope', function ($scope,
         return data;
     };
 
-    $scope.data = generateData();
+    // $scope.data = [];
 
     $scope.renderContent = function (item) {
         return `<div>${item.key} - ${item.label}</div>`;
     };
+    $scope.vModel = [];
+    $scope.data = [];
+    console.log($scope.data);
 
-    $scope.vModel = [1, 3, 4, 5, 7];
+    $timeout(() => {
+        $scope.vModel = [1, 3, 4, 5, 7];
+        $scope.data = generateData();
+    }, 5000);
+
+    /** **************** tree ************* */
 }];

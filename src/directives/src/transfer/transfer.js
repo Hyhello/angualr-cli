@@ -6,7 +6,7 @@
 
 import './transfer.scss';
 import tpl from './transfer.html';
-import { oneOf } from '@/libs/utils';
+import { oneOf, copy } from '@/libs/utils';
 
 export default {
     name: 'transfer',
@@ -44,6 +44,9 @@ export default {
             },
             link ($scope, element, attrs) {
                 /** ************************* 初始化 *********************** */
+
+                $scope.isCustomRender = !!attrs.renderContent;
+
                 $scope.leftIndeterminate = false;               // 控制checkbox样式
                 $scope.rightIndeterminate = false;              // 控制checkbox样式
 
@@ -75,35 +78,21 @@ export default {
                  // 格式化数据
                 const converToData = function (val) {
                     const key = $scope.props.key;
-                    const list = $scope.data.slice();
-                    const leftList = [];
-                    const rightList = [];
+                    const list = copy($scope.data);
+                    $scope.leftList = [];
+                    $scope.rightList = [];
                     // 过滤数据
                     list.forEach((item, index) => {
                         item[defaults.sortKey] = index;
                         if (oneOf(item[key], val || [])) {
-                            rightList.push(item);
+                            item.isChecked = item.disabled ? false : oneOf(item[key], $scope.rightDefaultChecked || []);
+                            $scope.handleChange(item.isChecked, item, 'right');
+                            $scope.rightList.push(item);
                         } else {
-                            leftList.push(item);
+                            item.isChecked = item.disabled ? false : oneOf(item[key], $scope.leftDefaultChecked || []);
+                            $scope.handleChange(item.isChecked, item, 'left');
+                            $scope.leftList.push(item);
                         }
-                    });
-
-                    $scope.leftList = leftList.map(item => {
-                        const isChecked = item.disabled ? false : oneOf(item[key], $scope.leftDefaultChecked || []);
-                        $scope.handleChange(isChecked, item, 'left');
-                        return {
-                            ...item,
-                            isChecked
-                        };
-                    });
-
-                    $scope.rightList = rightList.map(item => {
-                        const isChecked = item.disabled ? false : oneOf(item[key], $scope.rightDefaultChecked || []);
-                        $scope.handleChange(isChecked, item, 'right');
-                        return {
-                            ...item,
-                            isChecked
-                        };
                     });
                 };
                 /** ************************* 事件 *********************** */
