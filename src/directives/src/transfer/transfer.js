@@ -83,16 +83,11 @@ export default {
                     $scope.rightList = [];
                     // 过滤数据
                     list.forEach((item, index) => {
+                        const placment = oneOf(item[key], val || []) ? 'right' : 'left';
                         item[defaults.sortKey] = index;
-                        if (oneOf(item[key], val || [])) {
-                            item.isChecked = item.disabled ? false : oneOf(item[key], $scope.rightDefaultChecked || []);
-                            $scope.handleChange(item.isChecked, item, 'right');
-                            $scope.rightList.push(item);
-                        } else {
-                            item.isChecked = item.disabled ? false : oneOf(item[key], $scope.leftDefaultChecked || []);
-                            $scope.handleChange(item.isChecked, item, 'left');
-                            $scope.leftList.push(item);
-                        }
+                        item.isChecked = item.disabled ? false : oneOf(item[key], $scope[`${placment}DefaultChecked`] || []);
+                        $scope.handleChange(item.isChecked, item, placment);
+                        $scope[`${placment}List`].push(item);
                     });
                 };
                 /** ************************* 事件 *********************** */
