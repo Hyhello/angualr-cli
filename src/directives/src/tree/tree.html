@@ -1,3 +1,9 @@
 <div role="tree" class="tree_wraper">
-    123132
+    <tree-item
+        ng-repeat="item in list track by $index"
+        children="item.children"
+        level="{{ item._level }}"
+        label="{{ item.label }}"
+        >
+    </tree-item>
 </div>

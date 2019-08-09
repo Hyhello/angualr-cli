@@ -1,0 +1,9 @@
+<div role="treeitem" class="tree-item__wraper">
+    <p class="tree-item_node__content" ng-style="styles" ng-click="handleToggle()">
+        <span class="tree-node__expand" ng-class="{'is-visibled': !list}">
+            <span class="tree-node__expand-icon" ng-class="{'expanded': visible}"></span>
+        </span>
+        <span class="tree-node__label">{{ label }}</span>
+    </p>
+    <div role="group" class="tree-item_node__children" ng-show="visible" ng-if="list"></div>
+</div>

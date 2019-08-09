@@ -1,0 +1,38 @@
+.tree-item__wraper {
+    white-space: nowrap;
+    outline: none;
+    .tree-item_node__content {
+        display: flex;
+        align-items: center;
+        height: 26px;
+        cursor: pointer;
+        .tree-node__expand {
+            padding: 6px;
+            cursor: pointer;
+            color: #c0c4cc;
+            font-size: 12px;
+            line-height: 1;
+            &.is-visibled {
+                visibility: hidden;
+                opacity: 0;
+                cursor: default;
+            }
+            .tree-node__expand-icon {
+                width: 0;
+                height: 0;
+                display: inline-block;
+                border: 5px solid transparent;
+                border-left-color: currentColor;
+                transform: rotate(0deg);
+                transition: transform .3s ease-in-out;
+                transform-origin: 25% center;
+                &.expanded {
+                    transform: rotate(90deg);
+                }
+            }
+        }
+        .tree-node__label {
+            font-size: 14px;
+        }
+    }
+}
