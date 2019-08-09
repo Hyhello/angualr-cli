@@ -39,6 +39,8 @@ export default {
                 /** ********************** 初始化数据 ******************** */
                 $scope.visible = false;
 
+                $scope.vModel = false;
+
                 // 设置样式
                 $scope.styles = {
                     'padding-left': `${offset * $scope.level}px`
