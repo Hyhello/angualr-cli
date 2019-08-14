@@ -15,6 +15,7 @@ export default {
         const defaults = {
             props: {
                 label: 'label',
+                checked: 'checked',
                 children: 'children',
                 disabled: 'disabled'
             }
@@ -26,12 +27,14 @@ export default {
             const list = [];
             const props = options.props;
             const _level = options.level + 1;
-            options.list.forEach(item => {
+            options.list.forEach((item, index) => {
                 const tempObj = {
                     ...item,
+                    _index: index,
                     _level: _level - 1,
                     _showCheckbox: !!options.showCheckbox,
                     label: item[props.label],
+                    checked: !!item[props.checked],
                     disabled: !!item[props.disabled],
                     children: item[props.children]
                 };

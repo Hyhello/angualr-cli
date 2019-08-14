@@ -20,6 +20,8 @@ export default ['$scope', '$resource', '$state', '$rootScope', '$timeout', funct
 
     // $scope.data = [];
 
+    $scope.vModels = false;
+
     $scope.renderContent = function (item) {
         return `<div>${item.key} - ${item.label}</div>`;
     };
@@ -69,4 +71,21 @@ export default ['$scope', '$resource', '$state', '$rootScope', '$timeout', funct
             }]
         }]
     }];
+
+    $scope.treeData1 = [
+        {
+            label: '一级 3',
+            children: [{
+                label: '二级 3-1',
+                children: [{
+                    label: '三级 3-1-1'
+                }]
+            }, {
+                label: '二级 3-2',
+                children: [{
+                    label: '三级 3-2-1'
+                }]
+            }]
+        }
+    ];
 }];

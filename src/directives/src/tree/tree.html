@@ -2,6 +2,8 @@
     <tree-item
         ng-repeat="item in list track by $index"
         children="item.children"
+        checked="item.checked"
+        show-checkbox="item._showCheckbox"
         level="{{ item._level }}"
         label="{{ item.label }}"
         >

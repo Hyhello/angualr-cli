@@ -3,7 +3,8 @@
         <span class="tree-node__expand" ng-class="{'is-visibled': !list}">
             <span class="tree-node__expand-icon" ng-class="{'expanded': visible}"></span>
         </span>
-        <checkbox v-model="vModel"></checkbox>
+        <!-- ng-if会隔绝作用域 -->
+        <checkbox ng-if="showCheckbox" indeterminate="indeterminate" change="handleCheck(val)" v-model="checked"></checkbox>
         <span class="tree-node__label">{{ label }}</span>
     </p>
     <div role="group" class="tree-item_node__children" ng-show="visible" ng-if="list"></div>
