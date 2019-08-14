@@ -38,14 +38,30 @@ export default {
         // 计算col width
         const calcWidth = function (offsetWidth, list) {
             const hasWidthList = list.filter(item => isNumber(+item.width));
-            const totalLabelWidth = _reduce(hasWidthList);
-            const offset = offsetWidth - totalLabelWidth;
             const len = list.length - hasWidthList.length;
+            let totalLabelWidth = _reduce(hasWidthList);
             if (!len) return totalLabelWidth;
+            const offset = Math.max((offsetWidth - totalLabelWidth) / len, 80);
+            totalLabelWidth = 0;
             list.forEach(item => {
-                item.width = offset / len;
+                item.width = item.width || offset;
+                totalLabelWidth += +item.width;
             });
-            return offsetWidth;
+            return totalLabelWidth;
+        };
+
+        // nextTick
+        const nextTick = function (fn, wait) {
+            let timer = null;
+            return function (...args) {
+                if (timer) {
+                    $timeout.cancel(timer);
+                    timer = null;
+                }
+                timer = $timeout(() => {
+                    fn.apply(this, args);
+                }, wait || 0);
+            };
         };
 
         return {
@@ -59,7 +75,6 @@ export default {
             controller: ['$scope', '$element', function ($scope, $element) {
                 /** ***************初始化数据*************** */
                 let childList = [];
-                const offsetWidth = $element[0].offsetWidth;
 
                 // 添加child
                 this.addChild = (scope) => {
@@ -68,9 +83,13 @@ export default {
                         width: scope.width,
                         prop: scope.prop
                     });
-                    $scope.childList = distinct(childList);
-                    $scope.tableWidth = calcWidth(offsetWidth, $scope.childList);
+                    this.calcChild();
                 };
+
+                this.calcChild = nextTick(function () {
+                    $scope.childList = distinct(childList);
+                    $scope.tableWidth = calcWidth($element[0].offsetWidth, $scope.childList);
+                });
 
                 // 移除Child
                 this.removeChild = (scope) => {

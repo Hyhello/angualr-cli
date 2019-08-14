@@ -104,3 +104,8 @@ export const findClass = (iParent, iClass) => {
         return list;
     }
 };
+
+// 判断是否是一个number
+export const isNumber = (n) => {
+    return !isNaN(n) && typeof n === 'number';
+};

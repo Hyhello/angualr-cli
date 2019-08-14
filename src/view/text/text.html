@@ -1,18 +1,18 @@
 <div>
-    <transfer
-        v-model="vModel"
-        titles="['左边', '右边']"
-        render-content="renderContent(options)"
-        button-texts="['向左', '向右']"
-        filterable="true"
-        left-default-checked="[1, 2, 3, 4, 5, 6]"
-        right-default-checked="[7, 8, 9, 10]"
-        filter-placeholder="请搜索"
-        data="data">
-    </transfer>
-    <tree
-        show-checkbox="true"
-        data="treeData1"
-        >
-    </tree>
+    <v-table data="data">
+        <v-table-column
+            prop="name"
+            label="姓名"
+            width="1500"
+        ></v-table-column>
+        <v-table-column
+            prop="date"
+            label="日期"
+            width="500"
+        ></v-table-column>
+        <v-table-column
+            prop="address"
+            label="地址"
+        ></v-table-column>
+    </v-table>
 </div>
