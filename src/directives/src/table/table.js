@@ -3,10 +3,10 @@
  * 时间：2019-04-17
  * 描述：table组件
  */
-
 import './table.scss';
+import angular from 'angular';
 import tpl from './table.html';
-import { isNumber } from '@/libs/utils';
+import { isNumber, findClass } from '@/libs/utils';
 
 export default {
     name: 'vTable',
@@ -75,6 +75,13 @@ export default {
             controller: ['$scope', '$element', function ($scope, $element) {
                 /** ***************初始化数据*************** */
                 let childList = [];
+                const headerWrapper = findClass($element[0], 'el-table__header-wrapper')[0];
+                const bodyWrapper = angular.element(findClass($element[0], 'el-table__body-wrapper')[0]);
+
+                // 滚动事件
+                const __scroll = function (ev) {
+                    headerWrapper.scrollLeft = ev.target.scrollLeft;
+                };
 
                 // 添加child
                 this.addChild = (scope) => {
@@ -89,6 +96,7 @@ export default {
                 this.calcChild = nextTick(function () {
                     $scope.childList = distinct(childList);
                     $scope.tableWidth = calcWidth($element[0].offsetWidth, $scope.childList);
+                    bodyWrapper.on('scroll', __scroll);
                 });
 
                 // 移除Child
@@ -98,6 +106,8 @@ export default {
 
                 /** ******************* 注销 ******************** */
                 $element.on('$destroy', function () {
+                    childList = [];
+                    bodyWrapper.off('scroll', __scroll);
                     $scope.$destroy();
                 });
             }]

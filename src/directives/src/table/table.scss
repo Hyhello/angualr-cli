@@ -110,4 +110,8 @@
         border-left: 1px solid #ebeef5;
         z-index: 10;
     }
+    &.el-table--scrollable-x
+    .el-table__body-wrapper {
+        overflow-x: auto;
+    }
 }
