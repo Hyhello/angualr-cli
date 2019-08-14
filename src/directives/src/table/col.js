@@ -1,14 +1,13 @@
 import './table.scss';
-import tdTpl from './td.html';
+import tdTpl from './column.html';
 
 export default {
-    name: 'tableCell',
+    name: 'vTableColumn',
     callback () {
         return {
             restrict: 'E',
             template: tdTpl,
             replace: true,
-            transclude: true,
             require: '^vTable',
             scope: {
                 prop: '@',
