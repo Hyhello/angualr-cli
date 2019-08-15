@@ -12,20 +12,6 @@ export default {
     name: 'vTable',
     // 兼容ie8 则采用$compile 而不是ng-transclude
     callback: ['$compile', '$timeout', function ($compile, $timeout) {
-        // 去重
-        const distinct = (arr) => {
-            const list = arr;
-            const tempObj = {};
-            arr = [];
-            list.forEach(item => {
-                if (!tempObj[item.label]) {
-                    arr.push(item);
-                    tempObj[item.label] = 1;
-                }
-            });
-            return arr;
-        };
-
         // 计算值
         const _reduce = function (list) {
             let totalLabelWidth = 0;
@@ -38,6 +24,7 @@ export default {
         // 计算col width
         const calcWidth = function (offsetWidth, list) {
             const hasWidthList = list.filter(item => isNumber(+item.width));
+            console.log(hasWidthList);
             const len = list.length - hasWidthList.length;
             let totalLabelWidth = _reduce(hasWidthList);
             if (!len) return totalLabelWidth;
@@ -70,11 +57,11 @@ export default {
             replace: true,
             transclude: true,
             scope: {
+                columnList: '=column',
                 list: '=data'
             },
             controller: ['$scope', '$element', function ($scope, $element) {
                 /** ***************初始化数据*************** */
-                let childList = [];
                 const headerWrapper = findClass($element[0], 'el-table__header-wrapper')[0];
                 const bodyWrapper = angular.element(findClass($element[0], 'el-table__body-wrapper')[0]);
 
@@ -83,30 +70,17 @@ export default {
                     headerWrapper.scrollLeft = ev.target.scrollLeft;
                 };
 
-                // 添加child
-                this.addChild = (scope) => {
-                    childList.push({
-                        label: scope.label,
-                        width: scope.width,
-                        prop: scope.prop
-                    });
-                    this.calcChild();
-                };
-
-                this.calcChild = nextTick(function () {
-                    $scope.childList = distinct(childList);
-                    $scope.tableWidth = calcWidth($element[0].offsetWidth, $scope.childList);
+                const calcChild = nextTick(function () {
+                    $scope.tableWidth = calcWidth($element[0].offsetWidth, $scope.columnList || []);
                     bodyWrapper.on('scroll', __scroll);
                 });
 
-                // 移除Child
-                this.removeChild = (scope) => {
-                    childList = childList.filters(item => item.$id !== scope.$id);
-                };
+                $scope.$watch('list', (val) => {
+                    calcChild();
+                });
 
                 /** ******************* 注销 ******************** */
                 $element.on('$destroy', function () {
-                    childList = [];
                     bodyWrapper.off('scroll', __scroll);
                     $scope.$destroy();
                 });
