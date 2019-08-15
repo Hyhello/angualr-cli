@@ -63,6 +63,18 @@
     th.is-leaf {
         border-bottom: 1px solid #ebeef5;
     }
+    td,
+    th {
+        &.is-center {
+            text-align: center;
+        }
+        &.is-left {
+            text-align: center;
+        }
+        &.is-right {
+            text-align: center;
+        }
+    }
     .cell {
         box-sizing: border-box;
         overflow: hidden;

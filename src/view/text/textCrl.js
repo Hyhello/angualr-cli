@@ -10,26 +10,31 @@ export default ['$scope', '$resource', '$state', '$rootScope', '$timeout', funct
         title: 'Name',
         key: 'name',
         width: 100,
+        align: 'center',
         fixed: 'left'
     },
     {
         title: 'Age',
         key: 'age',
+        align: 'center',
         width: 100
     },
     {
         title: 'Province',
         key: 'province',
+        align: 'center',
         width: 100
     },
     {
         title: 'City',
         key: 'city',
+        align: 'center',
         width: 100
     },
     {
         title: 'Address',
         key: 'address',
+        align: 'center',
         width: 200
     },
     {
@@ -94,5 +99,5 @@ export default ['$scope', '$resource', '$state', '$rootScope', '$timeout', funct
                 zip: 100000
             }
         ];
-    }, 300000);
+    }, 3000);
 }];

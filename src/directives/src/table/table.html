@@ -10,7 +10,7 @@
             </colgroup>
             <thead class="has-gutter">
                 <tr>
-                    <th colspan="1" rowspan="1" class="is-leaf" ng-repeat="item in columnList track by $index">
+                    <th colspan="1" rowspan="1" class="{{ item.align ? 'is-' + item.align : '' }} is-leaf" ng-repeat="item in columnList track by $index">
                         <div class="cell">{{ item.title }}</div>
                     </th>
                     <th class="gutter" style="width: 0px; display: none;"></th>
@@ -25,7 +25,7 @@
             </colgroup>
             <tbody>
                 <tr class="el-table__row" ng-repeat="item in list track by $index">
-                    <td rowspan="1" colspan="1" ng-repeat="im in columnList track by $index">
+                    <td class="{{ im.align ? 'is-' + im.align : '' }}" rowspan="1" colspan="1" ng-repeat="im in columnList track by $index">
                         <div class="cell">{{item[im.key]}}</div>
                     </td>
                 </tr>
