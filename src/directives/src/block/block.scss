@@ -1,0 +1,9 @@
+.block__wraper {
+    position: relative;
+    overflow: hidden;
+    .block__wraper-body {
+        .block__wraper-extend {
+            transition: height 0.3s;
+        }
+    }
+}

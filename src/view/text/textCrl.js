@@ -100,4 +100,5 @@ export default ['$scope', '$resource', '$state', '$rootScope', '$timeout', funct
             }
         ];
     }, 3000);
+    $scope.vBlock = false;
 }];

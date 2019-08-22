@@ -12,7 +12,7 @@ export default {
     name: 'vTable',
     // 兼容ie8 则采用$compile 而不是ng-transclude
     callback: ['$compile', '$timeout', function ($compile, $timeout) {
-        const zIndex = 0;
+        // const zIndex = 0;
 
         // 计算值
         const _reduce = function (list) {

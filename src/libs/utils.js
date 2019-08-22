@@ -109,3 +109,22 @@ export const findClass = (iParent, iClass) => {
 export const isNumber = (n) => {
     return !isNaN(n) && typeof n === 'number';
 };
+
+// hasClass
+export const hasClass = (el, className) => {
+    const reg = new RegExp(`\b${className}\b`, 'i');
+    return reg.test(el.className);
+};
+
+// removeClass
+export const removeClass = (el, className) => {
+    const reg = new RegExp(`\b${className}\b`, 'i');
+    if (!hasClass(el, className)) return;
+    el.className = el.className.replace(reg, '');
+};
+
+// addClass
+export const addClass = (el, className) => {
+    if (hasClass(el, className)) return;
+    el.className = el.className.split(/\s+/).concat([className]).join(' ');
+};
