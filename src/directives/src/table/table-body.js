@@ -15,6 +15,7 @@ export default {
             replace: true,
             require: '^vTable',
             scope: {
+                fixed: '@',                      // fixed 固定定位
                 stripe: '=',                     // 是否为斑马纹 table 【boolean】 default: false
                 rowList: '=',
                 colList: '=',
@@ -23,6 +24,7 @@ export default {
             link ($scope, $element, attrs, app) {
                 /** ******************* 监听 ******************** */
                 $scope.$watch('rowList', () => {
+                    if (!$scope.fixed) return;
                     $element.ready(app.calcHeight);
                 });
 

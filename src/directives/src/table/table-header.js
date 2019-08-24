@@ -16,6 +16,7 @@ export default {
             replace: true,
             require: '^vTable',
             scope: {
+                fixed: '@',
                 gutter: '=',
                 colList: '=',
                 tableWidth: '='
@@ -23,7 +24,7 @@ export default {
             link ($scope, $element, attrs) {
                 /** ******************* 监听 ******************** */
                 $scope.$watch('gutter', (val) => {
-                    $scope.hasGutterWidth = val ? getScrollWidth() : 0;
+                    $scope.hasGutterWidth = (val && !$scope.fixed) ? getScrollWidth() : 0;
                 });
                 /** ******************* 注销 ******************** */
                 $element.on('$destroy', () => {

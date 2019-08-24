@@ -77,7 +77,7 @@ export default {
             transclude: true,
             scope: {
                 list: '=data',
-                height: '@',                    // 	Table 的高度，默认为自动高度。如果 height 为 number 类型，Table 的高度会受控于外部样式。
+                height: '@',                    // Table 的高度，默认为自动高度。如果 height 为 number 类型，Table 的高度会受控于外部样式。
                 border: '=',                    // 是否带有纵向边框 table 【boolean】 default: false
                 stripe: '='                     // 是否为斑马纹 table 【boolean】 default: false
             },

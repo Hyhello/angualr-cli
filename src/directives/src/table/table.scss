@@ -152,6 +152,17 @@
         border-left: 1px solid #ebeef5;
         z-index: 10;
     }
+    .el-table__fixed,
+    .el-table__fixed-right {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        box-shadow: 0 0 10px rgba(0,0,0,.12);
+    }
     .table-noData {
         text-align: center;
     }
