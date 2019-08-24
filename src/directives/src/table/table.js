@@ -62,7 +62,8 @@ export default {
             replace: true,
             transclude: true,
             scope: {
-                list: '=data'
+                list: '=data',
+                stripe: '='                     // 是否为斑马纹 table 【boolean】 default: false
             },
             controller: ['$scope', '$element', function ($scope, $element) {
                 /** ***************** 初始化数据 **************** */

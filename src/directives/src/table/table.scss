@@ -107,6 +107,9 @@
     &.el-table--enable-row-transition .el-table__body td {
         transition: background-color .25s ease;
     }
+    &.el-table--striped .el-table__body tr.el-table__row--striped td {
+        background-color: #fafafa;
+    }
     td,th {
         padding: 12px 0;
         min-width: 0;

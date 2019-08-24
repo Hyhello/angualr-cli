@@ -15,6 +15,7 @@ export default {
             replace: true,
             require: '^vTable',
             scope: {
+                stripe: '=',                     // 是否为斑马纹 table 【boolean】 default: false
                 rowList: '=',
                 colList: '=',
                 tableWidth: '='

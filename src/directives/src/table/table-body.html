@@ -3,8 +3,10 @@
         <col ng-repeat="item in colList track by $index" name="{{ item.className }}" width="{{ item.width }}">
     </colgroup>
     <tbody>
-        <tr class="el-table__row" ng-repeat="item in rowList track by $index">
-            <td class="{{ im.className }} {{ im.align ? 'is-' + im.align : '' }}" rowspan="1" colspan="1" ng-repeat="im in colList track by $index">
+        <tr class="el-table__row"
+            ng-class="{'el-table__row--striped': stripe && ($index % 2 !== 0)}"
+            ng-repeat="item in rowList track by $index">
+            <td rowspan="1" colspan="1" class="{{ im.className }} {{ im.align ? 'is-' + im.align : '' }}" ng-repeat="im in colList track by $index">
                 <div class="cell">{{item[im.prop]}}</div>
             </td>
         </tr>
