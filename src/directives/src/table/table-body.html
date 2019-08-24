@@ -1,11 +1,11 @@
 <table width="{{tableWidth}}" cellspacing="0" cellpadding="0" border="0" class="el-table__body">
     <colgroup>
-        <col ng-repeat="item in rowList track by $index" width="{{ item.width }}">
+        <col ng-repeat="item in colList track by $index" width="{{ item.width }}">
     </colgroup>
     <tbody>
         <tr class="el-table__row" ng-repeat="item in rowList track by $index">
-            <td class="{{ im.align ? 'is-' + im.align : '' }}" rowspan="1" colspan="1" ng-repeat="im in rowList track by $index">
-                <div class="cell">{{item[im.key]}}</div>
+            <td class="{{ im.align ? 'is-' + im.align : '' }}" rowspan="1" colspan="1" ng-repeat="im in colList track by $index">
+                <div class="cell">{{item[im.prop]}}</div>
             </td>
         </tr>
         <tr class="el-table__row" ng-if="!rowList.length">

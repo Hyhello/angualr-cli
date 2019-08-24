@@ -14,7 +14,8 @@ export default {
             template: tpl,
             replace: true,
             scope: {
-                rowList: '='
+                rowList: '=',
+                colList: '='
             },
             link ($scope, $element, attrs) {
                 console.log($scope.rowList);
