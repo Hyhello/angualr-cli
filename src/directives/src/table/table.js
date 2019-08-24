@@ -6,7 +6,7 @@
 import './table.scss';
 import angular from 'angular';
 import tpl from './table.html';
-import { isNumber, findClass } from '@/libs/utils';
+import { isNumber, findClass, getScrollWidth } from '@/libs/utils';
 
 export default {
     name: 'vTable',
@@ -15,7 +15,9 @@ export default {
         // 默认配置
         const _defaults = {
             zIndex: 0,
-            defaultClass: 'v-table_'
+            minWidth: 80,
+            defaultClass: 'v-table_',
+            scrollWidth: getScrollWidth()
         };
 
         // 计算值
@@ -33,13 +35,25 @@ export default {
             const len = list.length - hasWidthList.length;
             let totalLabelWidth = _reduce(hasWidthList);
             if (!len) return totalLabelWidth;
-            const offset = Math.max((offsetWidth - totalLabelWidth) / len, 80);
+            const offset = Math.max((offsetWidth - totalLabelWidth) / len, _defaults.minWidth);
             totalLabelWidth = 0;
             list.forEach(item => {
-                item.width = item.width || offset;
-                totalLabelWidth += +item.width;
+                const width = +item.width;
+                item.width = Math.max(width, _defaults.minWidth) || offset;
+                totalLabelWidth += width;
             });
             return totalLabelWidth;
+        };
+
+        // 计算calcHasgutter
+        const calcGutter = function (list) {
+            let len = list.length;
+            while (len--) {
+                if (list[len].width > (_defaults.minWidth + _defaults.scrollWidth)) {
+                    list[len.width] -= _defaults.scrollWidth;
+                    break;
+                }
+            }
         };
 
         // nextTick
@@ -113,6 +127,7 @@ export default {
                     $scope.$apply(() => {
                         $scope.bodyHeight = $scope.height - oElHeader.offsetHeight;
                         $scope.is_scroll_y = tableBody.offsetHeight > $scope.bodyHeight;
+                        $scope.is_scroll_y && calcGutter($scope.colList);
                     });
                 };
 

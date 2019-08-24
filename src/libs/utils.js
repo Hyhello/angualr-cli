@@ -128,3 +128,22 @@ export const addClass = (el, className) => {
     if (hasClass(el, className)) return;
     el.className = el.className.split(/\s+/).concat([className]).join(' ');
 };
+
+// 获取滚动条宽度
+export const getScrollWidth = () => {
+    const oDiv = document.createElement('div');
+    const styles = {
+        width: '100px',
+        height: '1px',
+        position: 'absolute',
+        visibility: 'hidden',
+        overflowY: 'scroll'
+    };
+    for (let i in styles) {
+        oDiv.style[i] = styles[i];
+    }
+    document.body.appendChild(oDiv);
+    const scrollbarWidth = oDiv.offsetWidth - oDiv.clientWidth;
+    oDiv.remove();
+    return scrollbarWidth;
+};

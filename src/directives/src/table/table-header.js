@@ -5,6 +5,7 @@
  */
 
 import tpl from './table-header.html';
+import { getScrollWidth } from '@/libs/utils';
 
 export default {
     name: 'tableHeader',
@@ -15,10 +16,15 @@ export default {
             replace: true,
             require: '^vTable',
             scope: {
+                gutter: '=',
                 colList: '=',
                 tableWidth: '='
             },
             link ($scope, $element, attrs) {
+                /** ******************* 监听 ******************** */
+                $scope.$watch('gutter', (val) => {
+                    $scope.hasGutterWidth = val ? getScrollWidth() : 0;
+                });
                 /** ******************* 注销 ******************** */
                 $element.on('$destroy', () => {
                     $scope.$destroy();
