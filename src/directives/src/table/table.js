@@ -38,8 +38,9 @@ export default {
             const offset = Math.max((offsetWidth - totalLabelWidth) / len, _defaults.minWidth);
             totalLabelWidth = 0;
             list.forEach(item => {
-                const width = +(item.width || 0);
-                item.width = width ? Math.max(width, _defaults.minWidth) : offset;
+                let width = +(item.width || 0);
+                width = width ? Math.max(width, _defaults.minWidth) : offset;
+                item.width = width;
                 totalLabelWidth += width;
             });
             return totalLabelWidth;
@@ -123,8 +124,9 @@ export default {
                 const oElBody = angular.element(findClass($element[0], 'el-table__body-wrapper')[0]);
                 $scope.childList = [];                                // col列表
                 $scope.elHeight = 0;                                  // height style
-                $scope.fixedRightWidth = $scope.fixedLeftWidth = 0;   // fix宽度
                 $scope.scrollWidth = _defaults.scrollWidth;           // 滚动条宽度
+                $scope.fixedRightWidth = $scope.fixedLeftWidth = 0;   // fix宽度
+
                 // 添加child
                 this.addChild = (scope) => {
                     $scope.childList.push({

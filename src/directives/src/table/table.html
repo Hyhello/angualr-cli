@@ -43,4 +43,23 @@
                 ></table-body>
         </div>
     </div>
+    <div class="el-table__fixed-right" ng-style="{height: elHeight - scrollWidth + 'px', width: fixedRightWidth + 'px'}">
+        <div class="el-table__fixed-header-wrapper">
+            <table-header
+                fixed="right"
+                gutter="is_scroll_y"
+                col-list="colList"
+                table-width="tableWidth"
+                ></table-header>
+        </div>
+        <div class="el-table__fixed-body-wrapper" ng-if="list.length" ng-style="{height: bodyHeight - scrollWidth + 'px'}">
+            <table-body
+                fixed="right"
+                stripe="stripe"
+                row-list="list"
+                col-list="colList"
+                table-width="tableWidth"
+                ></table-body>
+        </div>
+    </div>
 </div>

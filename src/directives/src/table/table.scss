@@ -176,6 +176,10 @@
         overflow-y: hidden;
         box-shadow: 0 0 10px rgba(0,0,0,.12);
     }
+    .el-table__fixed-right {
+        left: auto;
+        right: 0;
+    }
     .table-noData {
         text-align: center;
     }
