@@ -6,64 +6,6 @@
 
 export default ['$scope', '$resource', '$state', '$rootScope', '$timeout', function ($scope, $resource, $state, $rootScope, $timeout) {
     $scope.data = [];
-    $scope.column = [{
-        title: 'Name',
-        key: 'name',
-        width: 100,
-        align: 'center',
-        fixed: 'left'
-    },
-    {
-        title: 'Age',
-        key: 'age',
-        align: 'center',
-        width: 100
-    },
-    {
-        title: 'Province',
-        key: 'province',
-        align: 'center',
-        width: 100
-    },
-    {
-        title: 'City',
-        key: 'city',
-        align: 'center',
-        width: 100
-    },
-    {
-        title: 'Address',
-        key: 'address',
-        align: 'center',
-        width: 200
-    },
-    {
-        title: 'Postcode',
-        key: 'zip',
-        width: 100
-    },
-    {
-        title: 'Action',
-        key: 'action',
-        fixed: 'right',
-        width: '200',
-        render: (h, params) => {
-            return h('div', [
-                h('Button', {
-                    props: {
-                        type: 'text',
-                        size: 'small'
-                    }
-                }, 'View'),
-                h('Button', {
-                    props: {
-                        type: 'text',
-                        size: 'small'
-                    }
-                }, 'Edit')
-            ]);
-        }
-    }];
     $timeout(() => {
         $scope.data = [
             {

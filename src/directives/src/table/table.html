@@ -1,7 +1,5 @@
 <div class="el-table el-table--fit el-table--border el-table--group el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%;">
-    <div class="hidden-columns">
-        <div ng-repeat="item in columnList track by $index"></div>
-    </div>
+    <div class="hidden-columns" ng-transclude></div>
     <div class="el-table__header-wrapper">
         <table width="{{tableWidth}}" cellspacing="0" cellpadding="0" border="0" class="el-table__header">
             <colgroup>
@@ -36,7 +34,6 @@
                 </tr>
             </tbody>
         </table>
-
     </div>
     <div class="el-table__column-resize-proxy" style="display: none;"></div>
 </div>
