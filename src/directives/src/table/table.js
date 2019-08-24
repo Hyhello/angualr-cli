@@ -90,8 +90,19 @@ export default {
                 };
 
                 // 滚动事件函数
-                this.scrollEvent = (ev) => {
-                    oElHeader.scrollLeft = ev.target.scrollLeft;
+                this.scrollEvent = () => {
+                    oElHeader.scrollLeft = oElBody[0].scrollLeft;
+                    let placment = 'left';
+                    if (oElHeader.scrollLeft === 0) {
+                        placment = 'left';
+                    } else if (oElHeader.scrollLeft < ($scope.tableWidth - offsetWidth)) {
+                        placment = 'middle';
+                    } else {
+                        placment = 'right';
+                    }
+                    $scope.$apply(() => {
+                        $scope.row_scrolling_placment = placment;
+                    });
                 };
 
                 // 监听事件
@@ -107,6 +118,11 @@ export default {
                     });
                     $scope.tableWidth = calcWidth(offsetWidth, $scope.colList);
                     $scope.is_scroll_x = $scope.tableWidth > offsetWidth;
+                    if ($scope.is_scroll_x) {
+                        this.scrollEvent();
+                    } else {
+                        $scope.row_scrolling_placment = 'none';
+                    }
                 }));
 
                 /** ******************* 注销 ******************** */

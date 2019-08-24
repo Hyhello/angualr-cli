@@ -8,13 +8,13 @@
         }"
     >
     <div class="hidden-columns" ng-transclude></div>
-    <div class="el-table__header-wrapper">
+    <div class="el-table__header-wrapper is-scrolling-{{ row_scrolling_placment }}">
         <table-header
             col-list="colList"
             table-width="tableWidth"
             ></table-header>
     </div>
-    <div class="el-table__body-wrapper">
+    <div class="el-table__body-wrapper is-scrolling-{{ row_scrolling_placment }}">
         <table-body
             stripe="stripe"
             row-list="list"
