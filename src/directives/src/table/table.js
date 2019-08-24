@@ -121,9 +121,10 @@ export default {
                 const offsetWidth = $element[0].offsetWidth;
                 const oElHeader = findClass($element[0], 'el-table__header-wrapper')[0];
                 const oElBody = angular.element(findClass($element[0], 'el-table__body-wrapper')[0]);
-                $scope.childList = [];                          // col列表
-                $scope.elHeight = 0;                            // height style
+                $scope.childList = [];                                // col列表
+                $scope.elHeight = 0;                                  // height style
                 $scope.fixedRightWidth = $scope.fixedLeftWidth = 0;   // fix宽度
+                $scope.scrollWidth = _defaults.scrollWidth;           // 滚动条宽度
                 // 添加child
                 this.addChild = (scope) => {
                     $scope.childList.push({
@@ -159,10 +160,10 @@ export default {
                 // y轴滚动
                 this.yScroll = () => {
                     if (!$scope.is_scroll_y) return;
-                    if ($scope.fixedRightWidth) {
+                    if ($scope.fixedLeftWidth) {
                         findClass($element[0], 'el-table__fixed-body-wrapper')[0].scrollTop = oElBody[0].scrollTop;
                     }
-                    if ($scope.fixedLeftWidth) {
+                    if ($scope.fixedRightWidth) {
 
                     }
                 };
