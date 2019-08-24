@@ -14,7 +14,8 @@ export default {
             template: tpl,
             replace: true,
             scope: {
-                colList: '='
+                colList: '=',
+                tableWidth: '='
             },
             link ($scope, $element, attrs) {
                 console.log($scope.colList);

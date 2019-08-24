@@ -15,7 +15,8 @@ export default {
             replace: true,
             scope: {
                 rowList: '=',
-                colList: '='
+                colList: '=',
+                tableWidth: '='
             },
             link ($scope, $element, attrs) {
                 console.log($scope.rowList);
