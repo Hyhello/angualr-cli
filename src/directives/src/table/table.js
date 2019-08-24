@@ -56,6 +56,23 @@ export default {
             }
         };
 
+        // 排序列表
+        const sortList = function (list) {
+            const fixedLeftList = [];
+            const fixedRightList = [];
+            const tempList = [];
+            list.forEach((item) => {
+                if (item.fixed === 'left') {
+                    fixedLeftList.push(item);
+                } else if (item.fixed === 'right') {
+                    fixedRightList.push(item);
+                } else {
+                    tempList.push(item);
+                }
+            });
+            return fixedLeftList.concat(tempList, fixedRightList);
+        };
+
         // nextTick
         const nextTick = function (fn, wait) {
             let timer = null;
@@ -88,11 +105,13 @@ export default {
                 const oElHeader = findClass($element[0], 'el-table__header-wrapper')[0];
                 const oElBody = angular.element(findClass($element[0], 'el-table__body-wrapper')[0]);
                 $scope.childList = [];                        // col列表
+                $scope.elHeight = 0;                          // height style
                 // 添加child
                 this.addChild = (scope) => {
                     $scope.childList.push({
                         $id: scope.$id,
                         prop: scope.prop,
+                        fixed: scope.fixed,
                         width: scope.width,
                         label: scope.label,
                         align: scope.align
@@ -127,6 +146,7 @@ export default {
                     $scope.$apply(() => {
                         $scope.bodyHeight = $scope.height - oElHeader.offsetHeight;
                         $scope.is_scroll_y = tableBody.offsetHeight > $scope.bodyHeight;
+                        $scope.elHeight = $element[0].offsetHeight;
                         if ($scope.is_scroll_y) {
                             calcGutter($scope.colList);
                         }
@@ -138,7 +158,7 @@ export default {
 
                 /** ******************* 监听 ******************** */
                 $scope.$watch('childList', nextTick((val) => {
-                    $scope.colList = (val || []).map((item, index) => {
+                    $scope.colList = sortList(val || []).map((item, index) => {
                         return {
                             ...item,
                             className: `${_defaults.defaultClass}_${zIndex}_column_${index + 1}`

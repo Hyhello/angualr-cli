@@ -18,7 +18,8 @@ export default {
                 prop: '@',
                 align: '@',
                 label: '@',
-                width: '@'
+                width: '@',
+                fixed: '@'
             },
             link ($scope, $element, attrs, app) {
                 // 添加了$scope
