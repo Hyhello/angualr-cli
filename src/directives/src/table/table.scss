@@ -17,7 +17,7 @@
         border-right: 0;
         border-bottom: 0;
     }
-    &:before {
+    &::before {
         left: 0;
         bottom: 0;
         width: 100%;
@@ -28,6 +28,10 @@
     }
     &.el-table--border::after,
     &.el-table--group::after {
+        top: 0;
+        right: 0;
+        width: 1px;
+        height: 100%;
         content: "";
         position: absolute;
         background-color: #ebeef5;
@@ -109,6 +113,18 @@
     }
     &.el-table--striped .el-table__body tr.el-table__row--striped td {
         background-color: #fafafa;
+    }
+    &.el-table--border td,
+    &.el-table--border th {
+        border-right: 1px solid #ebeef5;
+    }
+    &.el-table--border,
+    &.el-table--group {
+        border: 1px solid #ebeef5;
+    }
+    &.el-table--border {
+        border-right: none;
+        border-bottom: none;
     }
     td,th {
         padding: 12px 0;

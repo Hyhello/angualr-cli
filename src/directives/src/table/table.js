@@ -63,6 +63,7 @@ export default {
             transclude: true,
             scope: {
                 list: '=data',
+                border: '=',                    // 是否带有纵向边框 table 【boolean】 default: false
                 stripe: '='                     // 是否为斑马纹 table 【boolean】 default: false
             },
             controller: ['$scope', '$element', function ($scope, $element) {
