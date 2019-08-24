@@ -16,6 +16,7 @@ export default {
             require: '^vTable',
             scope: {
                 prop: '@',
+                align: '@',
                 label: '@',
                 width: '@'
             },
