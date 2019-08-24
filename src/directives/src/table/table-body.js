@@ -1,31 +1,25 @@
 /**
  * 作者：Hyhello
  * 时间：2019-08-24
- * 描述：tableColumn
+ * 描述：tableBody
  */
 
-import tpl from './table-column.html';
+import tpl from './table-body.html';
 
 export default {
-    name: 'vTableColumn',
+    name: 'tableBody',
     callback () {
         return {
             restrict: 'E',
             template: tpl,
             replace: true,
-            require: '^vTable',
             scope: {
-                prop: '@',
-                label: '@',
-                width: '@'
+                rowList: '='
             },
-            link ($scope, $element, attrs, app) {
-                // 添加了$scope
-                app.addChild($scope);
-
+            link ($scope, $element, attrs) {
+                console.log($scope.rowList);
                 /** ******************* 注销 ******************** */
                 $element.on('$destroy', () => {
-                    app.removeChild($scope);
                     $scope.$destroy();
                 });
             }

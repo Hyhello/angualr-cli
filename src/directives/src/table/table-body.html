@@ -1,0 +1,17 @@
+<table width="{{tableWidth}}" cellspacing="0" cellpadding="0" border="0" class="el-table__body">
+    <colgroup>
+        <col ng-repeat="item in rowList track by $index" width="{{ item.width }}">
+    </colgroup>
+    <tbody>
+        <tr class="el-table__row" ng-repeat="item in rowList track by $index">
+            <td class="{{ im.align ? 'is-' + im.align : '' }}" rowspan="1" colspan="1" ng-repeat="im in rowList track by $index">
+                <div class="cell">{{item[im.key]}}</div>
+            </td>
+        </tr>
+        <tr class="el-table__row" ng-if="!rowList.length">
+            <td rowspan="1" colspan="{{ rowList.length }}">
+                <div class="table-noData">暂无数据</div>
+            </td>
+        </tr>
+    </tbody>
+</table>

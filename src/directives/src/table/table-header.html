@@ -1,0 +1,12 @@
+<table width="{{tableWidth}}" cellspacing="0" cellpadding="0" border="0" class="el-table__header">
+    <colgroup>
+        <col ng-repeat="item in colList track by $index" width="{{ item.width }}">
+    </colgroup>
+    <thead class="has-gutter">
+        <tr>
+            <th colspan="1" rowspan="1" class="{{ item.align ? 'is-' + item.align : '' }} is-leaf" ng-repeat="item in colList track by $index">
+                <div class="cell">{{ item.label }}</div>
+            </th>
+        </tr>
+    </thead>
+</table>

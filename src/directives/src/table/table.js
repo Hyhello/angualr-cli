@@ -62,6 +62,22 @@ export default {
             },
             controller: ['$scope', '$element', function ($scope, $element) {
                 /** ***************** 初始化数据 **************** */
+                $scope.colList = [];                        // col列表
+
+                // 添加child
+                this.addChild = (scope) => {
+                    $scope.colList.push({
+                        $id: scope.$id,
+                        prop: scope.prop,
+                        width: scope.width,
+                        label: scope.label
+                    });
+                };
+
+                // removeChild
+                this.removeChild = (scope) => {
+                    $scope.colList = $scope.colList.filter(item => item.$id !== scope.$id);
+                };
 
                 /** ******************* 注销 ******************** */
                 $element.on('$destroy', function () {

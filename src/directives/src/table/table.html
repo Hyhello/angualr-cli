@@ -1,39 +1,13 @@
-<div class="el-table el-table--fit el-table--border el-table--group el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%;">
+<div class="el-table" style="width: 100%;">
     <div class="hidden-columns" ng-transclude></div>
     <div class="el-table__header-wrapper">
-        <table width="{{tableWidth}}" cellspacing="0" cellpadding="0" border="0" class="el-table__header">
-            <colgroup>
-                <col ng-repeat="item in columnList track by $index" width="{{ item.width }}">
-                <col name="gutter" width="0">
-            </colgroup>
-            <thead class="has-gutter">
-                <tr>
-                    <th colspan="1" rowspan="1" class="{{ item.align ? 'is-' + item.align : '' }} is-leaf" ng-repeat="item in columnList track by $index">
-                        <div class="cell">{{ item.title }}</div>
-                    </th>
-                    <th class="gutter" style="width: 0px; display: none;"></th>
-                </tr>
-            </thead>
-        </table>
+        <table-header
+            col-list="colList"
+            ></table-header>
     </div>
-    <div class="el-table__body-wrapper is-scrolling-none">
-        <table width="{{tableWidth}}" cellspacing="0" cellpadding="0" border="0" class="el-table__body">
-            <colgroup>
-                <col ng-repeat="item in columnList track by $index" width="{{ item.width }}">
-            </colgroup>
-            <tbody>
-                <tr class="el-table__row" ng-repeat="item in list track by $index">
-                    <td class="{{ im.align ? 'is-' + im.align : '' }}" rowspan="1" colspan="1" ng-repeat="im in columnList track by $index">
-                        <div class="cell">{{item[im.key]}}</div>
-                    </td>
-                </tr>
-                <tr class="el-table__row" ng-if="!list.length">
-                    <td rowspan="1" colspan="{{ columnList.length }}">
-                        <div class="table-noData">暂无数据</div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="el-table__body-wrapper">
+        <table-body
+            row-list="list"
+            ></table-body>
     </div>
-    <div class="el-table__column-resize-proxy" style="display: none;"></div>
 </div>
