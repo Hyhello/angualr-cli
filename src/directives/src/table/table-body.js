@@ -8,7 +8,7 @@ import tpl from './table-body.html';
 
 export default {
     name: 'tableBody',
-    callback: ['$timeout', ($timeout) => {
+    callback () {
         return {
             restrict: 'E',
             template: tpl,
@@ -23,7 +23,7 @@ export default {
             link ($scope, $element, attrs, app) {
                 /** ******************* 监听 ******************** */
                 $scope.$watch('rowList', () => {
-                    $timeout(app.calcHeight);
+                    $element.ready(app.calcHeight);
                 });
 
                 /** ******************* 注销 ******************** */
@@ -32,5 +32,5 @@ export default {
                 });
             }
         };
-    }]
+    }
 };
