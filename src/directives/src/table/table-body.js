@@ -13,6 +13,7 @@ export default {
             restrict: 'E',
             template: tpl,
             replace: true,
+            require: '^vTable',
             scope: {
                 rowList: '=',
                 colList: '=',

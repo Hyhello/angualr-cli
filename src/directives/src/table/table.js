@@ -66,8 +66,8 @@ export default {
             controller: ['$scope', '$element', function ($scope, $element) {
                 /** ***************** 初始化数据 **************** */
                 const zIndex = _defaults.zIndex + 1;
-                $scope.childList = [];                        // col列表
                 const offsetWidth = $element[0].offsetWidth;
+                $scope.childList = [];                        // col列表
 
                 // 添加child
                 this.addChild = (scope) => {
