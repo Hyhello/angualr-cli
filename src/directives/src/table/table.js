@@ -50,7 +50,7 @@ export default {
             let len = list.length;
             while (len--) {
                 if (list[len].width > (_defaults.minWidth + _defaults.scrollWidth)) {
-                    list[len.width] -= _defaults.scrollWidth;
+                    list[len].width -= _defaults.scrollWidth;
                     break;
                 }
             }
@@ -127,7 +127,9 @@ export default {
                     $scope.$apply(() => {
                         $scope.bodyHeight = $scope.height - oElHeader.offsetHeight;
                         $scope.is_scroll_y = tableBody.offsetHeight > $scope.bodyHeight;
-                        $scope.is_scroll_y && calcGutter($scope.colList);
+                        if ($scope.is_scroll_y) {
+                            calcGutter($scope.colList);
+                        }
                     });
                 };
 
