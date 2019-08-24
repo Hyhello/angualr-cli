@@ -66,12 +66,11 @@ export default {
             },
             controller: ['$scope', '$element', function ($scope, $element) {
                 /** ***************** 初始化数据 **************** */
-                const zIndex = _defaults.zIndex + 1;
+                const zIndex = ++_defaults.zIndex;
                 const offsetWidth = $element[0].offsetWidth;
                 const oElHeader = findClass($element[0], 'el-table__header-wrapper')[0];
                 const oElBody = angular.element(findClass($element[0], 'el-table__body-wrapper')[0]);
                 $scope.childList = [];                        // col列表
-                console.log(oElHeader, oElBody);
                 // 添加child
                 this.addChild = (scope) => {
                     $scope.childList.push({
@@ -98,6 +97,7 @@ export default {
 
                 /** ******************* 监听 ******************** */
                 $scope.$watch('childList', nextTick((val) => {
+                    console.log(zIndex);
                     $scope.colList = (val || []).map((item, index) => {
                         return {
                             ...item,
