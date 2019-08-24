@@ -6,6 +6,7 @@
         'el-table--striped': stripe,
         'el-table--border': border
         }"
+    ng-style="{height: height + 'px'}"
     >
     <div class="hidden-columns" ng-transclude></div>
     <div class="el-table__header-wrapper">
@@ -14,7 +15,7 @@
             table-width="tableWidth"
             ></table-header>
     </div>
-    <div class="el-table__body-wrapper is-scrolling-{{ row_scrolling_placment }}">
+    <div class="el-table__body-wrapper is-scrolling-{{ row_scrolling_placment }}" ng-style="{height: bodyHeight + 'px'}">
         <table-body
             stripe="stripe"
             row-list="list"

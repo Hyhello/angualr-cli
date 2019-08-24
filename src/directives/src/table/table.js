@@ -106,6 +106,15 @@ export default {
                     });
                 };
 
+                // 计算高度
+                this.calcHeight = () => {
+                    const tableBody = findClass(oElBody[0], 'el-table__body')[0];
+                    $scope.$apply(() => {
+                        $scope.bodyHeight = $scope.height - oElHeader.offsetHeight;
+                        $scope.is_scroll_y = tableBody.offsetHeight > $scope.bodyHeight;
+                    });
+                };
+
                 // 监听事件
                 oElBody.on('scroll', this.scrollEvent);
 
@@ -123,6 +132,10 @@ export default {
                         this.scrollEvent();
                     } else {
                         $scope.row_scrolling_placment = 'none';
+                    }
+                    // 计算高度
+                    if ($scope.height) {
+                        this.calcHeight();
                     }
                 }));
 
