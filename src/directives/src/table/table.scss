@@ -112,6 +112,10 @@
         position: relative;
         text-align: left;
     }
+    td.is-hidden > *,
+    th.is-hidden > * {
+        visibility: hidden;
+    }
     .el-table__body-wrapper {
         overflow: hidden;
         position: relative;

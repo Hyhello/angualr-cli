@@ -6,7 +6,10 @@
         <tr class="el-table__row"
             ng-class="{'el-table__row--striped': stripe && ($index % 2 !== 0)}"
             ng-repeat="item in rowList track by $index">
-            <td rowspan="1" colspan="1" class="{{ im.className }} {{ im.align ? 'is-' + im.align : '' }}" ng-repeat="im in colList track by $index">
+            <td rowspan="1" colspan="1"
+                class="{{ im.className }} {{ im.align ? 'is-' + im.align : '' }}"
+                ng-class="{'is-hidden': im.fixed}"
+                ng-repeat="im in colList track by $index">
                 <div class="cell">{{item[im.prop]}}</div>
             </td>
         </tr>

@@ -5,7 +5,10 @@
     </colgroup>
     <thead class="has-gutter">
         <tr>
-            <th colspan="1" rowspan="1" class="{{ item.className }} {{ item.align ? 'is-' + item.align : '' }} is-leaf" ng-repeat="item in colList track by $index">
+            <th colspan="1" rowspan="1"
+                class="{{ item.className }} {{ item.align ? 'is-' + item.align : '' }} is-leaf"
+                ng-class="{'is-hidden': item.fixed}"
+                ng-repeat="item in colList track by $index">
                 <div class="cell">{{ item.label }}</div>
             </th>
             <th class="gutter" ng-show="hasGutterWidth" ng-style="{width: hasGutterWidth + 'px'}"></th>
