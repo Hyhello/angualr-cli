@@ -97,7 +97,6 @@ export default {
 
                 /** ******************* 监听 ******************** */
                 $scope.$watch('childList', nextTick((val) => {
-                    console.log(zIndex);
                     $scope.colList = (val || []).map((item, index) => {
                         return {
                             ...item,

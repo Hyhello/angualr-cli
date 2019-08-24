@@ -101,6 +101,9 @@
         overflow: hidden;
         position: relative;
     }
+    &.el-table--enable-row-hover tr:hover > td {
+        background-color: #f5f7fa;
+    }
     &.el-table--enable-row-transition .el-table__body td {
         transition: background-color .25s ease;
     }
