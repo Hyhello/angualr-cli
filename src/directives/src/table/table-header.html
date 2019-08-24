@@ -6,8 +6,8 @@
     <thead class="has-gutter">
         <tr>
             <th colspan="1" rowspan="1"
-                class="{{ item.className }} {{ item.align ? 'is-' + item.align : '' }} is-leaf"
-                ng-class="{'is-hidden': item.fixed}"
+                class="{{ item.className }} is-leaf"
+                ng-class="{{ classes(item) }}"
                 ng-repeat="item in colList track by $index">
                 <div class="cell">{{ item.label }}</div>
             </th>
