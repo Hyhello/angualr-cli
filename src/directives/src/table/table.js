@@ -11,7 +11,11 @@ export default {
     name: 'vTable',
     // 兼容ie8 则采用$compile 而不是ng-transclude
     callback: ['$compile', '$timeout', function ($compile, $timeout) {
-        // const zIndex = 0;
+        // 默认配置
+        const _defaults = {
+            zIndex: 0,
+            defaultClass: 'v-table_'
+        };
 
         // 计算值
         const _reduce = function (list) {
@@ -61,6 +65,7 @@ export default {
             },
             controller: ['$scope', '$element', function ($scope, $element) {
                 /** ***************** 初始化数据 **************** */
+                const zIndex = _defaults.zIndex + 1;
                 $scope.childList = [];                        // col列表
                 const offsetWidth = $element[0].offsetWidth;
 
@@ -75,16 +80,17 @@ export default {
                     });
                 };
 
-                // removeChild
+                // 移除Child
                 this.removeChild = (scope) => {
                     $scope.childList = $scope.childList.filter(item => item.$id !== scope.$id);
                 };
 
                 /** ******************* 监听 ******************** */
                 $scope.$watch('childList', nextTick((val) => {
-                    $scope.colList = (val || []).map(item => {
+                    $scope.colList = (val || []).map((item, index) => {
                         return {
-                            ...item
+                            ...item,
+                            className: `${_defaults.defaultClass}_${zIndex}_column_${index + 1}`
                         };
                     });
                     $scope.tableWidth = calcWidth(offsetWidth, $scope.colList);
