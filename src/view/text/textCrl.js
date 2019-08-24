@@ -5,8 +5,8 @@
  */
 
 export default ['$scope', '$resource', '$state', '$rootScope', '$timeout', function ($scope, $resource, $state, $rootScope, $timeout) {
-    // $scope.data = [];
-    // $timeout(() => {
+    $scope.data = [];
+    $timeout(() => {
         $scope.data = [
             {
                 name: 'John Brown',
@@ -57,6 +57,6 @@ export default ['$scope', '$resource', '$state', '$rootScope', '$timeout', funct
                 zip: 100000
             }
         ];
-    // }, 3000);
+    }, 3000);
     $scope.vBlock = false;
 }];
