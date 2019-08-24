@@ -4,6 +4,7 @@
  * 描述：table组件
  */
 import './table.scss';
+import angular from 'angular';
 import tpl from './table.html';
 import { isNumber, findClass } from '@/libs/utils';
 
@@ -67,8 +68,10 @@ export default {
                 /** ***************** 初始化数据 **************** */
                 const zIndex = _defaults.zIndex + 1;
                 const offsetWidth = $element[0].offsetWidth;
+                const oElHeader = findClass($element[0], 'el-table__header-wrapper')[0];
+                const oElBody = angular.element(findClass($element[0], 'el-table__body-wrapper')[0]);
                 $scope.childList = [];                        // col列表
-
+                console.log(oElHeader, oElBody);
                 // 添加child
                 this.addChild = (scope) => {
                     $scope.childList.push({
@@ -85,6 +88,14 @@ export default {
                     $scope.childList = $scope.childList.filter(item => item.$id !== scope.$id);
                 };
 
+                // 滚动事件函数
+                this.scrollEvent = (ev) => {
+                    oElHeader.scrollLeft = ev.target.scrollLeft;
+                };
+
+                // 监听事件
+                oElBody.on('scroll', this.scrollEvent);
+
                 /** ******************* 监听 ******************** */
                 $scope.$watch('childList', nextTick((val) => {
                     $scope.colList = (val || []).map((item, index) => {
@@ -94,10 +105,13 @@ export default {
                         };
                     });
                     $scope.tableWidth = calcWidth(offsetWidth, $scope.colList);
+                    $scope.is_scroll_x = $scope.tableWidth > offsetWidth;
                 }));
 
                 /** ******************* 注销 ******************** */
                 $element.on('$destroy', function () {
+                    // 清除事件
+                    oElBody.off('scroll', this.scrollEvent);
                     $scope.$destroy();
                 });
             }]

@@ -19,7 +19,6 @@ export default {
                 tableWidth: '='
             },
             link ($scope, $element, attrs) {
-                console.log($scope.colList);
                 /** ******************* 注销 ******************** */
                 $element.on('$destroy', () => {
                     $scope.$destroy();

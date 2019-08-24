@@ -20,7 +20,6 @@ export default {
                 tableWidth: '='
             },
             link ($scope, $element, attrs) {
-                console.log($scope.rowList);
                 /** ******************* 注销 ******************** */
                 $element.on('$destroy', () => {
                     $scope.$destroy();
