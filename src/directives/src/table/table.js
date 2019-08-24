@@ -73,6 +73,23 @@ export default {
             return fixedLeftList.concat(tempList, fixedRightList);
         };
 
+        // 获取fix
+        const getFixWidth = function (list) {
+            const fixedLeftList = [];
+            const fixedRightList = [];
+            list.forEach(item => {
+                if (item.fixed === 'left') {
+                    fixedLeftList.push(item);
+                } else if (item.fixed === 'right') {
+                    fixedRightList.push(item);
+                }
+            });
+            return {
+                fixedLeftWidth: _reduce(fixedLeftList),
+                fixedRightWidth: _reduce(fixedRightList)
+            };
+        };
+
         // nextTick
         const nextTick = function (fn, wait) {
             let timer = null;
@@ -104,8 +121,9 @@ export default {
                 const offsetWidth = $element[0].offsetWidth;
                 const oElHeader = findClass($element[0], 'el-table__header-wrapper')[0];
                 const oElBody = angular.element(findClass($element[0], 'el-table__body-wrapper')[0]);
-                $scope.childList = [];                        // col列表
-                $scope.elHeight = 0;                          // height style
+                $scope.childList = [];                          // col列表
+                $scope.elHeight = 0;                            // height style
+                $scope.fixedRightWidth = $scope.fixedLeftWidth = 0;   // fix宽度
                 // 添加child
                 this.addChild = (scope) => {
                     $scope.childList.push({
@@ -123,8 +141,9 @@ export default {
                     $scope.childList = $scope.childList.filter(item => item.$id !== scope.$id);
                 };
 
-                // 滚动事件函数
-                this.scrollEvent = () => {
+                // x轴滚动
+                this.xScroll = () => {
+                    if (!$scope.is_scroll_x) return;
                     oElHeader.scrollLeft = oElBody[0].scrollLeft;
                     let placment = 'left';
                     if (oElHeader.scrollLeft === 0) {
@@ -134,8 +153,25 @@ export default {
                     } else {
                         placment = 'right';
                     }
+                    $scope.row_scrolling_placment = placment;
+                };
+
+                // y轴滚动
+                this.yScroll = () => {
+                    if (!$scope.is_scroll_y) return;
+                    if ($scope.fixedRightWidth) {
+                        findClass($element[0], 'el-table__fixed-body-wrapper')[0].scrollTop = oElBody[0].scrollTop;
+                    }
+                    if ($scope.fixedLeftWidth) {
+
+                    }
+                };
+
+                // 滚动事件函数
+                this.scrollEvent = () => {
                     $scope.$apply(() => {
-                        $scope.row_scrolling_placment = placment;
+                        this.xScroll();
+                        this.yScroll();
                     });
                 };
 
@@ -165,6 +201,9 @@ export default {
                         };
                     });
                     $scope.tableWidth = calcWidth(offsetWidth, $scope.colList);
+                    const res = getFixWidth($scope.colList);
+                    $scope.fixedRightWidth = res.fixedRightWidth;
+                    $scope.fixedLeftWidth = res.fixedLeftWidth;
                     $scope.is_scroll_x = $scope.tableWidth > offsetWidth;
                     if ($scope.is_scroll_x) {
                         this.scrollEvent();

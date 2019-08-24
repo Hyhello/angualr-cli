@@ -120,6 +120,9 @@
         overflow: hidden;
         position: relative;
     }
+    .el-table__fixed-body-wrapper {
+        overflow: hidden;
+    }
     &.el-table--enable-row-transition .el-table__body td {
         transition: background-color .25s ease;
     }
@@ -155,6 +158,12 @@
         width: 0;
         border-left: 1px solid #ebeef5;
         z-index: 10;
+    }
+    .el-table__body-wrapper.is-scrolling-left~.el-table__fixed,
+    .el-table__body-wrapper.is-scrolling-none~.el-table__fixed,
+    .el-table__body-wrapper.is-scrolling-none~.el-table__fixed-right,
+    .el-table__body-wrapper.is-scrolling-right~.el-table__fixed-right {
+        box-shadow: none;
     }
     .el-table__fixed,
     .el-table__fixed-right {

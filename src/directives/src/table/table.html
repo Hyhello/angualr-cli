@@ -24,7 +24,7 @@
             table-width="tableWidth"
             ></table-body>
     </div>
-    <div class="el-table__fixed" ng-style="{'height': elHeight + 'px'}">
+    <div class="el-table__fixed" ng-if="list.length" ng-style="{height: elHeight + 'px', width: fixedLeftWidth + 'px'}">
         <div class="el-table__fixed-header-wrapper">
             <table-header
                 fixed="left"
@@ -33,7 +33,7 @@
                 table-width="tableWidth"
                 ></table-header>
         </div>
-        <div class="el-table__fixed-body-wrapper">
+        <div class="el-table__fixed-body-wrapper" ng-style="{height: bodyHeight + 'px'}">
             <table-body
                 fixed="left"
                 stripe="stripe"
