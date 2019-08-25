@@ -178,11 +178,10 @@ export default {
 
                 // 计算高度
                 this.calcHeight = () => {
-                    if (!$scope.height) return;
                     const tableBody = findClass(oElBody[0], 'el-table__body')[0];
                     $timeout(() => {
                         $scope.tableBodyWidth = $scope.tableWidth;                  // 多次会调用所以要初始化再计算
-                        $scope.bodyFixedHeight = $scope.bodyHeight = $scope.height - oElHeader.offsetHeight;
+                        $scope.bodyFixedHeight = $scope.bodyHeight = ($scope.height || $element[0].offsetHeight) - oElHeader.offsetHeight;
                         $scope.is_scroll_y = tableBody.offsetHeight > $scope.bodyHeight;
                         $scope.elFixedHeight = $scope.elHeight = $element[0].offsetHeight;
                         if ($scope.is_scroll_y) {
