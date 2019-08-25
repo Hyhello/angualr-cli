@@ -119,7 +119,6 @@ export default {
             controller: ['$scope', '$element', function ($scope, $element) {
                 /** ***************** 初始化数据 **************** */
                 const zIndex = ++_defaults.zIndex;
-                const offsetWidth = $element[0].offsetWidth;
                 const oElHeader = findClass($element[0], 'el-table__header-wrapper')[0];
                 const oElBody = angular.element(findClass($element[0], 'el-table__body-wrapper')[0]);
                 $scope.childList = [];                                // col列表
@@ -150,10 +149,10 @@ export default {
                     let placment = 'left';
                     if (oElHeader.scrollLeft === 0) {
                         placment = 'left';
-                    } else if (oElHeader.scrollLeft < ($scope.tableWidth - offsetWidth)) {
-                        placment = 'middle';
-                    } else {
+                    } else if (oElHeader.scrollLeft === ($scope.tableWidth - oElHeader.offsetWidth)) {
                         placment = 'right';
+                    } else {
+                        placment = 'middle';
                     }
                     $scope.row_scrolling_placment = placment;
                 };
@@ -171,7 +170,7 @@ export default {
 
                 // 滚动事件函数
                 this.scrollEvent = () => {
-                    $scope.$apply(() => {
+                    $timeout(() => {
                         this.xScroll();
                         this.yScroll();
                     });
@@ -181,7 +180,7 @@ export default {
                 this.calcHeight = () => {
                     if (!$scope.height) return;
                     const tableBody = findClass(oElBody[0], 'el-table__body')[0];
-                    $scope.$apply(() => {
+                    $timeout(() => {
                         $scope.tableBodyWidth = $scope.tableWidth;                  // 多次会调用所以要初始化再计算
                         $scope.bodyFixedHeight = $scope.bodyHeight = $scope.height - oElHeader.offsetHeight;
                         $scope.is_scroll_y = tableBody.offsetHeight > $scope.bodyHeight;
@@ -197,6 +196,23 @@ export default {
                     });
                 };
 
+                // 计算宽度
+                this.calcWidth = () => {
+                    $timeout(() => {
+                        const offsetWidth = oElHeader.offsetWidth;
+                        $scope.tableBodyWidth = $scope.tableWidth = calcWidth(offsetWidth, $scope.colList);
+                        const res = getFixWidth($scope.colList);
+                        $scope.fixedRightWidth = res.fixedRightWidth;
+                        $scope.fixedLeftWidth = res.fixedLeftWidth;
+                        $scope.is_scroll_x = $scope.tableWidth > offsetWidth;
+                        if ($scope.is_scroll_x) {
+                            this.scrollEvent();
+                        } else {
+                            $scope.row_scrolling_placment = 'none';
+                        }
+                    });
+                };
+
                 // 监听事件
                 oElBody.on('scroll', this.scrollEvent);
 
@@ -208,16 +224,6 @@ export default {
                             className: `${_defaults.defaultClass}_${zIndex}_column_${index + 1}`
                         };
                     });
-                    $scope.tableBodyWidth = $scope.tableWidth = calcWidth(offsetWidth, $scope.colList);
-                    const res = getFixWidth($scope.colList);
-                    $scope.fixedRightWidth = res.fixedRightWidth;
-                    $scope.fixedLeftWidth = res.fixedLeftWidth;
-                    $scope.is_scroll_x = $scope.tableWidth > offsetWidth;
-                    if ($scope.is_scroll_x) {
-                        this.scrollEvent();
-                    } else {
-                        $scope.row_scrolling_placment = 'none';
-                    }
                 }));
 
                 /** ******************* 注销 ******************** */

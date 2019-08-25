@@ -21,7 +21,7 @@ export default {
                 colList: '=',
                 tableWidth: '='
             },
-            link ($scope, $element, attrs) {
+            link ($scope, $element, attrs, app) {
                 // 样式
                 $scope.classes = function (item) {
                     const isHidden = !!($scope.fixed ? item.fixed !== $scope.fixed : item.fixed);
@@ -32,6 +32,11 @@ export default {
                 };
 
                 /** ******************* 监听 ******************** */
+                /** ******************* 监听 ******************** */
+                $scope.$watch('rowList', () => {
+                    if (!$scope.fixed) return;
+                    $element.ready(app.calcWidth);
+                });
                 $scope.$watch('gutter', (val) => {
                     $scope.hasGutterWidth = (val && !$scope.fixed) ? getScrollWidth() : 0;
                 });
