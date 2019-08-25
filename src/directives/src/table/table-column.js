@@ -4,6 +4,7 @@
  * 描述：tableColumn
  */
 
+import './table.scss';
 import tpl from './table-column.html';
 
 export default {

@@ -4,6 +4,7 @@
  * 描述：tableHeader
  */
 
+import './table.scss';
 import tpl from './table-header.html';
 import { getScrollWidth } from '@/libs/utils';
 

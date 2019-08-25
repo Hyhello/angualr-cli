@@ -4,6 +4,7 @@
  * 描述：tableBody
  */
 
+import './table.scss';
 import tpl from './table-body.html';
 
 export default {

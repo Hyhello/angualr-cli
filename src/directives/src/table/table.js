@@ -10,8 +10,7 @@ import { isNumber, findClass, getScrollWidth } from '@/libs/utils';
 
 export default {
     name: 'vTable',
-    // 兼容ie8 则采用$compile 而不是ng-transclude
-    callback: ['$compile', '$timeout', function ($compile, $timeout) {
+    callback: ['$timeout', function ($timeout) {
         // 默认配置
         const _defaults = {
             zIndex: 0,
