@@ -11,8 +11,8 @@
     <div class="hidden-columns" ng-transclude></div>
     <div class="el-table__header-wrapper">
         <table-header
-            gutter="is_scroll_y"
             col-list="colList"
+            gutter="is_scroll_y"
             table-width="tableWidth"
             ></table-header>
     </div>
@@ -21,44 +21,44 @@
             stripe="stripe"
             row-list="list"
             col-list="colList"
-            table-width="tableWidth"
+            table-width="tableBodyWidth"
             ></table-body>
     </div>
-    <div class="el-table__fixed" ng-style="{height: elHeight - scrollWidth + 'px', width: fixedLeftWidth + 'px'}">
+    <div class="el-table__fixed" ng-style="{height: elFixedHeight + 'px', width: fixedLeftWidth + 'px'}">
         <div class="el-table__fixed-header-wrapper">
             <table-header
                 fixed="left"
-                gutter="is_scroll_y"
                 col-list="colList"
+                gutter="is_scroll_y"
                 table-width="tableWidth"
                 ></table-header>
         </div>
-        <div class="el-table__fixed-body-wrapper" ng-if="list.length" ng-style="{height: bodyHeight - scrollWidth + 'px'}">
+        <div class="el-table__fixed-body-wrapper" ng-if="list.length" ng-style="{height: bodyFixedHeight + 'px'}">
             <table-body
                 fixed="left"
                 stripe="stripe"
                 row-list="list"
                 col-list="colList"
-                table-width="tableWidth"
+                table-width="tableBodyWidth"
                 ></table-body>
         </div>
     </div>
-    <div class="el-table__fixed-right" ng-style="{height: elHeight - scrollWidth + 'px', width: fixedRightWidth + 'px'}">
+    <div class="el-table__fixed-right" ng-style="{height: elFixedHeight + 'px', width: fixedRightWidth + 'px'}">
         <div class="el-table__fixed-header-wrapper">
             <table-header
                 fixed="right"
-                gutter="is_scroll_y"
                 col-list="colList"
+                gutter="is_scroll_y"
                 table-width="tableWidth"
                 ></table-header>
         </div>
-        <div class="el-table__fixed-body-wrapper" ng-if="list.length" ng-style="{height: bodyHeight - scrollWidth + 'px'}">
+        <div class="el-table__fixed-body-wrapper" ng-if="list.length" ng-style="{height: bodyFixedHeight + 'px'}">
             <table-body
                 fixed="right"
                 stripe="stripe"
                 row-list="list"
                 col-list="colList"
-                table-width="tableWidth"
+                table-width="tableBodyWidth"
                 ></table-body>
         </div>
     </div>

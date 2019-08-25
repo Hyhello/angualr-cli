@@ -124,7 +124,6 @@ export default {
                 const oElBody = angular.element(findClass($element[0], 'el-table__body-wrapper')[0]);
                 $scope.childList = [];                                // col列表
                 $scope.elHeight = 0;                                  // height style
-                $scope.scrollWidth = _defaults.scrollWidth;           // 滚动条宽度
                 $scope.fixedRightWidth = $scope.fixedLeftWidth = 0;   // fix宽度
 
                 // 添加child
@@ -183,11 +182,17 @@ export default {
                     if (!$scope.height) return;
                     const tableBody = findClass(oElBody[0], 'el-table__body')[0];
                     $scope.$apply(() => {
-                        $scope.bodyHeight = $scope.height - oElHeader.offsetHeight;
+                        $scope.tableBodyWidth = $scope.tableWidth;                  // 多次会调用所以要初始化再计算
+                        $scope.bodyFixedHeight = $scope.bodyHeight = $scope.height - oElHeader.offsetHeight;
                         $scope.is_scroll_y = tableBody.offsetHeight > $scope.bodyHeight;
-                        $scope.elHeight = $element[0].offsetHeight;
+                        $scope.elFixedHeight = $scope.elHeight = $element[0].offsetHeight;
                         if ($scope.is_scroll_y) {
+                            $scope.tableBodyWidth -= _defaults.scrollWidth;
                             calcGutter($scope.colList);
+                        }
+                        if ($scope.is_scroll_x) {
+                            $scope.elFixedHeight -= _defaults.scrollWidth;
+                            $scope.bodyFixedHeight -= _defaults.scrollWidth;
                         }
                     });
                 };
@@ -203,7 +208,7 @@ export default {
                             className: `${_defaults.defaultClass}_${zIndex}_column_${index + 1}`
                         };
                     });
-                    $scope.tableWidth = calcWidth(offsetWidth, $scope.colList);
+                    $scope.tableBodyWidth = $scope.tableWidth = calcWidth(offsetWidth, $scope.colList);
                     const res = getFixWidth($scope.colList);
                     $scope.fixedRightWidth = res.fixedRightWidth;
                     $scope.fixedLeftWidth = res.fixedLeftWidth;
