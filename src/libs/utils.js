@@ -147,3 +147,9 @@ export const getScrollWidth = () => {
     oDiv.remove();
     return scrollbarWidth;
 };
+
+// toNumber
+export const toNumber = (val) => {
+    const n = parseFloat(val);
+    return isNaN(n) ? val : n;
+};

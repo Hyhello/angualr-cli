@@ -1,7 +1,7 @@
 <table width="{{tableWidth}}" cellspacing="0" cellpadding="0" border="0" class="el-table__header">
     <colgroup>
         <col ng-repeat="item in colList track by $index" name="{{ item.className }}" width="{{ item.width }}">
-        <col name="gutter" ng-if="hasGutterWidth" width="{{ hasGutterWidth }}">
+        <col name="gutter" ng-show="hasGutterWidth" width="{{ hasGutterWidth }}">
     </colgroup>
     <thead class="has-gutter">
         <tr>
@@ -11,7 +11,7 @@
                 ng-repeat="item in colList track by $index">
                 <div class="cell">{{ item.label }}</div>
             </th>
-            <th class="gutter" ng-if="hasGutterWidth" ng-style="{width: hasGutterWidth + 'px'}"></th>
+            <th class="gutter" ng-show="hasGutterWidth" ng-style="{width: hasGutterWidth + 'px'}"></th>
         </tr>
     </thead>
 </table>

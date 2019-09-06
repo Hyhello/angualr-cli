@@ -6,7 +6,7 @@
 import './table.scss';
 import angular from 'angular';
 import tpl from './table.html';
-import { isNumber, findClass, getScrollWidth } from '@/libs/utils';
+import { isNumber, toNumber, findClass, getScrollWidth } from '@/libs/utils';
 
 export default {
     name: 'vTable',
@@ -54,6 +54,7 @@ export default {
                     break;
                 }
             }
+            console.log(list);
         };
 
         // 排序列表
@@ -118,11 +119,13 @@ export default {
             controller: ['$scope', '$element', function ($scope, $element) {
                 /** ***************** 初始化数据 **************** */
                 const zIndex = ++_defaults.zIndex;
+                const offsetWidth = $element[0].offsetWidth;
                 const oElHeader = findClass($element[0], 'el-table__header-wrapper')[0];
                 const oElBody = angular.element(findClass($element[0], 'el-table__body-wrapper')[0]);
                 $scope.childList = [];                                // col列表
                 $scope.elHeight = 0;                                  // height style
                 $scope.fixedRightWidth = $scope.fixedLeftWidth = 0;   // fix宽度
+                console.log($element[0].offsetWidth, $element[0].clientWidth);
 
                 // 添加child
                 this.addChild = (scope) => {
@@ -148,7 +151,7 @@ export default {
                     let placment = 'left';
                     if (oElHeader.scrollLeft === 0) {
                         placment = 'left';
-                    } else if (oElHeader.scrollLeft === ($scope.tableWidth - oElHeader.offsetWidth)) {
+                    } else if (oElHeader.scrollLeft === ($scope.tableWidth - offsetWidth)) {
                         placment = 'right';
                     } else {
                         placment = 'middle';
@@ -177,12 +180,14 @@ export default {
 
                 // 计算高度
                 this.calcHeight = () => {
+                    if (!$scope.height) return;
                     const tableBody = findClass(oElBody[0], 'el-table__body')[0];
                     $timeout(() => {
                         $scope.tableBodyWidth = $scope.tableWidth;                  // 多次会调用所以要初始化再计算
-                        $scope.bodyFixedHeight = $scope.bodyHeight = ($scope.height || $element[0].offsetHeight) - oElHeader.offsetHeight;
+                        const elHeight = toNumber($scope.height) || $element[0].offsetHeight;
+                        $scope.bodyFixedHeight = $scope.bodyHeight = elHeight - oElHeader.offsetHeight;
                         $scope.is_scroll_y = tableBody.offsetHeight > $scope.bodyHeight;
-                        $scope.elFixedHeight = $scope.elHeight = $element[0].offsetHeight;
+                        $scope.elFixedHeight = $scope.elHeight = elHeight;
                         if ($scope.is_scroll_y) {
                             $scope.tableBodyWidth -= _defaults.scrollWidth;
                             calcGutter($scope.colList);
@@ -197,7 +202,6 @@ export default {
                 // 计算宽度
                 this.calcWidth = () => {
                     $timeout(() => {
-                        const offsetWidth = oElHeader.offsetWidth;
                         $scope.tableBodyWidth = $scope.tableWidth = calcWidth(offsetWidth, $scope.colList);
                         const res = getFixWidth($scope.colList);
                         $scope.fixedRightWidth = res.fixedRightWidth;
