@@ -249,15 +249,10 @@ angular-resource@1.2.32:
   resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.2.32.tgz#b23052ff6194a4b7042147c04c7fced701bb5bdc"
   integrity sha1-sjBS/2GUpLcEIUfATH/O1wG7W9w=
 
-angular@1.2.32:
-  version "1.2.32"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.2.32.tgz#df52625a5167919931418dda3a9208b9f5fa3db4"
-  integrity sha1-31JiWlFnkZkxQY3aOpIIufX6PbQ=
-
-angular@^1.0.8:
-  version "1.7.8"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.8.tgz#b77ede272ce1b261e3be30c1451a0b346905a3c9"
-  integrity sha512-wtef/y4COxM7ZVhddd7JtAAhyYObq9YXKar9tsW7558BImeVYteJiTxCKeJOL45lJ/+7B4wrAC49j8gTFYEthg==
+angular@1.8.0, angular@^1.0.8:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.8.0.tgz#b1ec179887869215cab6dfd0df2e42caa65b1b51"
+  integrity sha512-VdaMx+Qk0Skla7B5gw77a8hzlcOakwF8mjlW13DpIWIDlfqwAbSSLfd8N/qZnzEmQF4jC4iofInd3gE7vL8ZZg==
 
 ansi-escapes@^3.0.0:
   version "3.2.0"
