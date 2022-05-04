@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@uirouter/angularjs": "0.4.2",
-    "angular": "1.2.32",
+    "angular": "1.8.3",
     "angular-resource": "1.2.32",
     "blueimp-md5": "^2.10.0",
     "echarts": "^2.2.8",
